@@ -1,0 +1,34 @@
+﻿{
+
+	"modules" : {
+
+		"Apache" : {
+			"name" : "Apache Server",
+			"type" : "service",
+			"service" : "wampapache64",
+			"config" : {
+				"Apache Config" : "C:/PandaStack/bin/apache/config/apache.conf",
+				"Apache Extras" : "C:/PandaStack/bin/apache/config/extras"
+			},
+
+			"enabled" : "true"
+		},
+
+		"MySQL" : {
+			"name" : "MySQL Server",
+			"type" : "service",
+			"config" : {
+				"MySQL Config" : "C:/PandaStack/bin/mysql/my.conf"
+			},
+			"admin" : {
+				"MySQL Console" : {
+					"command" : "cmd /k \"C:/PandaStack/bin/PandaStack/MySQL Console.bat\""
+				}
+			},
+
+			"enabled" : "true"
+		}
+
+	}
+
+}
