@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using System.IO;
+
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace PandaStack
 {
@@ -13,24 +18,129 @@ namespace PandaStack
 
         public void loadModules()
         {
-            // TODO: Load configuration file, parse JSON, add modules to list
-            Module apache = new Module("Apache", ModuleType.Service);
-            apache.addConfig(new ModuleConfig("Apache2 Config", "C:/test/apache/conf/httpd.conf", ModuleConfigType.File));
-            apache.addConfig(new ModuleConfig("Apache2 Extras", "C:/test/apache/conf/extra", ModuleConfigType.Directory));
-            apache.setService("APACHE");
+            string path = AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf";
+            string json = File.ReadAllText(path);
 
-            Module mysql = new Module("MySQL", ModuleType.Service);
-            mysql.addConfig(new ModuleConfig("MySQL Config", "C:/test/mysql/my.ini", ModuleConfigType.File));
-            mysql.addConfig(new ModuleConfig("Apache2 Extras", "C:/test/mysql/test.ini", ModuleConfigType.File));
-            mysql.addAdmin(new ModuleAdmin("MySQL Console", "C:/test/mysql/bin/mysql.exe", ModuleAdminType.Software));
-            mysql.setService("MYSQL");
+            DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(List<jModule>));
+            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
+            var obj = (List<jModule>)serialized.ReadObject(stream);
 
-            this._modules.Add(apache);
-            this._modules.Add(mysql);
-            this._modules.Add(new Module("PHP", ModuleType.Language));
-            this._modules.Add(new Module("Perl", ModuleType.Language));
-            this._modules.Add(new Module("Filezilla FTP Server", ModuleType.Software));
-            this._modules.Add(new Module("custom test program", ModuleType.Software));
+            foreach (jModule jModule in obj)
+            {
+                // Module has to have a name and type
+                if (jModule.name == null || jModule.type == null)
+                    continue;
+
+                // Get and then check module type
+                ModuleType moduleType = ModuleType.Helper;
+                string jmType = jModule.type.ToLower();
+
+                if (jmType == "service")
+                {
+                    moduleType = ModuleType.Service;
+                }
+                else if (jmType == "software")
+                {
+                    moduleType = ModuleType.Software;
+                }
+
+                // Create the module
+                Module module = new Module(jModule.name, moduleType);
+
+                // Setup the module with its corresponding type
+                if (moduleType == ModuleType.Service && jModule.service != null)
+                {
+                    module.setService(jModule.service);
+                }
+                else if (moduleType == ModuleType.Software)
+                {
+                    // TODO: Create software type modules
+                }
+
+                // Setup module's configurations
+                if (jModule.config != null)
+                {
+                    foreach (jConfig jConfig in jModule.config)
+                    {
+                        // Configuration must have a name, a type and a file/path
+                        if (jConfig.name == null || jConfig.type == null || jConfig.path == null)
+                            continue;
+
+                        // Get and then check the config's type
+                        ModuleConfig mc;
+                        ModuleConfigType configType = ModuleConfigType.File;
+                        string jcType = jConfig.type.ToLower();
+
+                        if (jcType == "dir" || jcType == "directory" || jcType == "folder")
+                        {
+                            configType = ModuleConfigType.Directory;
+                        }
+                        else if (jcType == "software")
+                        {
+                            configType = ModuleConfigType.Software;
+                        }
+                        else if (jcType == "url" || jcType == "website")
+                        {
+                            configType = ModuleConfigType.URL;
+                        }
+
+                        // Create the configuration, based on if it has args or not
+                        if (jConfig.args == null)
+                        {
+                            mc = new ModuleConfig(jConfig.name, jConfig.path, configType);
+                        }
+                        else
+                        {
+                            mc = new ModuleConfig(jConfig.name, jConfig.path, jConfig.args, configType);
+                        }
+
+                        // Add the configuration to the module
+                        module.addConfig(mc);
+                    }
+                }
+
+                // Setup module's administrations
+                if (jModule.admin != null)
+                {
+                    foreach (jAdmin jAdmin in jModule.admin)
+                    {
+                        // Admin has to have a name, a type and a file/path
+                        if (jAdmin.name == null || jAdmin.type == null || jAdmin.path == null)
+                            continue;
+
+                        // Get and check the admin's type
+                        ModuleAdmin ma;
+                        ModuleAdminType adminType = ModuleAdminType.Software;
+                        string jaType = jAdmin.type.ToLower();
+
+                        if (jaType == "command")
+                        {
+                            adminType = ModuleAdminType.Command;
+                        }
+                        else if (jaType == "url" || jaType == "website")
+                        {
+                            adminType = ModuleAdminType.URL;
+                        }
+
+                        // Create the administration, based on if it has args or not
+                        if (jAdmin.args == null)
+                        {
+                            ma = new ModuleAdmin(jAdmin.name, jAdmin.path, adminType);
+                        }
+                        else
+                        {
+                            ma = new ModuleAdmin(jAdmin.name, jAdmin.path, jAdmin.args, adminType);
+                        }
+
+                        // Add the administration to the module
+                        module.addAdmin(ma);
+                    }
+                }
+
+                // Add the module to the list
+                this._modules.Add(module);
+            }
+
         }
 
         public void reloadModules()

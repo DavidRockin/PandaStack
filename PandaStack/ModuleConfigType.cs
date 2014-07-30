@@ -11,7 +11,8 @@ namespace PandaStack
 
         File,
         Directory,
-        Software
+        Software,
+        URL
 
     }
 

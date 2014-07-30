@@ -10,7 +10,8 @@ namespace PandaStack
     {
 
         Software,
-        Command
+        Command,
+        URL
 
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace PandaStack
 {
@@ -41,6 +42,15 @@ namespace PandaStack
         public static void clearMessages()
         {
             Information.form.rtbConsole.Clear();
+        }
+
+        public static void handleException(Exception ex)
+        {
+            StackTrace stackTrace = new StackTrace(ex, true);
+            StackFrame stackFrame = stackTrace.GetFrame(0);
+            string message = ex.Message + " " + ex.InnerException + "\r\n" + stackFrame.GetFileName() + ":" +
+                                stackFrame.GetFileLineNumber() + " -> " + stackFrame.GetMethod();
+            Information.addMessage(message, InfoType.Exception);
         }
 
     }

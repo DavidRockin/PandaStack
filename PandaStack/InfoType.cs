@@ -9,6 +9,7 @@ namespace PandaStack
     enum InfoType
     {
 
+        Exception,
         Important,
         Warning,
         Info,

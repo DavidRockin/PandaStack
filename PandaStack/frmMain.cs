@@ -71,20 +71,24 @@ namespace PandaStack
                         try
                         {
                             ServiceController sc = module.getServiceController();
-                            if (sc.Status == ServiceControllerStatus.Stopped)
+
+                            if (sc != null)
                             {
-                                btnToggle.Text = "Start Module";
-                                btnToggle.Enabled = true;
-                            }
-                            else
-                            {
-                                btnToggle.Text = "Stop Module";
-                                btnToggle.Enabled = true;
+                                if (sc.Status == ServiceControllerStatus.Stopped)
+                                {
+                                    btnToggle.Text = "Start Module";
+                                    btnToggle.Enabled = true;
+                                }
+                                else
+                                {
+                                    btnToggle.Text = "Stop Module";
+                                    btnToggle.Enabled = true;
+                                }
                             }
                         }
                         catch (Exception ex)
                         {
-                            Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
+                            Information.handleException(ex);
                         }
                     }
                     else if (module.getModuleType() == ModuleType.Software)
@@ -146,6 +150,8 @@ namespace PandaStack
                 try
                 {
                     ServiceController sc = module.getServiceController();
+                    if (sc == null) return;
+
                     Information.addMessage("Toggling module " + module.getModuleName(), InfoType.Debug);
 
                     // Toggle the service
@@ -174,7 +180,7 @@ namespace PandaStack
                 }
                 catch (Exception ex)
                 {
-                    Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
+                    Information.handleException(ex);
                 }
             }
             else if (module.getModuleType() == ModuleType.Software)
@@ -186,6 +192,8 @@ namespace PandaStack
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             // Stop sync timer, and clear the list view
+            if (this.lvModules.FocusedItem != null)
+                this.lvModules.FocusedItem.Selected = false; // Bug fix: refreshing while having an item selected throws an exception
             this.tmrSync.Enabled = false;
             this.lvModules.Items.Clear();
 
@@ -235,6 +243,10 @@ namespace PandaStack
                         case ModuleConfigType.Software:
                             mi.Image = Properties.Resources.application;
                             break;
+
+                        case ModuleConfigType.URL:
+                            mi.Image = Properties.Resources.world;
+                            break;
                     }
 
                     this.ctmConfig.Items.Add(mi);
@@ -270,6 +282,10 @@ namespace PandaStack
 
                         case ModuleAdminType.Software:
                             mi.Image = Properties.Resources.application;
+                            break;
+
+                        case ModuleAdminType.URL:
+                            mi.Image = Properties.Resources.world;
                             break;
                     }
 
@@ -321,7 +337,9 @@ namespace PandaStack
         {
             ToolStripMenuItem mi = (ToolStripMenuItem)sender;
             ModuleConfig mc = (ModuleConfig)mi.Tag;
+            Module module = (Module)this.lvModules.FocusedItem.Tag;
 
+            Information.addMessage("Handling configuration '" + mc.getConfigName() + "' for module '" + module.getModuleName() + "'", InfoType.Debug);
             System.Diagnostics.Process.Start(@mc.getConfigFile(), mc.getArgs());
         }
         
@@ -329,7 +347,9 @@ namespace PandaStack
         {
             ToolStripMenuItem mi = (ToolStripMenuItem)sender;
             ModuleAdmin ma = (ModuleAdmin)mi.Tag;
+            Module module = (Module)this.lvModules.FocusedItem.Tag;
 
+            Information.addMessage("Handling administration '" + ma.getAdminName() + "' for module '" + module.getModuleName() + "'", InfoType.Debug);
             System.Diagnostics.Process.Start(@ma.getAdminPath(), ma.getArgs());
         }
 

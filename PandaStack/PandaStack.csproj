@@ -27,7 +27,7 @@
     <ProductName>PandaStack</ProductName>
     <PublisherName>David Tkachuk</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.0.2.%2a</ApplicationVersion>
+    <ApplicationVersion>0.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,6 +79,9 @@
     </Compile>
     <Compile Include="Information.cs" />
     <Compile Include="InfoType.cs" />
+    <Compile Include="jAdmin.cs" />
+    <Compile Include="jConfig.cs" />
+    <Compile Include="jModule.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleAdmin.cs" />
     <Compile Include="ModuleAdminType.cs" />
@@ -152,6 +156,8 @@
     <None Include="Resources\page_copy.png" />
     <None Include="Resources\disk.png" />
     <None Include="Resources\cross.png" />
+    <None Include="Resources\application_home.png" />
+    <None Include="Resources\world.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

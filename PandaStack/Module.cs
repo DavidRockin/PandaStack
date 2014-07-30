@@ -94,11 +94,7 @@ namespace PandaStack
                     this._sc.Refresh();
                     status = this._sc.Status.ToString();
                 }
-                catch // (Exception ex)
-                {
-                    // This spams the console a lot
-                    // Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
-                }
+                catch { }
             }
 
             return status;

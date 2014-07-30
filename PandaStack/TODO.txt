@@ -3,8 +3,6 @@
 Todo List:
 * If module is a service, and invalid or no service name is specified, causing program to hang or throw up
 	PandaStack should properly handle it with an error, then not allow control to that module, since it's "inactive" or "broken"
-+ Add config and admin controls to modules
-+ Load from a JSON file + Reload abilities
 + Add support for programs and languages
 	Programs: should be active only while PandaStack is active
 + Abiltiy to manage services?
