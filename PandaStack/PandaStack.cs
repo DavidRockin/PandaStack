@@ -43,6 +43,10 @@ namespace PandaStack
                 {
                     moduleType = ModuleType.Software;
                 }
+                else if (jmType == "language")
+                {
+                    moduleType = ModuleType.Language;
+                }
 
                 // Create the module
                 Module module = new Module(jModule.name, moduleType);
