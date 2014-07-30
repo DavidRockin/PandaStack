@@ -19,7 +19,7 @@ namespace PandaStack
         public static void addMessage(string message, InfoType type)
         {
             String msg = "[" + DateTime.Now.ToShortTimeString() + "] [" + type.ToString() + "] " + message + "\r\n";
-            Information.form.rtbInfo.Text += msg;
+            Information.form.rtbConsole.Text += msg;
         }
 
         public static void addMessage(string[] messages)
@@ -40,7 +40,7 @@ namespace PandaStack
 
         public static void clearMessages()
         {
-            Information.form.rtbInfo.Clear();
+            Information.form.rtbConsole.Clear();
         }
 
     }

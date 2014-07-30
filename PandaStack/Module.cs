@@ -64,7 +64,6 @@ namespace PandaStack
 
         public ServiceController getServiceController()
         {
-            if (this._moduleType != ModuleType.Service && this._sc != null) return null;
             return this._sc;
         }
 
@@ -82,6 +81,27 @@ namespace PandaStack
             {
                 MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        public string getStatus()
+        {
+            string status = "n/a";
+
+            if (this._moduleType == ModuleType.Service)
+            {
+                try
+                {
+                    this._sc.Refresh();
+                    status = this._sc.Status.ToString();
+                }
+                catch // (Exception ex)
+                {
+                    // This spams the console a lot
+                    // Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
+                }
+            }
+
+            return status;
         }
 
     }

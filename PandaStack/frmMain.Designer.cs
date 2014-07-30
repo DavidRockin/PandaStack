@@ -32,8 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.grpLoadedModules = new System.Windows.Forms.GroupBox();
             this.lvModules = new System.Windows.Forms.ListView();
-            this.rtbInfo = new System.Windows.Forms.RichTextBox();
+            this.rtbConsole = new System.Windows.Forms.RichTextBox();
             this.grpModuleControl = new System.Windows.Forms.GroupBox();
+            this.btnConfig = new System.Windows.Forms.Button();
+            this.btnAdmin = new System.Windows.Forms.Button();
             this.btnToggle = new System.Windows.Forms.Button();
             this.tmrSync = new System.Windows.Forms.Timer(this.components);
             this.ctmConfig = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -41,8 +43,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnConfig = new System.Windows.Forms.Button();
-            this.btnAdmin = new System.Windows.Forms.Button();
             this.grpLoadedModules.SuspendLayout();
             this.grpModuleControl.SuspendLayout();
             this.SuspendLayout();
@@ -59,22 +59,24 @@
             // 
             // lvModules
             // 
+            this.lvModules.FullRowSelect = true;
             this.lvModules.Location = new System.Drawing.Point(6, 19);
             this.lvModules.MultiSelect = false;
             this.lvModules.Name = "lvModules";
             this.lvModules.Size = new System.Drawing.Size(504, 236);
             this.lvModules.TabIndex = 0;
             this.lvModules.UseCompatibleStateImageBehavior = false;
+            this.lvModules.View = System.Windows.Forms.View.Details;
             this.lvModules.SelectedIndexChanged += new System.EventHandler(this.lvModules_SelectIndexChange);
             // 
-            // rtbInfo
+            // rtbConsole
             // 
-            this.rtbInfo.Location = new System.Drawing.Point(12, 335);
-            this.rtbInfo.Name = "rtbInfo";
-            this.rtbInfo.ReadOnly = true;
-            this.rtbInfo.Size = new System.Drawing.Size(516, 170);
-            this.rtbInfo.TabIndex = 2;
-            this.rtbInfo.Text = "";
+            this.rtbConsole.Location = new System.Drawing.Point(12, 335);
+            this.rtbConsole.Name = "rtbConsole";
+            this.rtbConsole.ReadOnly = true;
+            this.rtbConsole.Size = new System.Drawing.Size(516, 170);
+            this.rtbConsole.TabIndex = 2;
+            this.rtbConsole.Text = "";
             // 
             // grpModuleControl
             // 
@@ -87,6 +89,34 @@
             this.grpModuleControl.TabIndex = 1;
             this.grpModuleControl.TabStop = false;
             this.grpModuleControl.Text = "Module Control";
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.Enabled = false;
+            this.btnConfig.Image = global::PandaStack.Properties.Resources.cog;
+            this.btnConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfig.Location = new System.Drawing.Point(262, 21);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(122, 23);
+            this.btnConfig.TabIndex = 2;
+            this.btnConfig.Text = "Configuration";
+            this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.Enabled = false;
+            this.btnAdmin.Image = global::PandaStack.Properties.Resources.wrench;
+            this.btnAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdmin.Location = new System.Drawing.Point(134, 21);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(122, 23);
+            this.btnAdmin.TabIndex = 1;
+            this.btnAdmin.Text = "Administration";
+            this.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnToggle
             // 
@@ -153,34 +183,6 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // btnConfig
-            // 
-            this.btnConfig.Enabled = false;
-            this.btnConfig.Image = global::PandaStack.Properties.Resources.cog;
-            this.btnConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConfig.Location = new System.Drawing.Point(262, 21);
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(122, 23);
-            this.btnConfig.TabIndex = 2;
-            this.btnConfig.Text = "Configuration";
-            this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnConfig.UseVisualStyleBackColor = true;
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // btnAdmin
-            // 
-            this.btnAdmin.Enabled = false;
-            this.btnAdmin.Image = global::PandaStack.Properties.Resources.wrench;
-            this.btnAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdmin.Location = new System.Drawing.Point(134, 21);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(122, 23);
-            this.btnAdmin.TabIndex = 1;
-            this.btnAdmin.Text = "Administration";
-            this.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdmin.UseVisualStyleBackColor = true;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,7 +191,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.rtbInfo);
+            this.Controls.Add(this.rtbConsole);
             this.Controls.Add(this.grpModuleControl);
             this.Controls.Add(this.grpLoadedModules);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -211,7 +213,7 @@
         private System.Windows.Forms.ListView lvModules;
         private System.Windows.Forms.GroupBox grpModuleControl;
         private System.Windows.Forms.Button btnToggle;
-        public System.Windows.Forms.RichTextBox rtbInfo;
+        public System.Windows.Forms.RichTextBox rtbConsole;
         private System.Windows.Forms.Button btnAdmin;
         private System.Windows.Forms.Timer tmrSync;
         private System.Windows.Forms.Button btnRefresh;

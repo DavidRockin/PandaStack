@@ -15,56 +15,42 @@ namespace PandaStack
     {
 
         private PandaStack pandaStack;
+        private frmAbout formAbout = new frmAbout();
 
         public frmMain()
         {
             // Setup PandaStack
             this.pandaStack = Program.pandaStack;
             this.pandaStack.loadModules();
-            Information.form = this;
 
             InitializeComponent();
+
+            Information.form = this;
             Information.addMessage("Setting up PandaStack");
 
-            this.lvModules.View = View.Details;
-            this.lvModules.FullRowSelect = true;
+            // Check to see if PandaStack is running as administrator
+            if (Program.isAdministrator())
+            {
+                this.Text += " [Administrator]";
+                Information.addMessage("PandaStack is running as administrator");
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // Setup lvModules's columns
-            this.lvModules.Columns.Add("Module Name", 130, HorizontalAlignment.Left);
-            this.lvModules.Columns.Add("Module Status", 120, HorizontalAlignment.Left);
-            this.lvModules.Columns.Add("Module Type", 100, HorizontalAlignment.Left);
+            // Setup lvModule's Columns
+            this.lvModules.Columns.Add("Module Name", 140, HorizontalAlignment.Left);
+            this.lvModules.Columns.Add("Module Status", 130, HorizontalAlignment.Left);
+            this.lvModules.Columns.Add("Module Type", 130, HorizontalAlignment.Left);
 
-            List<Module> loadedModules = this.pandaStack.getModules();
-            if (loadedModules.Count > 0)
-            {
-                ListViewItem lvi;
-                Information.addMessage("Loading " + loadedModules.Count + " modules");
+            // Put the loaded modules into the list view
+            this.fetchModules();
+        }
 
-                foreach (Module module in loadedModules)
-                {
-                    string status = "n/a";
-                    if (module.getModuleType() == ModuleType.Service)
-                    {
-                        ServiceController sc = module.getServiceController();
-                        status = sc.Status.ToString();
-                    }
-
-                    Information.addMessage("Found module '" + module.getModuleName() + "'");
-                    lvi = new ListViewItem(module.getModuleName());
-                    lvi.SubItems.Add(status);
-                    lvi.SubItems.Add(module.getModuleType().ToString());
-                    lvi.Tag = module;
-                    this.lvModules.Items.Add(lvi);
-                    lvi = null;
-                }
-            } else {
-                Information.addMessage("There are no modules to load");
-            }
-
-            tmrSync.Enabled = true;
+        private void frmMain_Closing(object sender, FormClosingEventArgs e)
+        {
+            Information.addMessage("Exiting PandaStack");
+            // TODO: Handle closing programs (TBA)
         }
 
         private void lvModules_SelectIndexChange(object sender, EventArgs e)
@@ -74,145 +60,142 @@ namespace PandaStack
                 // We only want to manage a selected module
                 if (this.lvModules.SelectedItems.Count > 0)
                 {
-                    Module module = (Module)lvModules.FocusedItem.Tag;
-                    Information.addMessage("Selected module " + module.getModuleName(), InfoType.Debug);
+                    Module module = (Module)this.lvModules.FocusedItem.Tag;
+                    Information.addMessage("Selected the module " + module.getModuleName(), InfoType.Debug);
                     grpModuleControl.Text = "Module Control: " + module.getModuleName();
 
+                    // If the module is a service, check it's status
                     if (module.getModuleType() == ModuleType.Service)
                     {
-                        ServiceController sc = module.getServiceController();
-                        if (sc.Status == ServiceControllerStatus.Stopped)
+                        try
                         {
-                            btnToggle.Text = "Start Module";
-                            btnToggle.Enabled = true;
+                            ServiceController sc = module.getServiceController();
+                            if (sc.Status == ServiceControllerStatus.Stopped)
+                            {
+                                btnToggle.Text = "Start Module";
+                                btnToggle.Enabled = true;
+                            }
+                            else
+                            {
+                                btnToggle.Text = "Stop Module";
+                                btnToggle.Enabled = true;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            btnToggle.Text = "Stop Module";
-                            btnToggle.Enabled = true;
+                            Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
                         }
-
-                        if (module.getConfigs().Count > 0)
-                        {
-                            btnConfig.Enabled = true;
-                        }
-
-                        if (module.getAdmins().Count > 0)
-                        {
-                            btnAdmin.Enabled = true;
-                        }
-
-                        return;
+                    }
+                    else if (module.getModuleType() == ModuleType.Software)
+                    {
+                        // TODO: Allow the option to toggle module type software
                     }
 
-                    grpModuleControl.Text = "Module Control";
-                    btnToggle.Enabled = false;
-                    btnConfig.Enabled = false;
-                    btnAdmin.Enabled = false;
-                    btnToggle.Text = "Start Module";
+                    // If there are admin options, enable the admin button
+                    if (module.getAdmins().Count > 0)
+                    {
+                        btnAdmin.Enabled = true;
+                    }
+
+                    // If there are any configurations, enable the config button
+                    if (module.getConfigs().Count > 0)
+                    {
+                        btnConfig.Enabled = true;
+                    }
                 }
                 else
                 {
+                    // Reset the module control groupbox and it's component
                     grpModuleControl.Text = "Module Control";
                     btnToggle.Enabled = false;
-                    btnConfig.Enabled = false;
                     btnAdmin.Enabled = false;
+                    btnConfig.Enabled = false;
                     btnToggle.Text = "Start Module";
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                // Gotta CATCH em all! ;)
+                // meh
             }
         }
 
         private void tmrSync_Tick(object sender, EventArgs e)
         {
-            if (this.lvModules.Items.Count == 0) return;
+            if (this.lvModules.Items.Count == 0)
+                return;
 
-            foreach (ListViewItem lvi in this.lvModules.Items)
+            foreach (ListViewItem lvi in this.lvModules.Items) 
             {
                 Module module = (Module)lvi.Tag;
-                if (module.getModuleType() == ModuleType.Service)
-                {
-                    ServiceController sc = module.getServiceController();
-                    module.getServiceController().Refresh();
-                    lvi.SubItems[1].Text = module.getServiceController().Status.ToString();
-                }
+                lvi.SubItems[1].Text = module.getStatus();
             }
         }
 
         private void btnToggle_Click(object sender, EventArgs e)
         {
-            if (this.lvModules.Items.Count == 0) return;
+            // This button should only be clickable if there are items in lvModules
+            // and one of them has been selected
+            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+                return;
 
-            Module module = (Module)lvModules.FocusedItem.Tag;
+            Module module = (Module)this.lvModules.FocusedItem.Tag;
+
             if (module.getModuleType() == ModuleType.Service)
             {
-                ServiceController sc = module.getServiceController();
-                Information.addMessage("Toggling module " + module.getModuleName(), InfoType.Debug);
+                try
+                {
+                    ServiceController sc = module.getServiceController();
+                    Information.addMessage("Toggling module " + module.getModuleName(), InfoType.Debug);
 
-                if (sc.Status == ServiceControllerStatus.Stopped)
-                {
-                    sc.Start();
-                    sc.Refresh();
-                }
-                else
-                {
-                    sc.Stop();
-                    sc.Refresh();
-                }
+                    // Toggle the service
+                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    {
+                        sc.Start();
+                        sc.Refresh();
+                    }
+                    else
+                    {
+                        sc.Stop();
+                        sc.Refresh();
+                    }
 
-                if (sc.Status == ServiceControllerStatus.Stopped)
-                {
-                    btnToggle.Text = "Start Module";
-                    lvModules.FocusedItem.SubItems[1].Text = sc.Status.ToString();
+                    // Check the service status
+                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    {
+                        btnToggle.Text = "Start Module";
+                        lvModules.FocusedItem.SubItems[1].Text = module.getStatus();
+                    }
+                    else
+                    {
+                        btnToggle.Text = "Stop Module";
+                        lvModules.FocusedItem.SubItems[1].Text = module.getStatus();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    btnToggle.Text = "Stop Module";
-                    lvModules.FocusedItem.SubItems[1].Text = sc.Status.ToString();
+                    Information.addMessage(ex.Message + " " + ex.InnerException, InfoType.Important);
                 }
+            }
+            else if (module.getModuleType() == ModuleType.Software)
+            {
+                // TODO: Allow toggle of software type modules
             }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            tmrSync.Enabled = false;
+            // Stop sync timer, and clear the list view
+            this.tmrSync.Enabled = false;
             this.lvModules.Items.Clear();
 
-            List<Module> modules = this.pandaStack.getModules();
-            if (modules.Count > 0)
-            {
-                ListViewItem lvi;
-                Information.addMessage("Reloading " + modules.Count + " modules");
-
-                foreach (Module module in modules)
-                {
-                    string status = "n/a";
-                    if (module.getModuleType() == ModuleType.Service)
-                    {
-                        ServiceController sc = module.getServiceController();
-                        status = sc.Status.ToString();
-                    }
-
-                    Information.addMessage("Found module '" + module.getModuleName() + "'");
-                    lvi = new ListViewItem(module.getModuleName());
-                    lvi.SubItems.Add(status);
-                    lvi.SubItems.Add(module.getModuleType().ToString());
-                    lvi.Tag = module;
-                    this.lvModules.Items.Add(lvi);
-                    lvi = null;
-                }
-
-                tmrSync.Enabled = true;
-            }
+            // Reload the modules from file, and then add to the list view
+            this.pandaStack.reloadModules();
+            this.fetchModules();
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            frmAbout frmAbout = new frmAbout();
-            frmAbout.Show();
+            this.formAbout.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -220,56 +203,70 @@ namespace PandaStack
             Application.Exit();
         }
 
-        private void frmMain_Closing(object sender, FormClosingEventArgs e)
-        {
-            Information.addMessage("Exiting PandaStack");
-            // TODO: Handle closing programs (TBA)
-        }
-
         private void btnConfig_Click(object sender, EventArgs e)
         {
-            if (this.lvModules.SelectedItems.Count > 0)
+            // This button should only be clickable if there are items in lvModules
+            // and one of them was selected
+            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+                return;
+
+            Module module = (Module)this.lvModules.FocusedItem.Tag;
+            this.ctmConfig.Items.Clear();
+
+            if (module.getConfigs().Count > 0)
             {
-                Module module = (Module)lvModules.FocusedItem.Tag;
-                this.ctmConfig.Items.Clear();
                 foreach (ModuleConfig mc in module.getConfigs())
                 {
                     ToolStripMenuItem mi = new ToolStripMenuItem(mc.getConfigName());
+                    mi.Tag = mc;
+                    mi.Click += new EventHandler(this.ctmConfig_itemClicked);
 
                     switch (mc.getModuleConfigType())
                     {
                         case ModuleConfigType.File:
                             mi.Image = Properties.Resources.page_white_edit;
-                        break;
+                            break;
+
                         case ModuleConfigType.Directory:
                             mi.Image = Properties.Resources.folder;
-                        break;
+                            break;
+
                         case ModuleConfigType.Software:
                             mi.Image = Properties.Resources.application;
-                        break;
+                            break;
                     }
 
                     this.ctmConfig.Items.Add(mi);
                 }
+
                 this.ctmConfig.Show(btnConfig, new Point(0, btnConfig.Height));
             }
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            if (this.lvModules.SelectedItems.Count > 0)
+            // This button should only be clickable if there are items in lvModules
+            // and one of them was selected
+            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+                return;
+
+            Module module = (Module)this.lvModules.FocusedItem.Tag;
+            this.ctmAdmin.Items.Clear();
+
+            if (module.getAdmins().Count > 0)
             {
-                Module module = (Module)lvModules.FocusedItem.Tag;
-                this.ctmAdmin.Items.Clear();
                 foreach (ModuleAdmin ma in module.getAdmins())
                 {
-                    ToolStripMenuItem mi = new ToolStripMenuItem(ma.getConfigName());
+                    ToolStripMenuItem mi = new ToolStripMenuItem(ma.getAdminName());
+                    mi.Tag = ma;
+                    mi.Click += new EventHandler(this.ctmAdmin_itemClicked);
 
-                    switch (ma.getModuleConfigType())
+                    switch (ma.getModuleAdminType())
                     {
                         case ModuleAdminType.Command:
                             mi.Image = Properties.Resources.application_xp_terminal;
                             break;
+
                         case ModuleAdminType.Software:
                             mi.Image = Properties.Resources.application;
                             break;
@@ -277,8 +274,62 @@ namespace PandaStack
 
                     this.ctmAdmin.Items.Add(mi);
                 }
+
                 this.ctmAdmin.Show(btnAdmin, new Point(0, btnAdmin.Height));
             }
+        }
+
+        /**
+         * <summary>
+         * Fetch the loaded modules into the list view
+         * </summary>
+         */
+        private void fetchModules()
+        {
+            List<Module> loadedModules = this.pandaStack.getModules();
+
+            this.tmrSync.Enabled = false;
+
+            if (loadedModules.Count > 0)
+            {
+                ListViewItem lvi;
+                Information.addMessage("Loading " + loadedModules.Count + " modules");
+
+                foreach (Module module in loadedModules)
+                {
+                    Information.addMessage("Found module '" + module.getModuleName() + "' with " + module.getAdmins().Count + " admin options, " + module.getConfigs().Count + " config options");
+                    lvi = new ListViewItem(module.getModuleName());
+                    lvi.SubItems.Add(module.getStatus());
+                    lvi.SubItems.Add(module.getModuleType().ToString());
+                    lvi.Tag = module;
+
+                    this.lvModules.Items.Add(lvi);
+                    lvi = null;
+                }
+
+                // Enable the timer again only because there are modules loaded
+                this.tmrSync.Enabled = true;
+            }
+            else
+            {
+                Information.addMessage("No modules loaded");
+            }
+        }
+
+        private void ctmConfig_itemClicked(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
+            ModuleConfig mc = (ModuleConfig)mi.Tag;
+
+            System.Diagnostics.Process.Start(@mc.getConfigFile(), mc.getArgs());
+        }
+        
+        private void ctmAdmin_itemClicked(object sender, EventArgs e)
+        {
+            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
+            ModuleAdmin ma = (ModuleAdmin)mi.Tag;
+
+            System.Diagnostics.Process.Start(@ma.getAdminPath(), ma.getArgs());
         }
 
     }
