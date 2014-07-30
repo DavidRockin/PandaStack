@@ -66,17 +66,7 @@ namespace PandaStack
             }
             catch
             {
-                // Let the user know that PandaStack requires to run as an administrator
-                DialogResult msg = MessageBox.Show("PandaStack requires administrator privileges, please relaunch PandaStack as an administrator, otherwise you will not be able to carry out certain actions.", "Admin Rights required", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
-
-                if (msg == DialogResult.Retry)
-                {
-                    Program.launchAsAdmin();
-                }
-                else if (msg == DialogResult.Ignore)
-                {
-                    return;
-                }
+                // ...
             }
 
             Application.Exit();
