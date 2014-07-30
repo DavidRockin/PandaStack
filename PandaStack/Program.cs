@@ -20,7 +20,10 @@ namespace PandaStack
         static void Main()
         {
             if (!Program.isAdministrator())
+            {
                 Program.launchAsAdmin();
+                return;
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
