@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.ServiceProcess;
+using System.IO;
 
 namespace PandaStack
 {
@@ -330,6 +331,35 @@ namespace PandaStack
             ModuleAdmin ma = (ModuleAdmin)mi.Tag;
 
             System.Diagnostics.Process.Start(@ma.getAdminPath(), ma.getArgs());
+        }
+
+        private void ctmConsole_Copy_Click(object sender, EventArgs e)
+        {
+            this.rtbConsole.Copy();
+        }
+
+        private void ctmConsole_Clear_Click(object sender, EventArgs e)
+        {
+            this.rtbConsole.Text = "";
+        }
+
+        private void ctmConsole_SelectAll_Click(object sender, EventArgs e)
+        {
+            this.rtbConsole.SelectAll();
+            this.rtbConsole.Focus();
+        }
+
+        private void ctmConsole_Save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog svdConsoleOutput = new SaveFileDialog();
+            svdConsoleOutput.Filter = "Rich Text Format (.rtf)|*.rtf|Log Files (*.log)|*.log|Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            svdConsoleOutput.Title = "Save Console Output";
+            svdConsoleOutput.ShowDialog();
+
+            if (svdConsoleOutput.FileName != "")
+            {
+                rtbConsole.SaveFile(svdConsoleOutput.FileName);
+            }
         }
 
     }

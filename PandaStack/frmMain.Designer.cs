@@ -33,6 +33,12 @@
             this.grpLoadedModules = new System.Windows.Forms.GroupBox();
             this.lvModules = new System.Windows.Forms.ListView();
             this.rtbConsole = new System.Windows.Forms.RichTextBox();
+            this.ctmConsole = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctmConsole_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmConsole_SelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmConsole_Save = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctmConsole_Clear = new System.Windows.Forms.ToolStripMenuItem();
             this.grpModuleControl = new System.Windows.Forms.GroupBox();
             this.btnConfig = new System.Windows.Forms.Button();
             this.btnAdmin = new System.Windows.Forms.Button();
@@ -44,6 +50,7 @@
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.grpLoadedModules.SuspendLayout();
+            this.ctmConsole.SuspendLayout();
             this.grpModuleControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,12 +78,60 @@
             // 
             // rtbConsole
             // 
+            this.rtbConsole.ContextMenuStrip = this.ctmConsole;
             this.rtbConsole.Location = new System.Drawing.Point(12, 335);
             this.rtbConsole.Name = "rtbConsole";
             this.rtbConsole.ReadOnly = true;
             this.rtbConsole.Size = new System.Drawing.Size(516, 170);
             this.rtbConsole.TabIndex = 2;
             this.rtbConsole.Text = "";
+            // 
+            // ctmConsole
+            // 
+            this.ctmConsole.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctmConsole_Copy,
+            this.ctmConsole_SelectAll,
+            this.ctmConsole_Save,
+            this.toolStripSeparator1,
+            this.ctmConsole_Clear});
+            this.ctmConsole.Name = "ctmConsole";
+            this.ctmConsole.Size = new System.Drawing.Size(148, 98);
+            // 
+            // ctmConsole_Copy
+            // 
+            this.ctmConsole_Copy.Image = global::PandaStack.Properties.Resources.page_copy;
+            this.ctmConsole_Copy.Name = "ctmConsole_Copy";
+            this.ctmConsole_Copy.Size = new System.Drawing.Size(152, 22);
+            this.ctmConsole_Copy.Text = "Copy";
+            this.ctmConsole_Copy.Click += new System.EventHandler(this.ctmConsole_Copy_Click);
+            // 
+            // ctmConsole_SelectAll
+            // 
+            this.ctmConsole_SelectAll.Name = "ctmConsole_SelectAll";
+            this.ctmConsole_SelectAll.Size = new System.Drawing.Size(152, 22);
+            this.ctmConsole_SelectAll.Text = "Select All";
+            this.ctmConsole_SelectAll.Click += new System.EventHandler(this.ctmConsole_SelectAll_Click);
+            // 
+            // ctmConsole_Save
+            // 
+            this.ctmConsole_Save.Image = global::PandaStack.Properties.Resources.disk;
+            this.ctmConsole_Save.Name = "ctmConsole_Save";
+            this.ctmConsole_Save.Size = new System.Drawing.Size(152, 22);
+            this.ctmConsole_Save.Text = "Save";
+            this.ctmConsole_Save.Click += new System.EventHandler(this.ctmConsole_Save_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ctmConsole_Clear
+            // 
+            this.ctmConsole_Clear.Image = global::PandaStack.Properties.Resources.cross;
+            this.ctmConsole_Clear.Name = "ctmConsole_Clear";
+            this.ctmConsole_Clear.Size = new System.Drawing.Size(152, 22);
+            this.ctmConsole_Clear.Text = "Clear Console";
+            this.ctmConsole_Clear.Click += new System.EventHandler(this.ctmConsole_Clear_Click);
             // 
             // grpModuleControl
             // 
@@ -202,6 +257,7 @@
             this.Text = "PandaStack";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.grpLoadedModules.ResumeLayout(false);
+            this.ctmConsole.ResumeLayout(false);
             this.grpModuleControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -222,6 +278,12 @@
         private System.Windows.Forms.Button btnConfig;
         private System.Windows.Forms.ContextMenuStrip ctmConfig;
         private System.Windows.Forms.ContextMenuStrip ctmAdmin;
+        private System.Windows.Forms.ContextMenuStrip ctmConsole;
+        private System.Windows.Forms.ToolStripMenuItem ctmConsole_Copy;
+        private System.Windows.Forms.ToolStripMenuItem ctmConsole_SelectAll;
+        private System.Windows.Forms.ToolStripMenuItem ctmConsole_Save;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ctmConsole_Clear;
     }
 }
 

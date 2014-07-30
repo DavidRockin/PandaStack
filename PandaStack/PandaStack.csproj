@@ -149,6 +149,9 @@
     <None Include="Resources\page_white.png" />
     <None Include="Resources\page_white_edit.png" />
     <None Include="Resources\folder.png" />
+    <None Include="Resources\page_copy.png" />
+    <None Include="Resources\disk.png" />
+    <None Include="Resources\cross.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
