@@ -10,6 +10,7 @@ namespace PandaStack
 
         private string _configName;
         private string _configPath;
+        private string _configArgs;
 
         private ModuleConfigType _configType;
 
@@ -17,6 +18,14 @@ namespace PandaStack
         {
             this._configName = name;
             this._configPath = filePath;
+            this._configType = type;
+        }
+
+        public ModuleConfig(string name, string filePath, string args, ModuleConfigType type)
+        {
+            this._configName = name;
+            this._configPath = filePath;
+            this._configArgs = args;
             this._configType = type;
         }
 
@@ -33,6 +42,11 @@ namespace PandaStack
         public ModuleConfigType getModuleConfigType()
         {
             return this._configType;
+        }
+
+        public string getArgs()
+        {
+            return this._configArgs;
         }
 
     }
