@@ -129,6 +129,45 @@ namespace PandaStack
             if (this.lvModules.Items.Count == 0)
                 return;
 
+            // Is there a selected module?
+            if (this.lvModules.SelectedItems.Count > 0)
+            {
+                Module module = (Module)this.lvModules.FocusedItem.Tag;
+
+                // If the module is a service, update its button status
+                if (module.getModuleType() == ModuleType.Service)
+                {
+                    try
+                    {
+                        ServiceController sc = module.getServiceController();
+
+                        if (sc != null)
+                        {
+                            sc.Refresh();
+
+                            if (sc.Status == ServiceControllerStatus.Stopped)
+                            {
+                                btnToggle.Text = "Start Module";
+                                btnToggle.Enabled = true;
+                            }
+                            else
+                            {
+                                btnToggle.Text = "Stop Module";
+                                btnToggle.Enabled = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Information.handleException(ex);
+                    }
+                }
+                else if (module.getModuleType() == ModuleType.Software)
+                {
+                    // TODO: Update buttons for a selected software type module
+                }
+            }
+
             foreach (ListViewItem lvi in this.lvModules.Items) 
             {
                 Module module = (Module)lvi.Tag;
