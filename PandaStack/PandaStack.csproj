@@ -173,6 +173,7 @@
     <None Include="Resources\world.png" />
     <None Include="Resources\tick.png" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\application_double.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

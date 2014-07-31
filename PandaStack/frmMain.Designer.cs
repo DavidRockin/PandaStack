@@ -34,9 +34,14 @@
             this.lvModules = new System.Windows.Forms.ListView();
             this.rtbConsole = new System.Windows.Forms.RichTextBox();
             this.ctmConsole = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctmConsole_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.ctmConsole_SelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmConsole_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ctmConsole_Clear = new System.Windows.Forms.ToolStripMenuItem();
             this.grpModuleControl = new System.Windows.Forms.GroupBox();
+            this.btnConfig = new System.Windows.Forms.Button();
+            this.btnAdmin = new System.Windows.Forms.Button();
             this.btnToggle = new System.Windows.Forms.Button();
             this.tmrSync = new System.Windows.Forms.Timer(this.components);
             this.ctmConfig = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -44,15 +49,15 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.ctmConsole_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctmConsole_Save = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctmConsole_Clear = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnConfig = new System.Windows.Forms.Button();
-            this.btnAdmin = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.niMinimize = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ctmMinimize = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ctmMinimize_restore = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctmMinimize_exit = new System.Windows.Forms.ToolStripMenuItem();
             this.grpLoadedModules.SuspendLayout();
             this.ctmConsole.SuspendLayout();
             this.grpModuleControl.SuspendLayout();
+            this.ctmMinimize.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpLoadedModules
@@ -99,6 +104,14 @@
             this.ctmConsole.Name = "ctmConsole";
             this.ctmConsole.Size = new System.Drawing.Size(148, 98);
             // 
+            // ctmConsole_Copy
+            // 
+            this.ctmConsole_Copy.Image = global::PandaStack.Properties.Resources.page_copy;
+            this.ctmConsole_Copy.Name = "ctmConsole_Copy";
+            this.ctmConsole_Copy.Size = new System.Drawing.Size(147, 22);
+            this.ctmConsole_Copy.Text = "Copy";
+            this.ctmConsole_Copy.Click += new System.EventHandler(this.ctmConsole_Copy_Click);
+            // 
             // ctmConsole_SelectAll
             // 
             this.ctmConsole_SelectAll.Name = "ctmConsole_SelectAll";
@@ -106,10 +119,26 @@
             this.ctmConsole_SelectAll.Text = "Select All";
             this.ctmConsole_SelectAll.Click += new System.EventHandler(this.ctmConsole_SelectAll_Click);
             // 
+            // ctmConsole_Save
+            // 
+            this.ctmConsole_Save.Image = global::PandaStack.Properties.Resources.disk;
+            this.ctmConsole_Save.Name = "ctmConsole_Save";
+            this.ctmConsole_Save.Size = new System.Drawing.Size(147, 22);
+            this.ctmConsole_Save.Text = "Save";
+            this.ctmConsole_Save.Click += new System.EventHandler(this.ctmConsole_Save_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
+            // 
+            // ctmConsole_Clear
+            // 
+            this.ctmConsole_Clear.Image = global::PandaStack.Properties.Resources.cross;
+            this.ctmConsole_Clear.Name = "ctmConsole_Clear";
+            this.ctmConsole_Clear.Size = new System.Drawing.Size(147, 22);
+            this.ctmConsole_Clear.Text = "Clear Console";
+            this.ctmConsole_Clear.Click += new System.EventHandler(this.ctmConsole_Clear_Click);
             // 
             // grpModuleControl
             // 
@@ -122,6 +151,34 @@
             this.grpModuleControl.TabIndex = 1;
             this.grpModuleControl.TabStop = false;
             this.grpModuleControl.Text = "Module Control";
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.Enabled = false;
+            this.btnConfig.Image = global::PandaStack.Properties.Resources.cog;
+            this.btnConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfig.Location = new System.Drawing.Point(262, 21);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(122, 28);
+            this.btnConfig.TabIndex = 2;
+            this.btnConfig.Text = "Configuration";
+            this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.Enabled = false;
+            this.btnAdmin.Image = global::PandaStack.Properties.Resources.wrench;
+            this.btnAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdmin.Location = new System.Drawing.Point(134, 21);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(122, 28);
+            this.btnAdmin.TabIndex = 1;
+            this.btnAdmin.Text = "Administration";
+            this.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdmin.UseVisualStyleBackColor = true;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnToggle
             // 
@@ -188,58 +245,6 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // ctmConsole_Copy
-            // 
-            this.ctmConsole_Copy.Image = global::PandaStack.Properties.Resources.page_copy;
-            this.ctmConsole_Copy.Name = "ctmConsole_Copy";
-            this.ctmConsole_Copy.Size = new System.Drawing.Size(147, 22);
-            this.ctmConsole_Copy.Text = "Copy";
-            this.ctmConsole_Copy.Click += new System.EventHandler(this.ctmConsole_Copy_Click);
-            // 
-            // ctmConsole_Save
-            // 
-            this.ctmConsole_Save.Image = global::PandaStack.Properties.Resources.disk;
-            this.ctmConsole_Save.Name = "ctmConsole_Save";
-            this.ctmConsole_Save.Size = new System.Drawing.Size(147, 22);
-            this.ctmConsole_Save.Text = "Save";
-            this.ctmConsole_Save.Click += new System.EventHandler(this.ctmConsole_Save_Click);
-            // 
-            // ctmConsole_Clear
-            // 
-            this.ctmConsole_Clear.Image = global::PandaStack.Properties.Resources.cross;
-            this.ctmConsole_Clear.Name = "ctmConsole_Clear";
-            this.ctmConsole_Clear.Size = new System.Drawing.Size(147, 22);
-            this.ctmConsole_Clear.Text = "Clear Console";
-            this.ctmConsole_Clear.Click += new System.EventHandler(this.ctmConsole_Clear_Click);
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.Enabled = false;
-            this.btnConfig.Image = global::PandaStack.Properties.Resources.cog;
-            this.btnConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConfig.Location = new System.Drawing.Point(262, 21);
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(122, 28);
-            this.btnConfig.TabIndex = 2;
-            this.btnConfig.Text = "Configuration";
-            this.btnConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnConfig.UseVisualStyleBackColor = true;
-            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
-            // 
-            // btnAdmin
-            // 
-            this.btnAdmin.Enabled = false;
-            this.btnAdmin.Image = global::PandaStack.Properties.Resources.wrench;
-            this.btnAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdmin.Location = new System.Drawing.Point(134, 21);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(122, 28);
-            this.btnAdmin.TabIndex = 1;
-            this.btnAdmin.Text = "Administration";
-            this.btnAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAdmin.UseVisualStyleBackColor = true;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            // 
             // btnSettings
             // 
             this.btnSettings.Enabled = false;
@@ -253,6 +258,37 @@
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // niMinimize
+            // 
+            this.niMinimize.ContextMenuStrip = this.ctmMinimize;
+            this.niMinimize.Text = "notifyIcon1";
+            this.niMinimize.Visible = true;
+            this.niMinimize.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niMinimize_MouseDoubleClick);
+            // 
+            // ctmMinimize
+            // 
+            this.ctmMinimize.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ctmMinimize_restore,
+            this.ctmMinimize_exit});
+            this.ctmMinimize.Name = "ctmMinimize";
+            this.ctmMinimize.Size = new System.Drawing.Size(178, 70);
+            // 
+            // ctmMinimize_restore
+            // 
+            this.ctmMinimize_restore.Image = global::PandaStack.Properties.Resources.application_double;
+            this.ctmMinimize_restore.Name = "ctmMinimize_restore";
+            this.ctmMinimize_restore.Size = new System.Drawing.Size(177, 22);
+            this.ctmMinimize_restore.Text = "Restore PandaStack";
+            this.ctmMinimize_restore.Click += new System.EventHandler(this.ctmMinimize_restore_Click);
+            // 
+            // ctmMinimize_exit
+            // 
+            this.ctmMinimize_exit.Image = global::PandaStack.Properties.Resources.cancel;
+            this.ctmMinimize_exit.Name = "ctmMinimize_exit";
+            this.ctmMinimize_exit.Size = new System.Drawing.Size(177, 22);
+            this.ctmMinimize_exit.Text = "Exit PandaStack";
+            this.ctmMinimize_exit.Click += new System.EventHandler(this.ctmMinimize_exit_Click);
             // 
             // frmMain
             // 
@@ -273,9 +309,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PandaStack";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.grpLoadedModules.ResumeLayout(false);
             this.ctmConsole.ResumeLayout(false);
             this.grpModuleControl.ResumeLayout(false);
+            this.ctmMinimize.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -302,6 +340,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ctmConsole_Clear;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.NotifyIcon niMinimize;
+        private System.Windows.Forms.ContextMenuStrip ctmMinimize;
+        private System.Windows.Forms.ToolStripMenuItem ctmMinimize_restore;
+        private System.Windows.Forms.ToolStripMenuItem ctmMinimize_exit;
     }
 }
 

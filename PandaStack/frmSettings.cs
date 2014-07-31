@@ -22,6 +22,8 @@ namespace PandaStack
             this.numTimerInterval.Enabled = false;
             this.chkAutoStart.Enabled = false;
             this.chkDisplayDebug.Enabled = false;
+            this.chkMinimize.Enabled = false;
+            this.chkShowBalloonTip.Enabled = false;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

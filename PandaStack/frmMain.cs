@@ -56,6 +56,24 @@ namespace PandaStack
             // TODO: Handle closing programs (TBA)
         }
 
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.niMinimize.BalloonTipIcon = ToolTipIcon.Info;
+                this.niMinimize.BalloonTipTitle = "PandaStack Minimized";
+                this.niMinimize.BalloonTipText = "PandaStack has minimized to your system's tray, you can open it by double-clicking the PandaStack icon.";
+                this.niMinimize.Icon = this.Icon;
+                this.niMinimize.Text = "PandaStack";
+
+                this.ShowInTaskbar = false;
+                this.niMinimize.Visible = true;
+                this.niMinimize.ShowBalloonTip(3000);
+
+                this.tmrSync.Enabled = false;
+            }
+        }
+
         private void lvModules_SelectIndexChange(object sender, EventArgs e)
         {
             try
@@ -337,43 +355,6 @@ namespace PandaStack
             }
         }
 
-        /**
-         * <summary>
-         * Fetch the loaded modules into the list view
-         * </summary>
-         */
-        private void fetchModules()
-        {
-            List<Module> loadedModules = this.pandaStack.getModules();
-
-            this.tmrSync.Enabled = false;
-
-            if (loadedModules.Count > 0)
-            {
-                ListViewItem lvi;
-                Information.addMessage("Loading " + loadedModules.Count + " modules");
-
-                foreach (Module module in loadedModules)
-                {
-                    Information.addMessage("Found module '" + module.getModuleName() + "' with " + module.getAdmins().Count + " admin options, " + module.getConfigs().Count + " config options");
-                    lvi = new ListViewItem(module.getModuleName());
-                    lvi.SubItems.Add(module.getStatus());
-                    lvi.SubItems.Add(module.getModuleType().ToString());
-                    lvi.Tag = module;
-
-                    this.lvModules.Items.Add(lvi);
-                    lvi = null;
-                }
-
-                // Enable the timer again only because there are modules loaded
-                this.tmrSync.Enabled = true;
-            }
-            else
-            {
-                Information.addMessage("No modules loaded");
-            }
-        }
-
         private void ctmConfig_itemClicked(object sender, EventArgs e)
         {
             ToolStripMenuItem mi = (ToolStripMenuItem)sender;
@@ -451,6 +432,64 @@ namespace PandaStack
 
             lvModules.Sort();
             this.lvModules.ListViewItemSorter = new ListViewItemComparer(e.Column, lvModules.Sorting);
+        }
+
+        private void niMinimize_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+            this.niMinimize.Visible = false;
+            this.tmrSync.Enabled = true;
+        }
+
+        private void ctmMinimize_restore_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+            this.niMinimize.Visible = false;
+            this.tmrSync.Enabled = true;
+        }
+
+        private void ctmMinimize_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /**
+         * <summary>
+         * Fetch the loaded modules into the list view
+         * </summary>
+         */
+        private void fetchModules()
+        {
+            List<Module> loadedModules = this.pandaStack.getModules();
+
+            this.tmrSync.Enabled = false;
+
+            if (loadedModules.Count > 0)
+            {
+                ListViewItem lvi;
+                Information.addMessage("Loading " + loadedModules.Count + " modules");
+
+                foreach (Module module in loadedModules)
+                {
+                    Information.addMessage("Found module '" + module.getModuleName() + "' with " + module.getAdmins().Count + " admin options, " + module.getConfigs().Count + " config options");
+                    lvi = new ListViewItem(module.getModuleName());
+                    lvi.SubItems.Add(module.getStatus());
+                    lvi.SubItems.Add(module.getModuleType().ToString());
+                    lvi.Tag = module;
+
+                    this.lvModules.Items.Add(lvi);
+                    lvi = null;
+                }
+
+                // Enable the timer again only because there are modules loaded
+                this.tmrSync.Enabled = true;
+            }
+            else
+            {
+                Information.addMessage("No modules loaded");
+            }
         }
 
     }
