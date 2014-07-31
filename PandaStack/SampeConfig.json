@@ -1,34 +1,108 @@
 ﻿{
 
-	"modules" : {
-
-		"Apache" : {
+	"modules" : [
+		{
 			"name" : "Apache Server",
 			"type" : "service",
-			"service" : "wampapache64",
-			"config" : {
-				"Apache Config" : "C:/PandaStack/bin/apache/config/apache.conf",
-				"Apache Extras" : "C:/PandaStack/bin/apache/config/extras"
-			},
-
-			"enabled" : "true"
+			"service" : "apache",
+			"config" : [
+				{
+					"name" : "Apache Config",
+					"type" : "file",
+					"path" : "C:/PandaStack/bin/apache/conf/httpd.conf"
+				},
+				{
+					"name" : "Apache Extras",
+					"type" : "directory",
+					"path" : "C:/PandaStack/bin/apache/conf/extra"
+				},
+				{
+					"name" : "Apache Directory",
+					"type" : "directory",
+					"path" : "C:/PandaStack/bin/apache"
+				}
+			]
 		},
-
-		"MySQL" : {
+		
+		{
 			"name" : "MySQL Server",
 			"type" : "service",
-			"config" : {
-				"MySQL Config" : "C:/PandaStack/bin/mysql/my.conf"
-			},
-			"admin" : {
-				"MySQL Console" : {
-					"command" : "cmd /k \"C:/PandaStack/bin/PandaStack/MySQL Console.bat\""
+			"service" : "mysql",
+			"config" : [
+				{
+					"name" : "MySQL Config",
+					"type" : "file",
+					"path" : "C:/PandaStack/bin/mysql/my.ini"
+				},
+				{
+					"name" : "MySQL Directory",
+					"type" : "directory",
+					"path" : "C:/PandaStack/bin/mysql"
 				}
-			},
-
-			"enabled" : "true"
+			],
+			"admin" : [
+				{
+					"name" : "MySQL Console",
+					"type" : "software",
+					"path" : "C:/PandaStack/bin/mysql/bin/mysql.exe",
+					"args" : "-u root -p"
+				},
+				{
+					"name" : "PHPMyAdmin",
+					"type" : "url",
+					"path" : "http://localhost/phpmyadmin/"
+				}
+			]
+		},
+		
+		{
+			"name" : "PHP",
+			"type" : "language",
+			"config" : [
+				{
+					"name" : "PHP Config",
+					"type" : "file",
+					"path" : "C:/PandaStack/bin/php/php.ini"
+				},
+				{
+					"name" : "PHP Directory",
+					"type" : "directory",
+					"path" : "C:/PandaStack/bin/php"
+				}
+			],
+			"admin" : [
+				{
+					"name" : "PHPMyAdmin",
+					"type" : "url",
+					"path" : "http://localhost/phpmyadmin/"
+				},
+				{
+					"name" : "PHPSysInfo",
+					"type" : "url",
+					"path" : "http://localhost/phpsysinfo/"
+				}
+			]
+		},
+		
+		{
+			"name" : "Python",
+			"type" : "language",
+			"config" : [
+				{
+					"name" : "Python Directory",
+					"type" : "directory",
+					"path" : "C:/PandaStack/bin/python"
+				}
+			]
 		}
 
+	],
+	
+	"settings" : {
+		"minimizeToTray" : true,
+		"minimizeToolTip" : true,
+		"displayDebug" : true,
+		"timerInterval" : 777
 	}
 
 }
