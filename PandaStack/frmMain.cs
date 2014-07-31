@@ -18,6 +18,7 @@ namespace PandaStack
 
         private PandaStack pandaStack;
         private frmAbout formAbout = new frmAbout();
+        private frmSettings formSettings = new frmSettings();
 
         public frmMain()
         {
@@ -421,7 +422,12 @@ namespace PandaStack
                 rtbConsole.SaveFile(svdConsoleOutput.FileName);
             }
         }
-	
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            this.formSettings.Show();
+        }
+
         private int _sortColumn = -1;
 
         private void lvModules_ColumnClick(object sender, ColumnClickEventArgs e)
