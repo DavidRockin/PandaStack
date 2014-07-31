@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -419,6 +420,31 @@ namespace PandaStack
             {
                 rtbConsole.SaveFile(svdConsoleOutput.FileName);
             }
+        }
+	
+        private int _sortColumn = -1;
+
+        private void lvModules_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column != this._sortColumn)
+            {
+                this._sortColumn = e.Column;
+                lvModules.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                if (lvModules.Sorting == SortOrder.Ascending)
+                {
+                    lvModules.Sorting = SortOrder.Descending;
+                }
+                else
+                {
+                    lvModules.Sorting = SortOrder.Ascending;
+                }
+            }
+
+            lvModules.Sort();
+            this.lvModules.ListViewItemSorter = new ListViewItemComparer(e.Column, lvModules.Sorting);
         }
 
     }

@@ -74,6 +74,7 @@
             this.lvModules.TabIndex = 0;
             this.lvModules.UseCompatibleStateImageBehavior = false;
             this.lvModules.View = System.Windows.Forms.View.Details;
+            this.lvModules.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvModules_ColumnClick);
             this.lvModules.SelectedIndexChanged += new System.EventHandler(this.lvModules_SelectIndexChange);
             // 
             // rtbConsole
