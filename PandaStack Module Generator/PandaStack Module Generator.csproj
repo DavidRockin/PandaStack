@@ -74,6 +74,10 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Module.cs" />
+    <Compile Include="ModuleConfig.cs" />
+    <Compile Include="ModuleConfigType.cs" />
+    <Compile Include="ModuleType.cs" />
     <Compile Include="PandaStackGen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -103,6 +108,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\arrow-090.png" />
+    <None Include="Resources\arrow-270.png" />
+    <None Include="Resources\disk.png" />
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\gear.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
