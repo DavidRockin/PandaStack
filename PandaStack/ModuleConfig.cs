@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PandaStack
 {
-    class ModuleConfig
+    public class ModuleConfig
     {
 
         private string _configName;

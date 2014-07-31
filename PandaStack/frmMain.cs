@@ -37,6 +37,8 @@ namespace PandaStack
                 this.Text += " [Administrator]";
                 Information.addMessage("PandaStack is running as administrator");
             }
+
+            this.tmrSync.Interval = this.pandaStack.getJSONHandler().getSettings().timerInterval;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -58,6 +60,9 @@ namespace PandaStack
 
         private void frmMain_Resize(object sender, EventArgs e)
         {
+            if (this.pandaStack.getJSONHandler().getSettings().minimizeToTray != true)
+                return;
+
             if (this.WindowState == FormWindowState.Minimized)
             {
                 this.niMinimize.BalloonTipIcon = ToolTipIcon.Info;
@@ -68,7 +73,9 @@ namespace PandaStack
 
                 this.ShowInTaskbar = false;
                 this.niMinimize.Visible = true;
-                this.niMinimize.ShowBalloonTip(3000);
+
+                if (this.pandaStack.getJSONHandler().getSettings().minimizeToolTip == true)
+                    this.niMinimize.ShowBalloonTip(3000);
 
                 this.tmrSync.Enabled = false;
             }
@@ -188,6 +195,7 @@ namespace PandaStack
                 }
             }
 
+            // Loop through all of the modules in the list, and update its status
             foreach (ListViewItem lvi in this.lvModules.Items) 
             {
                 Module module = (Module)lvi.Tag;
@@ -199,7 +207,7 @@ namespace PandaStack
         {
             // This button should only be clickable if there are items in lvModules
             // and one of them has been selected
-            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+            if (this.lvModules.Items.Count == 0 || this.lvModules.SelectedItems.Count == 0)
                 return;
 
             Module module = (Module)this.lvModules.FocusedItem.Tag;
@@ -250,9 +258,11 @@ namespace PandaStack
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            // Stop sync timer, and clear the list view
+            // If an module is selected, then unselect it before updating the list view
             if (this.lvModules.FocusedItem != null)
-                this.lvModules.FocusedItem.Selected = false; // Bug fix: refreshing while having an item selected throws an exception
+                this.lvModules.FocusedItem.Selected = false;
+
+            // Stop sync timer, and clear the list view
             this.tmrSync.Enabled = false;
             this.lvModules.Items.Clear();
 
@@ -275,7 +285,7 @@ namespace PandaStack
         {
             // This button should only be clickable if there are items in lvModules
             // and one of them was selected
-            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+            if (this.lvModules.Items.Count == 0 || this.lvModules.SelectedItems.Count == 0)
                 return;
 
             Module module = (Module)this.lvModules.FocusedItem.Tag;
@@ -319,7 +329,7 @@ namespace PandaStack
         {
             // This button should only be clickable if there are items in lvModules
             // and one of them was selected
-            if (this.lvModules.Items.Count == 0 && this.lvModules.SelectedItems.Count == 0)
+            if (this.lvModules.Items.Count == 0 || this.lvModules.SelectedItems.Count == 0)
                 return;
 
             Module module = (Module)this.lvModules.FocusedItem.Tag;

@@ -11,21 +11,22 @@ using System.Runtime.Serialization.Json;
 namespace PandaStack
 {
 
-    class PandaStack
+    public class PandaStack
     {
 
+        private JSONHandler jsonHandler;
         protected List<Module> _modules = new List<Module>();
+
+        public PandaStack()
+        {
+            this.jsonHandler = new JSONHandler(AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf");
+        }
 
         public void loadModules()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf";
-            string json = File.ReadAllText(path);
+            this.jsonHandler.fetchJSON();
 
-            DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(List<jModule>));
-            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            var obj = (List<jModule>)serialized.ReadObject(stream);
-
-            foreach (jModule jModule in obj)
+            foreach (jsonModule jModule in this.jsonHandler.getModules())
             {
                 // Module has to have a name and type
                 if (jModule.name == null || jModule.type == null)
@@ -64,7 +65,7 @@ namespace PandaStack
                 // Setup module's configurations
                 if (jModule.config != null)
                 {
-                    foreach (jConfig jConfig in jModule.config)
+                    foreach (jsonConfig jConfig in jModule.config)
                     {
                         // Configuration must have a name, a type and a file/path
                         if (jConfig.name == null || jConfig.type == null || jConfig.path == null)
@@ -106,7 +107,7 @@ namespace PandaStack
                 // Setup module's administrations
                 if (jModule.admin != null)
                 {
-                    foreach (jAdmin jAdmin in jModule.admin)
+                    foreach (jsonAdmin jAdmin in jModule.admin)
                     {
                         // Admin has to have a name, a type and a file/path
                         if (jAdmin.name == null || jAdmin.type == null || jAdmin.path == null)
@@ -156,6 +157,11 @@ namespace PandaStack
         public List<Module> getModules()
         {
             return this._modules;
+        }
+
+        public JSONHandler getJSONHandler()
+        {
+            return this.jsonHandler;
         }
 
     }

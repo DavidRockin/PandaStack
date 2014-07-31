@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
             this.chkDisplayDebug = new System.Windows.Forms.CheckBox();
             this.grpPSS = new System.Windows.Forms.GroupBox();
+            this.chkShowBalloonTip = new System.Windows.Forms.CheckBox();
+            this.chkMinimize = new System.Windows.Forms.CheckBox();
             this.chkAutoStart = new System.Windows.Forms.CheckBox();
             this.numTimerInterval = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.chkMinimize = new System.Windows.Forms.CheckBox();
-            this.chkShowBalloonTip = new System.Windows.Forms.CheckBox();
             this.grpPSS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimerInterval)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +67,26 @@
             this.grpPSS.TabStop = false;
             this.grpPSS.Text = "PandaStack Settings";
             // 
+            // chkShowBalloonTip
+            // 
+            this.chkShowBalloonTip.AutoSize = true;
+            this.chkShowBalloonTip.Location = new System.Drawing.Point(9, 88);
+            this.chkShowBalloonTip.Name = "chkShowBalloonTip";
+            this.chkShowBalloonTip.Size = new System.Drawing.Size(126, 17);
+            this.chkShowBalloonTip.TabIndex = 5;
+            this.chkShowBalloonTip.Text = "Show minimize tooltip";
+            this.chkShowBalloonTip.UseVisualStyleBackColor = true;
+            // 
+            // chkMinimize
+            // 
+            this.chkMinimize.AutoSize = true;
+            this.chkMinimize.Location = new System.Drawing.Point(9, 65);
+            this.chkMinimize.Name = "chkMinimize";
+            this.chkMinimize.Size = new System.Drawing.Size(133, 17);
+            this.chkMinimize.TabIndex = 4;
+            this.chkMinimize.Text = "Minimize to system tray";
+            this.chkMinimize.UseVisualStyleBackColor = true;
+            // 
             // chkAutoStart
             // 
             this.chkAutoStart.AutoSize = true;
@@ -80,9 +100,24 @@
             // numTimerInterval
             // 
             this.numTimerInterval.Location = new System.Drawing.Point(288, 39);
+            this.numTimerInterval.Maximum = new decimal(new int[] {
+            60000,
+            0,
+            0,
+            0});
+            this.numTimerInterval.Minimum = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
             this.numTimerInterval.Name = "numTimerInterval";
             this.numTimerInterval.Size = new System.Drawing.Size(98, 20);
             this.numTimerInterval.TabIndex = 2;
+            this.numTimerInterval.Value = new decimal(new int[] {
+            250,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -104,6 +139,7 @@
             this.btnApply.Text = "Apply";
             this.btnApply.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // btnCancel
             // 
@@ -117,26 +153,6 @@
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // chkMinimize
-            // 
-            this.chkMinimize.AutoSize = true;
-            this.chkMinimize.Location = new System.Drawing.Point(9, 65);
-            this.chkMinimize.Name = "chkMinimize";
-            this.chkMinimize.Size = new System.Drawing.Size(133, 17);
-            this.chkMinimize.TabIndex = 4;
-            this.chkMinimize.Text = "Minimize to system tray";
-            this.chkMinimize.UseVisualStyleBackColor = true;
-            // 
-            // chkShowBalloonTip
-            // 
-            this.chkShowBalloonTip.AutoSize = true;
-            this.chkShowBalloonTip.Location = new System.Drawing.Point(9, 88);
-            this.chkShowBalloonTip.Name = "chkShowBalloonTip";
-            this.chkShowBalloonTip.Size = new System.Drawing.Size(126, 17);
-            this.chkShowBalloonTip.TabIndex = 5;
-            this.chkShowBalloonTip.Text = "Show minimize tooltip";
-            this.chkShowBalloonTip.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 

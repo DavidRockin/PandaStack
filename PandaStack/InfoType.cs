@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack
 {
 
-    enum InfoType
+    public enum InfoType
     {
 
         Exception,

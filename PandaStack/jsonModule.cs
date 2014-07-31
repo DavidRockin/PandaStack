@@ -6,13 +6,15 @@ using System.Text;
 namespace PandaStack
 {
 
-    public class jConfig
+    public class jsonModule
     {
 
         public string name { get; set; }
         public string type { get; set; }
-        public string path { get; set; }
-        public string args { get; set; }
+        public string service { get; set; }
+
+        public List<jsonAdmin> admin { get; set; }
+        public List<jsonConfig> config { get; set; }
 
     }
 

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace PandaStack
 {
 
-    class Module
+    public class Module
     {
 
         private string _moduleName;

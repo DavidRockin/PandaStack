@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace PandaStack
 {
 
-    class Information
+    public class Information
     {
 
         public static frmMain form;
@@ -19,6 +19,9 @@ namespace PandaStack
 
         public static void addMessage(string message, InfoType type)
         {
+            if (type == InfoType.Debug && Program.pandaStack.getJSONHandler().getSettings().displayDebug != true)
+                return;
+
             String msg = "[" + DateTime.Now.ToShortTimeString() + "] [" + type.ToString() + "] " + message + "\r\n";
             Information.form.rtbConsole.Text += msg;
         }

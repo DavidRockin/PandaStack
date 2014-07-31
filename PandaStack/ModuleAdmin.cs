@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack
 {
 
-    class ModuleAdmin
+    public class ModuleAdmin
     {
 
         private string _adminName;

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace PandaStack
 {
 
-    class ListViewItemComparer : IComparer
+    public class ListViewItemComparer : IComparer
     {
 
         private int _column;
@@ -29,8 +29,7 @@ namespace PandaStack
         public int Compare(object x, object y)
         {
             int returnVal = -1;
-            returnVal = String.Compare(((ListViewItem)x).SubItems[this._column].Text,
-                                    ((ListViewItem)y).SubItems[this._column].Text);
+            returnVal = String.Compare(((ListViewItem)x).SubItems[this._column].Text, ((ListViewItem)y).SubItems[this._column].Text);
 
             if (this._order == SortOrder.Descending)
             {

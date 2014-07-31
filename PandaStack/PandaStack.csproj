@@ -88,9 +88,12 @@
     </Compile>
     <Compile Include="Information.cs" />
     <Compile Include="InfoType.cs" />
-    <Compile Include="jAdmin.cs" />
-    <Compile Include="jConfig.cs" />
-    <Compile Include="jModule.cs" />
+    <Compile Include="jsonAdmin.cs" />
+    <Compile Include="jsonConfig.cs" />
+    <Compile Include="JSONHandler.cs" />
+    <Compile Include="jsonModule.cs" />
+    <Compile Include="jsonRoot.cs" />
+    <Compile Include="jsonSettings.cs" />
     <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleAdmin.cs" />
