@@ -13,17 +13,18 @@ namespace PandaStack_Module_Generator
     partial class frmEditItem : Form
     {
 
-        private ListViewItem _lvi;
         private ModuleConfig _config;
         private ModuleAdmin _admin;
 
-        public frmEditItem(ModuleAdmin admin, ListViewItem lvi)
+        public string name;
+        public string type;
+        public string path;
+
+        public frmEditItem(ModuleAdmin admin)
         {
             InitializeComponent();
 
             this._admin = admin;
-            this._lvi = lvi;
-
             var values = Enum.GetValues(typeof(ModuleAdminType));
             foreach (ModuleAdminType type in values)
             {
@@ -31,13 +32,11 @@ namespace PandaStack_Module_Generator
             }
         }
 
-        public frmEditItem(ModuleConfig config, ListViewItem lvi)
+        public frmEditItem(ModuleConfig config)
         {
             InitializeComponent();
 
             this._config = config;
-            this._lvi = lvi;
-
             var values = Enum.GetValues(typeof(ModuleConfigType));
             foreach (ModuleConfigType type in values)
             {
@@ -47,23 +46,22 @@ namespace PandaStack_Module_Generator
 
         private void frmEditItem_Load(object sender, EventArgs e)
         {
-            this.txtName.Text = this._lvi.Text;
-            this.cmbType.Text = this._lvi.SubItems[1].Text;
-            this.txtPath.Text = this._lvi.SubItems[2].Text;
+            this.txtName.Text = this.name;
+            this.cmbType.Text = this.type;
+            this.txtPath.Text = this.path;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            this._lvi.Text = this.txtName.Text;
-            this._lvi.SubItems[1].Text = this.cmbType.Text;
-            this._lvi.SubItems[2].Text = this.txtPath.Text;
-
-            this.Dispose();
+            this.name = this.txtName.Text;
+            this.type = this.cmbType.Text;
+            this.path = this.txtPath.Text;
+            this.DialogResult = DialogResult.OK;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void btnOpenLoc_Click(object sender, EventArgs e)

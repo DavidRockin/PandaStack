@@ -234,8 +234,17 @@ namespace PandaStack_Module_Generator
                     ListViewItem lvi = this.lvAdmins.FocusedItem;
                     ModuleAdmin admin = (ModuleAdmin)lvi.Tag;
 
-                    this.formEditItem = new frmEditItem(admin, lvi);
-                    this.formEditItem.ShowDialog();
+                    this.formEditItem = new frmEditItem(admin);
+                    this.formEditItem.name = lvi.Text;
+                    this.formEditItem.type = lvi.SubItems[1].Text;
+                    this.formEditItem.path = lvi.SubItems[2].Text;
+
+                    if (this.formEditItem.ShowDialog() == DialogResult.OK)
+                    {
+                        lvi.Text = formEditItem.name;
+                        lvi.SubItems[1].Text = formEditItem.type;
+                        lvi.SubItems[2].Text = formEditItem.path;
+                    }
                 }
             }
             catch (Exception ex)
@@ -301,8 +310,18 @@ namespace PandaStack_Module_Generator
                 {
                     ListViewItem lvi = this.lvConfigs.FocusedItem;
                     ModuleConfig config = (ModuleConfig)lvi.Tag;
-                    this.formEditItem = new frmEditItem(config, lvi);
-                    this.formEditItem.ShowDialog();
+
+                    this.formEditItem = new frmEditItem(config);
+                    this.formEditItem.name = lvi.Text;
+                    this.formEditItem.type = lvi.SubItems[1].Text;
+                    this.formEditItem.path = lvi.SubItems[2].Text;
+
+                    if (this.formEditItem.ShowDialog() == DialogResult.OK)
+                    {
+                        lvi.Text = formEditItem.name;
+                        lvi.SubItems[1].Text = formEditItem.type;
+                        lvi.SubItems[2].Text = formEditItem.path;
+                    }
                 }
             }
             catch (Exception ex)

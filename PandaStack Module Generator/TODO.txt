@@ -6,10 +6,6 @@ should be able to load that file, and be able to manage it.
 
 TODO:
 + Create new/load exisiting configurtion file
-+ Manage (create/update/delete) modules
-	* With respective types (service/program/language etc)
-	+ Manage module configs
-	+ Manage module administrations
 + Save/output the config
 + Test configuration?
 	* Load the config, test to make sure it's valid, test to make sure the
