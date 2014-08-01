@@ -14,8 +14,6 @@ namespace PandaStack_Module_Generator
     {
 
         private ListViewItem _lvi;
-        private bool _isAdmin; // For now
-
         private ModuleConfig _config;
         private ModuleAdmin _admin;
 
@@ -23,7 +21,6 @@ namespace PandaStack_Module_Generator
         {
             InitializeComponent();
 
-            this._isAdmin = true;
             this._admin = admin;
             this._lvi = lvi;
 
@@ -32,17 +29,12 @@ namespace PandaStack_Module_Generator
             {
                 this.cmbType.Items.Add(type.ToString());
             }
-
-            this.txtName.Text = admin.getName();
-            this.cmbType.Text = admin.getType().ToString();
-            this.txtPath.Text = admin.getPath();
         }
 
         public frmEditItem(ModuleConfig config, ListViewItem lvi)
         {
             InitializeComponent();
 
-            this._isAdmin = false;
             this._config = config;
             this._lvi = lvi;
 
@@ -51,15 +43,13 @@ namespace PandaStack_Module_Generator
             {
                 this.cmbType.Items.Add(type.ToString());
             }
-
-            this.txtName.Text = config.getName();
-            this.cmbType.Text = config.getType().ToString();
-            this.txtPath.Text = config.getPath();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void frmEditItem_Load(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.txtName.Text = this._lvi.Text;
+            this.cmbType.Text = this._lvi.SubItems[1].Text;
+            this.txtPath.Text = this._lvi.SubItems[2].Text;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -68,30 +58,72 @@ namespace PandaStack_Module_Generator
             this._lvi.SubItems[1].Text = this.cmbType.Text;
             this._lvi.SubItems[2].Text = this.txtPath.Text;
 
-            /*if (this._isAdmin == true)
-            {
-                this._admin.setName(this.txtName.Text);
-                this._admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), this.cmbType.Text));
-                this._admin.setPath(this.txtPath.Text);
-            }
-            else
-            {
-                this._config.setName(this.txtName.Text);
-                this._config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), this.cmbType.Text));
-                this._config.setPath(this.txtPath.Text);
-            }*/
+            this.Dispose();
+        }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
             this.Dispose();
         }
 
         private void btnOpenLoc_Click(object sender, EventArgs e)
         {
+            if (this.cmbType.Text == "Software")
+            {
+                OpenFileDialog ofdPath = new OpenFileDialog();
+                ofdPath.Title = "Select Application";
+                ofdPath.Filter = "Applications (*.exe)|*.exe|Batch Files (*.bat;*.com)|*.bat;*.com|All Files (*.*)|*.*";
 
+                if (ofdPath.ShowDialog() != DialogResult.Cancel)
+                {
+                    this.txtPath.Text = ofdPath.FileName;
+                }
+            }
+            else if (this._config != null && this.cmbType.Text == "File") {
+                OpenFileDialog ofdPath = new OpenFileDialog();
+                ofdPath.Title = "Select Configuration File";
+                ofdPath.Filter = "All Files (*.*)|*.*";
+
+                if (ofdPath.ShowDialog() != DialogResult.Cancel)
+                {
+                    this.txtPath.Text = ofdPath.FileName;
+                }
+            }
+            else if (this._config != null && this.cmbType.Text == "Directory")
+            {
+                FolderBrowserDialog fbdPath = new FolderBrowserDialog();
+
+                if (fbdPath.ShowDialog() != DialogResult.Cancel)
+                {
+                    this.txtPath.Text = fbdPath.SelectedPath;
+                }
+            }
         }
 
-        private void frmEditItem_Load(object sender, EventArgs e)
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string text = this.cmbType.Text;
 
+            if (text == "URL" || text == "Command")
+            {
+                this.btnOpenLoc.Enabled = false;
+                this.lblPath.Text = (text == "URL" ? "URL Address" : "Command");
+                return;
+            }
+            else if (text == "Software")
+            {
+                this.lblPath.Text = "Application File";
+            }
+            else if (text == "Directory")
+            {
+                this.lblPath.Text = "Directory Path";
+            }
+            else if (text == "File")
+            {
+                this.lblPath.Text = "Configuration File";
+            }
+
+            this.btnOpenLoc.Enabled = true;
         }
 
     }
