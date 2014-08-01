@@ -73,6 +73,12 @@
     <Compile Include="frmCode.Designer.cs">
       <DependentUpon>frmCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEditItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditItem.Designer.cs">
+      <DependentUpon>frmEditItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,11 +91,13 @@
     <Compile Include="ModuleConfig.cs" />
     <Compile Include="ModuleConfigType.cs" />
     <Compile Include="ModuleType.cs" />
-    <Compile Include="PandaStackGen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCode.resx">
       <DependentUpon>frmCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditItem.resx">
+      <DependentUpon>frmEditItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -124,6 +132,7 @@
     <None Include="Resources\pencil.png" />
     <None Include="Resources\gear.png" />
     <Content Include="favicon.ico" />
+    <None Include="Resources\tick.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>

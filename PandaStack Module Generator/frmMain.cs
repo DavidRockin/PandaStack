@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace PandaStack_Module_Generator
 {
@@ -13,6 +14,7 @@ namespace PandaStack_Module_Generator
     public partial class frmMain : Form
     {
 
+        private frmEditItem formEditItem;
         private List<Module> modules = new List<Module>();
 
         public frmMain()
@@ -54,9 +56,9 @@ namespace PandaStack_Module_Generator
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                this.handleException(ex);
             }
 
             this.clearCurrentModule();
@@ -87,8 +89,9 @@ namespace PandaStack_Module_Generator
                     this.clearCurrentModule();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                this.handleException(ex);
             }
         }
 
@@ -176,9 +179,9 @@ namespace PandaStack_Module_Generator
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                this.handleException(ex);
             }
 
             this.clearCurrentAdmin();
@@ -208,8 +211,28 @@ namespace PandaStack_Module_Generator
                     this.lvAdmins.Items.Remove(lvi);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                this.handleException(ex);
+            }
+        }
+
+        private void btnAdmin_Edit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                {
+                    ListViewItem lvi = this.lvAdmins.FocusedItem;
+                    ModuleAdmin admin = (ModuleAdmin)lvi.Tag;
+
+                    this.formEditItem = new frmEditItem(admin, lvi);
+                    this.formEditItem.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.handleException(ex);
             }
         }
 
@@ -224,9 +247,9 @@ namespace PandaStack_Module_Generator
                     return;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                this.handleException(ex);
             }
 
             this.clearCurrentConfig();
@@ -256,8 +279,27 @@ namespace PandaStack_Module_Generator
                     this.lvConfigs.Items.Remove(lvi);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                this.handleException(ex);
+            }
+        }
+
+        private void btnConfig_Edit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.lvConfigs.Items.Count > 0 && this.lvConfigs.SelectedItems.Count > 0)
+                {
+                    ListViewItem lvi = this.lvConfigs.FocusedItem;
+                    ModuleConfig config = (ModuleConfig)lvi.Tag;
+                    this.formEditItem = new frmEditItem(config, lvi);
+                    this.formEditItem.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.handleException(ex);
             }
         }
 
@@ -344,6 +386,15 @@ namespace PandaStack_Module_Generator
         {
             this.btnConfig_Edit.Enabled = false;
             this.btnConfig_Remove.Enabled = false;
+        }
+
+        private void handleException(Exception ex)
+        {
+            StackTrace stackTrace = new StackTrace(ex, true);
+            StackFrame stackFrame = stackTrace.GetFrame(0);
+            string message = ex.Message + " " + ex.InnerException + "\r\n" + stackFrame.GetFileName() + ":" +
+                                stackFrame.GetFileLineNumber() + " -> " + stackFrame.GetMethod();
+            MessageBox.Show(message, ex.GetType().ToString());
         }
 
     }

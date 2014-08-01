@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack_Module_Generator
 {
 
-    public enum ModuleAdminType
+    enum ModuleAdminType
     {
 
         Software,
