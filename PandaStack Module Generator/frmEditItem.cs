@@ -68,7 +68,7 @@ namespace PandaStack_Module_Generator
             this._lvi.SubItems[1].Text = this.cmbType.Text;
             this._lvi.SubItems[2].Text = this.txtPath.Text;
 
-            if (this._isAdmin == true)
+            /*if (this._isAdmin == true)
             {
                 this._admin.setName(this.txtName.Text);
                 this._admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), this.cmbType.Text));
@@ -79,9 +79,19 @@ namespace PandaStack_Module_Generator
                 this._config.setName(this.txtName.Text);
                 this._config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), this.cmbType.Text));
                 this._config.setPath(this.txtPath.Text);
-            }
+            }*/
 
             this.Dispose();
+        }
+
+        private void btnOpenLoc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmEditItem_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

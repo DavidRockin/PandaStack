@@ -90,6 +90,7 @@
             this.btnOpenLoc.TabIndex = 5;
             this.btnOpenLoc.Text = "..";
             this.btnOpenLoc.UseVisualStyleBackColor = true;
+            this.btnOpenLoc.Click += new System.EventHandler(this.btnOpenLoc_Click);
             // 
             // txtPath
             // 
@@ -142,6 +143,7 @@
             this.Name = "frmEditItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmEditItem";
+            this.Load += new System.EventHandler(this.frmEditItem_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

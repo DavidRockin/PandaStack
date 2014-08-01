@@ -118,7 +118,11 @@ namespace PandaStack_Module_Generator
                 {
                     foreach (ListViewItem alvi in this.lvAdmins.Items)
                     {
-                        module.addAdmin((ModuleAdmin)alvi.Tag);
+                        ModuleAdmin admin = (ModuleAdmin)alvi.Tag;
+                        admin.setName(alvi.Text);
+                        admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), alvi.SubItems[1].Text));
+                        admin.setPath(alvi.SubItems[2].Text);
+                        module.addAdmin(admin);
                     }
                 }
 
@@ -126,7 +130,11 @@ namespace PandaStack_Module_Generator
                 {
                     foreach (ListViewItem clvi in this.lvConfigs.Items)
                     {
-                        module.addConfig((ModuleConfig)clvi.Tag);
+                        ModuleConfig config = (ModuleConfig)clvi.Tag;
+                        config.setName(clvi.Text);
+                        config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), clvi.SubItems[1].Text));
+                        config.setPath(clvi.SubItems[2].Text);
+                        module.addConfig(config);
                     }
                 }
             }
