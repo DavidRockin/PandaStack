@@ -56,6 +56,11 @@ namespace PandaStack_Module_Generator
             return this.configs;
         }
 
+        public void clearConfigs()
+        {
+            this.configs.Clear();
+        }
+
     }
 
 }

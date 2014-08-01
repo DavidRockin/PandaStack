@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace PandaStack_Module_Generator
 {
+
     public partial class frmMain : Form
     {
 
@@ -21,31 +22,22 @@ namespace PandaStack_Module_Generator
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // Setup the administrations columns
             lvAdmins.Columns.Add("Name", 125, HorizontalAlignment.Left);
             lvAdmins.Columns.Add("Type", 75, HorizontalAlignment.Left);
             lvAdmins.Columns.Add("Path", 250, HorizontalAlignment.Left);
 
+            // Setup the configurations columns
             lvConfigs.Columns.Add("Name", 125, HorizontalAlignment.Left);
             lvConfigs.Columns.Add("Type", 75, HorizontalAlignment.Left);
             lvConfigs.Columns.Add("Path", 250, HorizontalAlignment.Left);
 
+            // Set the module types
             var values = Enum.GetValues(typeof(ModuleType));
             foreach (ModuleType type in values)
             {
                 this.cmbType.Items.Add(type.ToString());
             }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            Module module = new Module();
-            this.modules.Add(module);
-
-            ListViewItem lvi = new ListViewItem();
-            lvi.Text = module.getName();
-            lvi.Tag = module;
-
-            this.lvModules.Items.Add(lvi);
         }
 
         private void lvModules_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -59,57 +51,26 @@ namespace PandaStack_Module_Generator
                     this.groupBox2.Enabled = true;
                     this.btnRemove.Enabled = true;
 
-                    if (module.getConfigs().Count > 0)
-                    {
-                        this.lvConfigs.Items.Clear();
-
-                        foreach (ModuleConfig config in module.getConfigs())
-                        {
-                            ListViewItem clvi = new ListViewItem();
-                            clvi.Text = config.getName();
-                            clvi.SubItems.Add(config.getType().ToString());
-                            clvi.SubItems.Add(config.getPath());
-                            this.lvConfigs.Items.Add(clvi);
-                        }
-                    }
-
                     return;
                 }
-            } catch {
+            }
+            catch
+            {
 
             }
 
             this.clearCurrentModule();
         }
 
-        private void updateCurrentModule(Module module)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            this.txtName.Text = module.getName();
-            this.cmbType.Text = module.getType().ToString();
+            Module module = new Module();
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = module.getName();
+            lvi.Tag = module;
 
-            if (module.getType() == ModuleType.Service)
-            {
-                this.txtServiceName.Text = module.getService();
-            }
-        }
-
-        private void clearCurrentModule()
-        {
-            if (this.lvModules.SelectedItems.Count > 0)
-                this.lvModules.FocusedItem.Focused = false;
-
-            this.btnRemove.Enabled = false;
-            this.groupBox2.Enabled = false;
-            this.txtName.Text = "";
-            this.cmbType.Text = "";
-            this.txtServiceName.Text = "";
-            this.lvConfigs.Items.Clear();
-        }
-
-        private void clearCurrentConfig()
-        {
-            this.btnConfig_Edit.Enabled = false;
-            this.btnConfig_Remove.Enabled = false;
+            this.modules.Add(module);
+            this.lvModules.Items.Add(lvi);
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -149,11 +110,11 @@ namespace PandaStack_Module_Generator
                 lvi.Text = txtName.Text;
                 module.getConfigs().Clear();
 
-                if (lvConfigs.Items.Count > 0) {
+                if (this.lvConfigs.Items.Count > 0)
+                {
                     foreach (ListViewItem clvi in this.lvConfigs.Items)
                     {
-                        ModuleConfig config = (ModuleConfig)clvi.Tag;
-                        module.addConfig(config);
+                        module.addConfig((ModuleConfig)clvi.Tag);
                     }
                 }
 
@@ -179,25 +140,9 @@ namespace PandaStack_Module_Generator
                     clvi.Text = config.getName();
                     clvi.SubItems.Add(config.getType().ToString());
                     clvi.SubItems.Add(config.getPath());
+                    clvi.Tag = config;
                     this.lvConfigs.Items.Add(clvi);
                 }
-            }
-        }
-
-        private void btnConfig_Add_Click(object sender, EventArgs e)
-        {
-            if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = this.lvModules.FocusedItem;
-                Module module = (Module)lvi.Tag;
-
-                ModuleConfig config = new ModuleConfig();
-                ListViewItem clvi = new ListViewItem();
-                clvi.Text = config.getName();
-                clvi.SubItems.Add(config.getType().ToString());
-                clvi.SubItems.Add(config.getPath());
-                clvi.Tag = config;
-                this.lvConfigs.Items.Add(clvi);
             }
         }
 
@@ -221,20 +166,92 @@ namespace PandaStack_Module_Generator
             this.clearCurrentConfig();
         }
 
+        private void btnConfig_Add_Click(object sender, EventArgs e)
+        {
+            if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
+            {
+                ModuleConfig config = new ModuleConfig();
+                ListViewItem clvi = new ListViewItem();
+                clvi.Text = config.getName();
+                clvi.SubItems.Add(config.getType().ToString());
+                clvi.SubItems.Add(config.getPath());
+                clvi.Tag = config;
+                this.lvConfigs.Items.Add(clvi);
+            }
+        }
+
         private void btnConfig_Remove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.lvConfigs.SelectedItems.Count > 0)
+                if (this.lvModules.Items.Count > 0 && this.lvConfigs.SelectedItems.Count > 0)
                 {
                     ListViewItem lvi = this.lvConfigs.FocusedItem;
-                    ModuleConfig config = (ModuleConfig)lvi.Tag;
                     this.lvConfigs.Items.Remove(lvi);
                 }
             }
             catch
             {
             }
+        }
+
+        /**
+         * <summary>
+         * Set the selected module
+         * </summary>
+         */
+        private void updateCurrentModule(Module module)
+        {
+            this.txtName.Text = module.getName();
+            this.cmbType.Text = module.getType().ToString();
+            this.lvConfigs.Items.Clear();
+
+            if (module.getType() == ModuleType.Service)
+            {
+                this.txtServiceName.Text = module.getService();
+            }
+
+            if (module.getConfigs().Count > 0)
+            {
+                foreach (ModuleConfig config in module.getConfigs())
+                {
+                    ListViewItem clvi = new ListViewItem();
+                    clvi.Text = config.getName();
+                    clvi.SubItems.Add(config.getType().ToString());
+                    clvi.SubItems.Add(config.getPath());
+                    clvi.Tag = config;
+                    this.lvConfigs.Items.Add(clvi);
+                }
+            }
+        }
+
+        /**
+         * <summary>
+         * Clear the current module fields
+         * </summary>
+         */
+        private void clearCurrentModule()
+        {
+            if (this.lvModules.SelectedItems.Count > 0)
+                this.lvModules.FocusedItem.Focused = false;
+
+            this.btnRemove.Enabled = false;
+            this.groupBox2.Enabled = false;
+            this.txtName.Text = "";
+            this.cmbType.Text = "";
+            this.txtServiceName.Text = "";
+            this.lvConfigs.Items.Clear();
+        }
+
+        /**
+         * <summary>
+         * Disable configuration management
+         * </summary>
+         */
+        private void clearCurrentConfig()
+        {
+            this.btnConfig_Edit.Enabled = false;
+            this.btnConfig_Remove.Enabled = false;
         }
 
     }
