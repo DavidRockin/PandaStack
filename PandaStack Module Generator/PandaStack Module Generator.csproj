@@ -57,6 +57,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +86,14 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="jsonAdmin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="jsonConfig.cs" />
+    <Compile Include="JSONHandler.cs" />
+    <Compile Include="jsonModule.cs" />
+    <Compile Include="jsonRoot.cs" />
+    <Compile Include="jsonSettings.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleAdmin.cs" />
     <Compile Include="ModuleAdminType.cs" />
@@ -133,6 +142,8 @@
     <None Include="Resources\gear.png" />
     <Content Include="favicon.ico" />
     <None Include="Resources\tick.png" />
+    <None Include="Resources\folder_page.png" />
+    <None Include="Resources\page_white_get.png" />
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>

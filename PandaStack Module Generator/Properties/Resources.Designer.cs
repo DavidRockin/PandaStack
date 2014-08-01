@@ -103,6 +103,16 @@ namespace PandaStack_Module_Generator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap folder_page {
+            get {
+                object obj = ResourceManager.GetObject("folder_page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gear {
             get {
                 object obj = ResourceManager.GetObject("gear", resourceCulture);
@@ -116,6 +126,16 @@ namespace PandaStack_Module_Generator.Properties {
         internal static System.Drawing.Bitmap minus {
             get {
                 object obj = ResourceManager.GetObject("minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap page_white_get {
+            get {
+                object obj = ResourceManager.GetObject("page_white_get", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

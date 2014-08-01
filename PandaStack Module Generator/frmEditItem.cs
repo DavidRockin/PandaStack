@@ -102,7 +102,7 @@ namespace PandaStack_Module_Generator
         {
             string text = this.cmbType.Text;
 
-            if (text == "URL" || text == "Command")
+            if (text == "Url" || text == "Command")
             {
                 this.btnOpenLoc.Enabled = false;
                 this.lblPath.Text = (text == "URL" ? "URL Address" : "Command");

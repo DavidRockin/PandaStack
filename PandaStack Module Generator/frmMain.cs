@@ -34,6 +34,8 @@ namespace PandaStack_Module_Generator
             lvConfigs.Columns.Add("Type", 75, HorizontalAlignment.Left);
             lvConfigs.Columns.Add("Path", 250, HorizontalAlignment.Left);
 
+            lvModules.Columns.Add("Module Name", lvModules.Width - 25, HorizontalAlignment.Left);
+
             // Set the module types
             var values = Enum.GetValues(typeof(ModuleType));
             foreach (ModuleType type in values)
@@ -425,6 +427,134 @@ namespace PandaStack_Module_Generator
             string message = ex.Message + " " + ex.InnerException + "\r\n" + stackFrame.GetFileName() + ":" +
                                 stackFrame.GetFileLineNumber() + " -> " + stackFrame.GetMethod();
             MessageBox.Show(message, ex.GetType().ToString());
+        }
+
+        private void btnLoadConfig_Click(object sender, EventArgs e)
+        {
+            DialogResult warning = MessageBox.Show("You are loading a new PandaStack configuration file, doing so will remove all unsaved changes. Are you sure you wish to remove all unsaved changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (warning == DialogResult.Yes)
+            {
+                // Remove modules
+                this.clearCurrentModule();
+                this.lvModules.Items.Clear();
+                this.modules.Clear();
+
+                // Display a file dialog asking which configuration file to load
+                OpenFileDialog ofdConfig = new OpenFileDialog();
+                ofdConfig.Title = "Load New Configuration File";
+                ofdConfig.Filter = "Configuration File (*.conf;*.json)|*.conf;*.json|All Files (*.*)|*.*";
+
+                if (ofdConfig.ShowDialog() != DialogResult.Cancel)
+                {
+                    JSONHandler jsonHandler = new JSONHandler(ofdConfig.FileName);
+                    jsonHandler.fetchJSON();
+
+                    foreach (jsonModule jsonModule in jsonHandler.getModules())
+                    {
+                        Module module = new Module();
+                        module.setName(jsonModule.name);
+                        module.setType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
+                        if (module.getType() == ModuleType.Service)
+                        {
+                            module.setService(jsonModule.service);
+                        }
+
+                        if (jsonModule.admin != null && jsonModule.admin.Count > 0)
+                        {
+                            foreach (jsonAdmin jsonAdmin in jsonModule.admin)
+                            {
+                                ModuleAdmin admin = new ModuleAdmin();
+                                admin.setName(jsonAdmin.name);
+                                admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
+                                admin.setPath(jsonAdmin.path);
+
+                                module.addAdmin(admin);
+                            }
+                        }
+
+                        if (jsonModule.config != null && jsonModule.config.Count > 0)
+                        {
+                            foreach (jsonConfig jsonConfig in jsonModule.config)
+                            {
+                                ModuleConfig config = new ModuleConfig();
+                                config.setName(jsonConfig.name);
+                                config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
+                                config.setPath(jsonConfig.path);
+
+                                module.addConfig(config);
+                            }
+                        }
+
+                        this.modules.Add(module);
+
+                        ListViewItem lvi = new ListViewItem();
+                        lvi.Text = module.getName();
+                        lvi.Tag = module;
+                        this.lvModules.Items.Add(lvi);
+                    }
+                }
+            }
+            else
+            {
+                // Do nothing
+            }
+        }
+
+        private void btnImportConfig_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdConfig = new OpenFileDialog();
+            ofdConfig.Title = "Import Configuration File";
+            ofdConfig.Filter = "Configuration File (*.conf;*.json)|*.conf;*.json|All Files (*.*)|*.*";
+
+            if (ofdConfig.ShowDialog() != DialogResult.Cancel)
+            {
+                JSONHandler jsonHandler = new JSONHandler(ofdConfig.FileName);
+                jsonHandler.fetchJSON();
+
+                foreach (jsonModule jsonModule in jsonHandler.getModules())
+                {
+                    Module module = new Module();
+                    module.setName(jsonModule.name);
+                    module.setType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
+                    if (module.getType() == ModuleType.Service)
+                    {
+                        module.setService(jsonModule.service);
+                    }
+
+                    if (jsonModule.admin != null && jsonModule.admin.Count > 0)
+                    {
+                        foreach (jsonAdmin jsonAdmin in jsonModule.admin)
+                        {
+                            ModuleAdmin admin = new ModuleAdmin();
+                            admin.setName(jsonAdmin.name);
+                            admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
+                            admin.setPath(jsonAdmin.path);
+
+                            module.addAdmin(admin);
+                        }
+                    }
+
+                    if (jsonModule.config != null && jsonModule.config.Count > 0)
+                    {
+                        foreach (jsonConfig jsonConfig in jsonModule.config)
+                        {
+                            ModuleConfig config = new ModuleConfig();
+                            config.setName(jsonConfig.name);
+                            config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
+                            config.setPath(jsonConfig.path);
+
+                            module.addConfig(config);
+                        }
+                    }
+
+                    this.modules.Add(module);
+
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.Text = module.getName();
+                    lvi.Tag = module;
+                    this.lvModules.Items.Add(lvi);
+                }
+            }
         }
 
     }

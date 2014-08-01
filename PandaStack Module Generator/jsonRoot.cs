@@ -6,12 +6,11 @@ using System.Text;
 namespace PandaStack_Module_Generator
 {
 
-    enum ModuleAdminType
+    public class jsonRoot
     {
 
-        Software,
-        Command,
-        Url
+        public jsonModule[] modules { get; set; }
+        public jsonSettings settings { get; set; }
 
     }
 
