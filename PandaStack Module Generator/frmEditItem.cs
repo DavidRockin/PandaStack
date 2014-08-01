@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace PandaStack_Module_Generator
 {
 
-    public partial class frmEditItem : Form
+    partial class frmEditItem : Form
     {
 
         private ListViewItem _lvi;
@@ -21,28 +21,40 @@ namespace PandaStack_Module_Generator
 
         public frmEditItem(ModuleAdmin admin, ListViewItem lvi)
         {
+            InitializeComponent();
+
             this._isAdmin = true;
             this._admin = admin;
             this._lvi = lvi;
 
+            var values = Enum.GetValues(typeof(ModuleAdminType));
+            foreach (ModuleAdminType type in values)
+            {
+                this.cmbType.Items.Add(type.ToString());
+            }
+
             this.txtName.Text = admin.getName();
             this.cmbType.Text = admin.getType().ToString();
             this.txtPath.Text = admin.getPath();
-
-            InitializeComponent();
         }
 
         public frmEditItem(ModuleConfig config, ListViewItem lvi)
         {
+            InitializeComponent();
+
             this._isAdmin = false;
             this._config = config;
             this._lvi = lvi;
 
+            var values = Enum.GetValues(typeof(ModuleConfigType));
+            foreach (ModuleConfigType type in values)
+            {
+                this.cmbType.Items.Add(type.ToString());
+            }
+
             this.txtName.Text = config.getName();
             this.cmbType.Text = config.getType().ToString();
             this.txtPath.Text = config.getPath();
-
-            InitializeComponent();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
