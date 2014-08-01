@@ -391,6 +391,9 @@ namespace PandaStack_Module_Generator
             this.txtServiceName.Text = "";
             this.lvAdmins.Items.Clear();
             this.lvConfigs.Items.Clear();
+
+            this.clearCurrentAdmin();
+            this.clearCurrentConfig();
         }
 
         /**
