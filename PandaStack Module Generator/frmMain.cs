@@ -48,7 +48,7 @@ namespace PandaStack_Module_Generator
                 {
                     Module module = (Module)this.lvModules.FocusedItem.Tag;
                     this.updateCurrentModule(module);
-                    this.groupBox2.Enabled = true;
+                    this.grpModuleOptions.Enabled = true;
                     this.btnRemove.Enabled = true;
 
                     return;
@@ -316,7 +316,7 @@ namespace PandaStack_Module_Generator
                 this.lvModules.FocusedItem.Focused = false;
 
             this.btnRemove.Enabled = false;
-            this.groupBox2.Enabled = false;
+            this.grpModuleOptions.Enabled = false;
             this.txtName.Text = "";
             this.cmbType.Text = "";
             this.txtServiceName.Text = "";
