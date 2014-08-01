@@ -75,6 +75,8 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Module.cs" />
+    <Compile Include="ModuleAdmin.cs" />
+    <Compile Include="ModuleAdminType.cs" />
     <Compile Include="ModuleConfig.cs" />
     <Compile Include="ModuleConfigType.cs" />
     <Compile Include="ModuleType.cs" />

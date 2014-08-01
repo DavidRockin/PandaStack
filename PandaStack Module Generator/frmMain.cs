@@ -108,7 +108,16 @@ namespace PandaStack_Module_Generator
                 }
 
                 lvi.Text = txtName.Text;
+                module.getAdmins().Clear();
                 module.getConfigs().Clear();
+
+                if (this.lvAdmins.Items.Count > 0)
+                {
+                    foreach (ListViewItem alvi in this.lvAdmins.Items)
+                    {
+                        module.addAdmin((ModuleAdmin)alvi.Tag);
+                    }
+                }
 
                 if (this.lvConfigs.Items.Count > 0)
                 {
@@ -117,7 +126,6 @@ namespace PandaStack_Module_Generator
                         module.addConfig((ModuleConfig)clvi.Tag);
                     }
                 }
-
             }
         }
 
@@ -132,7 +140,18 @@ namespace PandaStack_Module_Generator
                 cmbType.Text = module.getType().ToString();
                 lvi.Text = module.getName();
 
+                this.lvAdmins.Items.Clear();
                 this.lvConfigs.Items.Clear();
+
+                foreach (ModuleAdmin admin in module.getAdmins())
+                {
+                    ListViewItem alvi = new ListViewItem();
+                    alvi.Text = admin.getName();
+                    alvi.SubItems.Add(admin.getType().ToString());
+                    alvi.SubItems.Add(admin.getPath());
+                    alvi.Tag = admin;
+                    this.lvAdmins.Items.Add(alvi);
+                }
 
                 foreach (ModuleConfig config in module.getConfigs())
                 {
@@ -146,13 +165,60 @@ namespace PandaStack_Module_Generator
             }
         }
 
+        private void lvAdmins_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                {
+                    this.btnAdmin_Remove.Enabled = true;
+                    this.btnAdmin_Edit.Enabled = true;
+                    return;
+                }
+            }
+            catch
+            {
+
+            }
+
+            this.clearCurrentAdmin();
+        }
+
+        private void btnAdmin_Add_Click(object sender, EventArgs e)
+        {
+            if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
+            {
+                ModuleAdmin admin = new ModuleAdmin();
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = admin.getName();
+                lvi.SubItems.Add(admin.getType().ToString());
+                lvi.SubItems.Add(admin.getPath());
+                lvi.Tag = admin;
+                this.lvAdmins.Items.Add(lvi);
+            }
+        }
+
+        private void btnAdmin_Remove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                {
+                    ListViewItem lvi = this.lvAdmins.FocusedItem;
+                    this.lvAdmins.Items.Remove(lvi);
+                }
+            }
+            catch
+            {
+            }
+        }
+
         private void lvConfigs_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 if (this.lvConfigs.Items.Count > 0 && this.lvConfigs.SelectedItems.Count > 0)
                 {
-                    ModuleConfig config = (ModuleConfig)this.lvConfigs.FocusedItem.Tag;
                     this.btnConfig_Edit.Enabled = true;
                     this.btnConfig_Remove.Enabled = true;
                     return;
@@ -171,12 +237,12 @@ namespace PandaStack_Module_Generator
             if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
             {
                 ModuleConfig config = new ModuleConfig();
-                ListViewItem clvi = new ListViewItem();
-                clvi.Text = config.getName();
-                clvi.SubItems.Add(config.getType().ToString());
-                clvi.SubItems.Add(config.getPath());
-                clvi.Tag = config;
-                this.lvConfigs.Items.Add(clvi);
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = config.getName();
+                lvi.SubItems.Add(config.getType().ToString());
+                lvi.SubItems.Add(config.getPath());
+                lvi.Tag = config;
+                this.lvConfigs.Items.Add(lvi);
             }
         }
 
@@ -184,7 +250,7 @@ namespace PandaStack_Module_Generator
         {
             try
             {
-                if (this.lvModules.Items.Count > 0 && this.lvConfigs.SelectedItems.Count > 0)
+                if (this.lvConfigs.Items.Count > 0 && this.lvConfigs.SelectedItems.Count > 0)
                 {
                     ListViewItem lvi = this.lvConfigs.FocusedItem;
                     this.lvConfigs.Items.Remove(lvi);
@@ -204,11 +270,25 @@ namespace PandaStack_Module_Generator
         {
             this.txtName.Text = module.getName();
             this.cmbType.Text = module.getType().ToString();
+            this.lvAdmins.Items.Clear();
             this.lvConfigs.Items.Clear();
 
             if (module.getType() == ModuleType.Service)
             {
                 this.txtServiceName.Text = module.getService();
+            }
+
+            if (module.getAdmins().Count > 0)
+            {
+                foreach (ModuleAdmin admin in module.getAdmins())
+                {
+                    ListViewItem alvi = new ListViewItem();
+                    alvi.Text = admin.getName();
+                    alvi.SubItems.Add(admin.getType().ToString());
+                    alvi.SubItems.Add(admin.getPath());
+                    alvi.Tag = admin;
+                    this.lvAdmins.Items.Add(alvi);
+                }
             }
 
             if (module.getConfigs().Count > 0)
@@ -240,7 +320,19 @@ namespace PandaStack_Module_Generator
             this.txtName.Text = "";
             this.cmbType.Text = "";
             this.txtServiceName.Text = "";
+            this.lvAdmins.Items.Clear();
             this.lvConfigs.Items.Clear();
+        }
+
+        /**
+         * <summary>
+         * Disable administration management
+         * </summary>
+         */
+        private void clearCurrentAdmin()
+        {
+            this.btnAdmin_Edit.Enabled = false;
+            this.btnAdmin_Remove.Enabled = false;
         }
 
         /**

@@ -51,6 +51,9 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnAdmin_Edit = new System.Windows.Forms.Button();
+            this.btnAdmin_Remove = new System.Windows.Forms.Button();
+            this.btnAdmin_Add = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -125,6 +128,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnAdmin_Edit);
+            this.groupBox2.Controls.Add(this.btnAdmin_Remove);
+            this.groupBox2.Controls.Add(this.btnAdmin_Add);
             this.groupBox2.Controls.Add(this.btnConfig_Edit);
             this.groupBox2.Controls.Add(this.lvConfigs);
             this.groupBox2.Controls.Add(this.btnConfig_Remove);
@@ -152,7 +158,7 @@
             // 
             this.btnConfig_Edit.Enabled = false;
             this.btnConfig_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 331);
+            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 351);
             this.btnConfig_Edit.Name = "btnConfig_Edit";
             this.btnConfig_Edit.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Edit.TabIndex = 17;
@@ -175,7 +181,7 @@
             // 
             this.btnConfig_Remove.Enabled = false;
             this.btnConfig_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 298);
+            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 318);
             this.btnConfig_Remove.Name = "btnConfig_Remove";
             this.btnConfig_Remove.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Remove.TabIndex = 13;
@@ -185,7 +191,7 @@
             // btnConfig_Add
             // 
             this.btnConfig_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnConfig_Add.Location = new System.Drawing.Point(470, 265);
+            this.btnConfig_Add.Location = new System.Drawing.Point(470, 285);
             this.btnConfig_Add.Name = "btnConfig_Add";
             this.btnConfig_Add.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Add.TabIndex = 12;
@@ -212,6 +218,7 @@
             this.lvAdmins.TabIndex = 9;
             this.lvAdmins.UseCompatibleStateImageBehavior = false;
             this.lvAdmins.View = System.Windows.Forms.View.Details;
+            this.lvAdmins.SelectedIndexChanged += new System.EventHandler(this.lvAdmins_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -307,6 +314,37 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Actions";
             // 
+            // btnAdmin_Edit
+            // 
+            this.btnAdmin_Edit.Enabled = false;
+            this.btnAdmin_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
+            this.btnAdmin_Edit.Location = new System.Drawing.Point(470, 200);
+            this.btnAdmin_Edit.Name = "btnAdmin_Edit";
+            this.btnAdmin_Edit.Size = new System.Drawing.Size(30, 27);
+            this.btnAdmin_Edit.TabIndex = 20;
+            this.btnAdmin_Edit.UseVisualStyleBackColor = true;
+            // 
+            // btnAdmin_Remove
+            // 
+            this.btnAdmin_Remove.Enabled = false;
+            this.btnAdmin_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
+            this.btnAdmin_Remove.Location = new System.Drawing.Point(470, 167);
+            this.btnAdmin_Remove.Name = "btnAdmin_Remove";
+            this.btnAdmin_Remove.Size = new System.Drawing.Size(30, 27);
+            this.btnAdmin_Remove.TabIndex = 19;
+            this.btnAdmin_Remove.UseVisualStyleBackColor = true;
+            this.btnAdmin_Remove.Click += new System.EventHandler(this.btnAdmin_Remove_Click);
+            // 
+            // btnAdmin_Add
+            // 
+            this.btnAdmin_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
+            this.btnAdmin_Add.Location = new System.Drawing.Point(470, 134);
+            this.btnAdmin_Add.Name = "btnAdmin_Add";
+            this.btnAdmin_Add.Size = new System.Drawing.Size(30, 27);
+            this.btnAdmin_Add.TabIndex = 18;
+            this.btnAdmin_Add.UseVisualStyleBackColor = true;
+            this.btnAdmin_Add.Click += new System.EventHandler(this.btnAdmin_Add_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,6 +391,9 @@
         private System.Windows.Forms.ListView lvAdmins;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnConfig_Edit;
+        private System.Windows.Forms.Button btnAdmin_Edit;
+        private System.Windows.Forms.Button btnAdmin_Remove;
+        private System.Windows.Forms.Button btnAdmin_Add;
     }
 }
 

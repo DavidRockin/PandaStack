@@ -14,6 +14,7 @@ namespace PandaStack_Module_Generator
 
         private string service;
 
+        private List<ModuleAdmin> admins = new List<ModuleAdmin>();
         private List<ModuleConfig> configs = new List<ModuleConfig>();
 
         public void setName(string name)
@@ -59,6 +60,21 @@ namespace PandaStack_Module_Generator
         public void clearConfigs()
         {
             this.configs.Clear();
+        }
+
+        public void addAdmin(ModuleAdmin admin)
+        {
+            this.admins.Add(admin);
+        }
+
+        public List<ModuleAdmin> getAdmins()
+        {
+            return this.admins;
+        }
+
+        public void clearAdmins()
+        {
+            this.admins.Clear();
         }
 
     }
