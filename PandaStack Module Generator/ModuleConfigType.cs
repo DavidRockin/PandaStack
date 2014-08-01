@@ -11,7 +11,8 @@ namespace PandaStack_Module_Generator
 
         File,
         Directory,
-        Software
+        Software,
+        URL
 
     }
 
