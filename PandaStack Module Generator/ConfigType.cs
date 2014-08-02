@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack_Module_Generator
 {
 
-    enum ModuleConfigType
+    enum ConfigType
     {
 
         File,

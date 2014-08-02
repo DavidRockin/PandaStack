@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack_Module_Generator
 {
 
-    public class jsonConfig
+    public class JsonConfig
     {
 
         public string name { get; set; }

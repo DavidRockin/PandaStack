@@ -14,8 +14,8 @@ namespace PandaStack_Module_Generator
     public partial class frmMain : Form
     {
 
-        private frmEditItem formEditItem;
-        private List<Module> modules = new List<Module>();
+        private frmEditItem FormEditItem;
+        private List<Module> Modules = new List<Module>();
 
         public frmMain()
         {
@@ -24,10 +24,10 @@ namespace PandaStack_Module_Generator
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // Setup the administrations columns
-            lvAdmins.Columns.Add("Name", 125, HorizontalAlignment.Left);
-            lvAdmins.Columns.Add("Type", 75, HorizontalAlignment.Left);
-            lvAdmins.Columns.Add("Path", 250, HorizontalAlignment.Left);
+            // Setup the controls columns
+            lvControls.Columns.Add("Name", 125, HorizontalAlignment.Left);
+            lvControls.Columns.Add("Type", 75, HorizontalAlignment.Left);
+            lvControls.Columns.Add("Path", 250, HorizontalAlignment.Left);
 
             // Setup the configurations columns
             lvConfigs.Columns.Add("Name", 125, HorizontalAlignment.Left);
@@ -60,20 +60,20 @@ namespace PandaStack_Module_Generator
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
 
-            this.clearCurrentModule();
+            this.ClearCurrentModule();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Module module = new Module();
             ListViewItem lvi = new ListViewItem();
-            lvi.Text = module.getName();
+            lvi.Text = module.GetModuleName();
             lvi.Tag = module;
 
-            this.modules.Add(module);
+            this.Modules.Add(module);
             this.lvModules.Items.Add(lvi);
         }
 
@@ -86,14 +86,14 @@ namespace PandaStack_Module_Generator
                     ListViewItem lvi = this.lvModules.FocusedItem;
                     Module module = (Module)lvi.Tag;
                     this.lvModules.Items.Remove(lvi);
-                    this.modules.Remove(module);
+                    this.Modules.Remove(module);
 
-                    this.clearCurrentModule();
+                    this.ClearCurrentModule();
                 }
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
         }
 
@@ -104,27 +104,27 @@ namespace PandaStack_Module_Generator
                 ListViewItem lvi = this.lvModules.FocusedItem;
                 Module module = (Module)lvi.Tag;
 
-                module.setName(txtName.Text);
-                module.setType((ModuleType)Enum.Parse(typeof(ModuleType), cmbType.Text));
+                module.SetModuleName(txtName.Text);
+                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), cmbType.Text));
 
                 if (cmbType.Text == "Service")
                 {
-                    module.setService(txtServiceName.Text);
+                    module.SetServiceName(txtServiceName.Text);
                 }
 
                 lvi.Text = txtName.Text;
-                module.getAdmins().Clear();
-                module.getConfigs().Clear();
+                module.ClearConfigs();
+                module.ClearControls();
 
-                if (this.lvAdmins.Items.Count > 0)
+                if (this.lvControls.Items.Count > 0)
                 {
-                    foreach (ListViewItem alvi in this.lvAdmins.Items)
+                    foreach (ListViewItem alvi in this.lvControls.Items)
                     {
-                        ModuleAdmin admin = (ModuleAdmin)alvi.Tag;
-                        admin.setName(alvi.Text);
-                        admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), alvi.SubItems[1].Text));
-                        admin.setPath(alvi.SubItems[2].Text);
-                        module.addAdmin(admin);
+                        ModuleControl control = (ModuleControl)alvi.Tag;
+                        control.SetControlName(alvi.Text);
+                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), alvi.SubItems[1].Text));
+                        control.SetControlPath(alvi.SubItems[2].Text);
+                        module.AddControl(control);
                     }
                 }
 
@@ -133,10 +133,10 @@ namespace PandaStack_Module_Generator
                     foreach (ListViewItem clvi in this.lvConfigs.Items)
                     {
                         ModuleConfig config = (ModuleConfig)clvi.Tag;
-                        config.setName(clvi.Text);
-                        config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), clvi.SubItems[1].Text));
-                        config.setPath(clvi.SubItems[2].Text);
-                        module.addConfig(config);
+                        config.SetConfigName(clvi.Text);
+                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), clvi.SubItems[1].Text));
+                        config.SetConfigPath(clvi.SubItems[2].Text);
+                        module.AddConfig(config);
                     }
                 }
             }
@@ -149,31 +149,31 @@ namespace PandaStack_Module_Generator
                 ListViewItem lvi = this.lvModules.FocusedItem;
                 Module module = (Module)lvi.Tag;
 
-                txtName.Text = module.getName();
-                cmbType.Text = module.getType().ToString();
-                lvi.Text = module.getName();
+                txtName.Text = module.GetModuleName();
+                cmbType.Text = module.GetModuleType().ToString();
+                lvi.Text = module.GetModuleName();
 
-                this.lvAdmins.Items.Clear();
+                this.lvControls.Items.Clear();
                 this.lvConfigs.Items.Clear();
 
-                foreach (ModuleAdmin admin in module.getAdmins())
+                foreach (ModuleControl control in module.GetControls())
                 {
-                    ListViewItem alvi = new ListViewItem();
-                    alvi.Text = admin.getName();
-                    alvi.SubItems.Add(admin.getType().ToString());
-                    alvi.SubItems.Add(admin.getPath());
-                    alvi.Tag = admin;
-                    this.lvAdmins.Items.Add(alvi);
+                    ListViewItem controlLvi = new ListViewItem();
+                    controlLvi.Text = control.GetControlName();
+                    controlLvi.SubItems.Add(control.GetControlType().ToString());
+                    controlLvi.SubItems.Add(control.GetControlPath());
+                    controlLvi.Tag = control;
+                    this.lvControls.Items.Add(controlLvi);
                 }
 
-                foreach (ModuleConfig config in module.getConfigs())
+                foreach (ModuleConfig config in module.GetConfigs())
                 {
-                    ListViewItem clvi = new ListViewItem();
-                    clvi.Text = config.getName();
-                    clvi.SubItems.Add(config.getType().ToString());
-                    clvi.SubItems.Add(config.getPath());
-                    clvi.Tag = config;
-                    this.lvConfigs.Items.Add(clvi);
+                    ListViewItem configLvi = new ListViewItem();
+                    configLvi.Text = config.GetConfigName();
+                    configLvi.SubItems.Add(config.GetConfigType().ToString());
+                    configLvi.SubItems.Add(config.GetConfigPath());
+                    configLvi.Tag = config;
+                    this.lvConfigs.Items.Add(configLvi);
                 }
             }
         }
@@ -182,76 +182,76 @@ namespace PandaStack_Module_Generator
         {
             try
             {
-                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                if (this.lvControls.Items.Count > 0 && this.lvControls.SelectedItems.Count > 0)
                 {
-                    this.btnAdmin_Remove.Enabled = true;
-                    this.btnAdmin_Edit.Enabled = true;
+                    this.btnControl_Remove.Enabled = true;
+                    this.btnControl_Edit.Enabled = true;
                     return;
                 }
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
 
-            this.clearCurrentAdmin();
+            this.ClearCurrentControl();
         }
 
-        private void btnAdmin_Add_Click(object sender, EventArgs e)
+        private void btnControl_Add_Click(object sender, EventArgs e)
         {
             if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
             {
-                ModuleAdmin admin = new ModuleAdmin();
+                ModuleControl control = new ModuleControl();
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = admin.getName();
-                lvi.SubItems.Add(admin.getType().ToString());
-                lvi.SubItems.Add(admin.getPath());
-                lvi.Tag = admin;
-                this.lvAdmins.Items.Add(lvi);
+                lvi.Text = control.GetControlName();
+                lvi.SubItems.Add(control.GetControlType().ToString());
+                lvi.SubItems.Add(control.GetControlPath());
+                lvi.Tag = control;
+                this.lvControls.Items.Add(lvi);
             }
         }
 
-        private void btnAdmin_Remove_Click(object sender, EventArgs e)
+        private void btnControl_Remove_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                if (this.lvControls.Items.Count > 0 && this.lvControls.SelectedItems.Count > 0)
                 {
-                    ListViewItem lvi = this.lvAdmins.FocusedItem;
-                    this.lvAdmins.Items.Remove(lvi);
+                    ListViewItem lvi = this.lvControls.FocusedItem;
+                    this.lvControls.Items.Remove(lvi);
                 }
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
         }
 
-        private void btnAdmin_Edit_Click(object sender, EventArgs e)
+        private void btnControl_Edit_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.lvAdmins.Items.Count > 0 && this.lvAdmins.SelectedItems.Count > 0)
+                if (this.lvControls.Items.Count > 0 && this.lvControls.SelectedItems.Count > 0)
                 {
-                    ListViewItem lvi = this.lvAdmins.FocusedItem;
-                    ModuleAdmin admin = (ModuleAdmin)lvi.Tag;
+                    ListViewItem lvi = this.lvControls.FocusedItem;
+                    ModuleControl admin = (ModuleControl)lvi.Tag;
 
-                    this.formEditItem = new frmEditItem(admin);
-                    this.formEditItem.name = lvi.Text;
-                    this.formEditItem.type = lvi.SubItems[1].Text;
-                    this.formEditItem.path = lvi.SubItems[2].Text;
+                    this.FormEditItem = new frmEditItem(admin);
+                    this.FormEditItem.Name = lvi.Text;
+                    this.FormEditItem.Type = lvi.SubItems[1].Text;
+                    this.FormEditItem.Path = lvi.SubItems[2].Text;
 
-                    if (this.formEditItem.ShowDialog() == DialogResult.OK)
+                    if (this.FormEditItem.ShowDialog() == DialogResult.OK)
                     {
-                        lvi.Text = formEditItem.name;
-                        lvi.SubItems[1].Text = formEditItem.type;
-                        lvi.SubItems[2].Text = formEditItem.path;
+                        lvi.Text = this.FormEditItem.Name;
+                        lvi.SubItems[1].Text = this.FormEditItem.Type;
+                        lvi.SubItems[2].Text = this.FormEditItem.Path;
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
         }
 
@@ -268,10 +268,10 @@ namespace PandaStack_Module_Generator
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
 
-            this.clearCurrentConfig();
+            this.ClearCurrentConfig();
         }
 
         private void btnConfig_Add_Click(object sender, EventArgs e)
@@ -280,9 +280,9 @@ namespace PandaStack_Module_Generator
             {
                 ModuleConfig config = new ModuleConfig();
                 ListViewItem lvi = new ListViewItem();
-                lvi.Text = config.getName();
-                lvi.SubItems.Add(config.getType().ToString());
-                lvi.SubItems.Add(config.getPath());
+                lvi.Text = config.GetConfigName();
+                lvi.SubItems.Add(config.GetConfigType().ToString());
+                lvi.SubItems.Add(config.GetConfigPath());
                 lvi.Tag = config;
                 this.lvConfigs.Items.Add(lvi);
             }
@@ -300,7 +300,7 @@ namespace PandaStack_Module_Generator
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
         }
 
@@ -313,120 +313,23 @@ namespace PandaStack_Module_Generator
                     ListViewItem lvi = this.lvConfigs.FocusedItem;
                     ModuleConfig config = (ModuleConfig)lvi.Tag;
 
-                    this.formEditItem = new frmEditItem(config);
-                    this.formEditItem.name = lvi.Text;
-                    this.formEditItem.type = lvi.SubItems[1].Text;
-                    this.formEditItem.path = lvi.SubItems[2].Text;
+                    this.FormEditItem = new frmEditItem(config);
+                    this.FormEditItem.Name = lvi.Text;
+                    this.FormEditItem.Type = lvi.SubItems[1].Text;
+                    this.FormEditItem.Path = lvi.SubItems[2].Text;
 
-                    if (this.formEditItem.ShowDialog() == DialogResult.OK)
+                    if (this.FormEditItem.ShowDialog() == DialogResult.OK)
                     {
-                        lvi.Text = formEditItem.name;
-                        lvi.SubItems[1].Text = formEditItem.type;
-                        lvi.SubItems[2].Text = formEditItem.path;
+                        lvi.Text = FormEditItem.Name;
+                        lvi.SubItems[1].Text = FormEditItem.Type;
+                        lvi.SubItems[2].Text = FormEditItem.Path;
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.handleException(ex);
+                this.HandleException(ex);
             }
-        }
-
-        /**
-         * <summary>
-         * Set the selected module
-         * </summary>
-         */
-        private void updateCurrentModule(Module module)
-        {
-            this.txtName.Text = module.getName();
-            this.cmbType.Text = module.getType().ToString();
-            this.lvAdmins.Items.Clear();
-            this.lvConfigs.Items.Clear();
-
-            if (module.getType() == ModuleType.Service)
-            {
-                this.txtServiceName.Text = module.getService();
-            }
-
-            if (module.getAdmins().Count > 0)
-            {
-                foreach (ModuleAdmin admin in module.getAdmins())
-                {
-                    ListViewItem alvi = new ListViewItem();
-                    alvi.Text = admin.getName();
-                    alvi.SubItems.Add(admin.getType().ToString());
-                    alvi.SubItems.Add(admin.getPath());
-                    alvi.Tag = admin;
-                    this.lvAdmins.Items.Add(alvi);
-                }
-            }
-
-            if (module.getConfigs().Count > 0)
-            {
-                foreach (ModuleConfig config in module.getConfigs())
-                {
-                    ListViewItem clvi = new ListViewItem();
-                    clvi.Text = config.getName();
-                    clvi.SubItems.Add(config.getType().ToString());
-                    clvi.SubItems.Add(config.getPath());
-                    clvi.Tag = config;
-                    this.lvConfigs.Items.Add(clvi);
-                }
-            }
-        }
-
-        /**
-         * <summary>
-         * Clear the current module fields
-         * </summary>
-         */
-        private void clearCurrentModule()
-        {
-            if (this.lvModules.SelectedItems.Count > 0)
-                this.lvModules.FocusedItem.Focused = false;
-
-            this.btnRemove.Enabled = false;
-            this.grpModuleOptions.Enabled = false;
-            this.txtName.Text = "";
-            this.cmbType.Text = "";
-            this.txtServiceName.Text = "";
-            this.lvAdmins.Items.Clear();
-            this.lvConfigs.Items.Clear();
-
-            this.clearCurrentAdmin();
-            this.clearCurrentConfig();
-        }
-
-        /**
-         * <summary>
-         * Disable administration management
-         * </summary>
-         */
-        private void clearCurrentAdmin()
-        {
-            this.btnAdmin_Edit.Enabled = false;
-            this.btnAdmin_Remove.Enabled = false;
-        }
-
-        /**
-         * <summary>
-         * Disable configuration management
-         * </summary>
-         */
-        private void clearCurrentConfig()
-        {
-            this.btnConfig_Edit.Enabled = false;
-            this.btnConfig_Remove.Enabled = false;
-        }
-
-        private void handleException(Exception ex)
-        {
-            StackTrace stackTrace = new StackTrace(ex, true);
-            StackFrame stackFrame = stackTrace.GetFrame(0);
-            string message = ex.Message + " " + ex.InnerException + "\r\n" + stackFrame.GetFileName() + ":" +
-                                stackFrame.GetFileLineNumber() + " -> " + stackFrame.GetMethod();
-            MessageBox.Show(message, ex.GetType().ToString());
         }
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
@@ -435,9 +338,9 @@ namespace PandaStack_Module_Generator
             if (warning == DialogResult.Yes)
             {
                 // Remove modules
-                this.clearCurrentModule();
+                this.ClearCurrentModule();
                 this.lvModules.Items.Clear();
-                this.modules.Clear();
+                this.Modules.Clear();
 
                 // Display a file dialog asking which configuration file to load
                 OpenFileDialog ofdConfig = new OpenFileDialog();
@@ -446,52 +349,7 @@ namespace PandaStack_Module_Generator
 
                 if (ofdConfig.ShowDialog() != DialogResult.Cancel)
                 {
-                    JSONHandler jsonHandler = new JSONHandler(ofdConfig.FileName);
-                    jsonHandler.fetchJSON();
-
-                    foreach (jsonModule jsonModule in jsonHandler.getModules())
-                    {
-                        Module module = new Module();
-                        module.setName(jsonModule.name);
-                        module.setType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
-                        if (module.getType() == ModuleType.Service)
-                        {
-                            module.setService(jsonModule.service);
-                        }
-
-                        if (jsonModule.admin != null && jsonModule.admin.Count > 0)
-                        {
-                            foreach (jsonAdmin jsonAdmin in jsonModule.admin)
-                            {
-                                ModuleAdmin admin = new ModuleAdmin();
-                                admin.setName(jsonAdmin.name);
-                                admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
-                                admin.setPath(jsonAdmin.path);
-
-                                module.addAdmin(admin);
-                            }
-                        }
-
-                        if (jsonModule.config != null && jsonModule.config.Count > 0)
-                        {
-                            foreach (jsonConfig jsonConfig in jsonModule.config)
-                            {
-                                ModuleConfig config = new ModuleConfig();
-                                config.setName(jsonConfig.name);
-                                config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
-                                config.setPath(jsonConfig.path);
-
-                                module.addConfig(config);
-                            }
-                        }
-
-                        this.modules.Add(module);
-
-                        ListViewItem lvi = new ListViewItem();
-                        lvi.Text = module.getName();
-                        lvi.Tag = module;
-                        this.lvModules.Items.Add(lvi);
-                    }
+                    this.LoadJsonFile(ofdConfig.FileName);
                 }
             }
             else
@@ -508,54 +366,158 @@ namespace PandaStack_Module_Generator
 
             if (ofdConfig.ShowDialog() != DialogResult.Cancel)
             {
-                JSONHandler jsonHandler = new JSONHandler(ofdConfig.FileName);
-                jsonHandler.fetchJSON();
+                this.LoadJsonFile(ofdConfig.FileName);
 
-                foreach (jsonModule jsonModule in jsonHandler.getModules())
+            }
+        }
+
+        /**
+         * <summary>
+         * Set the selected module
+         * </summary>
+         */
+        private void updateCurrentModule(Module module)
+        {
+            this.txtName.Text = module.GetModuleName();
+            this.cmbType.Text = module.GetModuleType().ToString();
+            this.lvControls.Items.Clear();
+            this.lvConfigs.Items.Clear();
+
+            if (module.GetModuleType() == ModuleType.Service)
+            {
+                this.txtServiceName.Text = module.GetServiceName();
+            }
+
+            if (module.GetControls().Count > 0)
+            {
+                foreach (ModuleControl control in module.GetControls())
                 {
-                    Module module = new Module();
-                    module.setName(jsonModule.name);
-                    module.setType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
-                    if (module.getType() == ModuleType.Service)
-                    {
-                        module.setService(jsonModule.service);
-                    }
+                    ListViewItem controlLvi = new ListViewItem();
+                    controlLvi.Text = control.GetControlName();
+                    controlLvi.SubItems.Add(control.GetControlType().ToString());
+                    controlLvi.SubItems.Add(control.GetControlPath());
+                    controlLvi.Tag = control;
+                    this.lvControls.Items.Add(controlLvi);
+                }
+            }
 
-                    if (jsonModule.admin != null && jsonModule.admin.Count > 0)
-                    {
-                        foreach (jsonAdmin jsonAdmin in jsonModule.admin)
-                        {
-                            ModuleAdmin admin = new ModuleAdmin();
-                            admin.setName(jsonAdmin.name);
-                            admin.setType((ModuleAdminType)Enum.Parse(typeof(ModuleAdminType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
-                            admin.setPath(jsonAdmin.path);
-
-                            module.addAdmin(admin);
-                        }
-                    }
-
-                    if (jsonModule.config != null && jsonModule.config.Count > 0)
-                    {
-                        foreach (jsonConfig jsonConfig in jsonModule.config)
-                        {
-                            ModuleConfig config = new ModuleConfig();
-                            config.setName(jsonConfig.name);
-                            config.setType((ModuleConfigType)Enum.Parse(typeof(ModuleConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
-                            config.setPath(jsonConfig.path);
-
-                            module.addConfig(config);
-                        }
-                    }
-
-                    this.modules.Add(module);
-
-                    ListViewItem lvi = new ListViewItem();
-                    lvi.Text = module.getName();
-                    lvi.Tag = module;
-                    this.lvModules.Items.Add(lvi);
+            if (module.GetConfigs().Count > 0)
+            {
+                foreach (ModuleConfig config in module.GetConfigs())
+                {
+                    ListViewItem configLvi = new ListViewItem();
+                    configLvi.Text = config.GetConfigName();
+                    configLvi.SubItems.Add(config.GetConfigType().ToString());
+                    configLvi.SubItems.Add(config.GetConfigPath());
+                    configLvi.Tag = config;
+                    this.lvConfigs.Items.Add(configLvi);
                 }
             }
         }
 
+        /**
+         * <summary>
+         * Clear the current module fields
+         * </summary>
+         */
+        private void ClearCurrentModule()
+        {
+            if (this.lvModules.SelectedItems.Count > 0)
+                this.lvModules.FocusedItem.Focused = false;
+
+            this.btnRemove.Enabled = false;
+            this.grpModuleOptions.Enabled = false;
+            this.txtName.Text = "";
+            this.cmbType.Text = "";
+            this.txtServiceName.Text = "";
+            this.lvControls.Items.Clear();
+            this.lvConfigs.Items.Clear();
+
+            this.ClearCurrentControl();
+            this.ClearCurrentConfig();
+        }
+
+        /**
+         * <summary>
+         * Disable administration management
+         * </summary>
+         */
+        private void ClearCurrentControl()
+        {
+            this.btnControl_Edit.Enabled = false;
+            this.btnControl_Remove.Enabled = false;
+        }
+
+        /**
+         * <summary>
+         * Disable configuration management
+         * </summary>
+         */
+        private void ClearCurrentConfig()
+        {
+            this.btnConfig_Edit.Enabled = false;
+            this.btnConfig_Remove.Enabled = false;
+        }
+
+        private void HandleException(Exception ex)
+        {
+            StackTrace stackTrace = new StackTrace(ex, true);
+            StackFrame stackFrame = stackTrace.GetFrame(0);
+            string message = ex.Message + " " + ex.InnerException + "\r\n" + stackFrame.GetFileName() + ":" +
+                                stackFrame.GetFileLineNumber() + " -> " + stackFrame.GetMethod();
+            MessageBox.Show(message, ex.GetType().ToString());
+        }
+
+        private void LoadJsonFile(string filePath)
+        {
+            JsonHandler jsonHandler = new JsonHandler(filePath);
+            jsonHandler.FetchJson();
+
+            foreach (JsonModule jsonModule in jsonHandler.GetModules())
+            {
+                Module module = new Module();
+                module.SetModuleName(jsonModule.name);
+                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
+                if (module.GetModuleType() == ModuleType.Service)
+                {
+                    module.SetServiceName(jsonModule.service);
+                }
+
+                if (jsonModule.control != null && jsonModule.control.Count > 0)
+                {
+                    foreach (JsonControl jsonAdmin in jsonModule.control)
+                    {
+                        ModuleControl control = new ModuleControl();
+                        control.SetControlName(jsonAdmin.name);
+                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
+                        control.SetControlPath(jsonAdmin.path);
+
+                        module.AddControl(control);
+                    }
+                }
+
+                if (jsonModule.config != null && jsonModule.config.Count > 0)
+                {
+                    foreach (JsonConfig jsonConfig in jsonModule.config)
+                    {
+                        ModuleConfig config = new ModuleConfig();
+                        config.SetConfigName(jsonConfig.name);
+                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
+                        config.SetConfigPath(jsonConfig.path);
+
+                        module.AddConfig(config);
+                    }
+                }
+
+                this.Modules.Add(module);
+
+                ListViewItem lvi = new ListViewItem();
+                lvi.Text = module.GetModuleName();
+                lvi.Tag = module;
+                this.lvModules.Items.Add(lvi);
+            }
+        }
+
     }
+
 }

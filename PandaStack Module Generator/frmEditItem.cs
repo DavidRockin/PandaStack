@@ -13,20 +13,20 @@ namespace PandaStack_Module_Generator
     partial class frmEditItem : Form
     {
 
-        private ModuleConfig _config;
-        private ModuleAdmin _admin;
+        private ModuleConfig Config;
+        private ModuleControl Control;
 
-        public string name;
-        public string type;
-        public string path;
+        public string Name;
+        public string Type;
+        public string Path;
 
-        public frmEditItem(ModuleAdmin admin)
+        public frmEditItem(ModuleControl control)
         {
             InitializeComponent();
 
-            this._admin = admin;
-            var values = Enum.GetValues(typeof(ModuleAdminType));
-            foreach (ModuleAdminType type in values)
+            this.Control = control;
+            var values = Enum.GetValues(typeof(ControlType));
+            foreach (ControlType type in values)
             {
                 this.cmbType.Items.Add(type.ToString());
             }
@@ -36,9 +36,9 @@ namespace PandaStack_Module_Generator
         {
             InitializeComponent();
 
-            this._config = config;
-            var values = Enum.GetValues(typeof(ModuleConfigType));
-            foreach (ModuleConfigType type in values)
+            this.Config = config;
+            var values = Enum.GetValues(typeof(ConfigType));
+            foreach (ConfigType type in values)
             {
                 this.cmbType.Items.Add(type.ToString());
             }
@@ -46,16 +46,16 @@ namespace PandaStack_Module_Generator
 
         private void frmEditItem_Load(object sender, EventArgs e)
         {
-            this.txtName.Text = this.name;
-            this.cmbType.Text = this.type;
-            this.txtPath.Text = this.path;
+            this.txtName.Text = this.Name;
+            this.cmbType.Text = this.Type;
+            this.txtPath.Text = this.Path;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            this.name = this.txtName.Text;
-            this.type = this.cmbType.Text;
-            this.path = this.txtPath.Text;
+            this.Name = this.txtName.Text;
+            this.Type = this.cmbType.Text;
+            this.Path = this.txtPath.Text;
             this.DialogResult = DialogResult.OK;
         }
 
@@ -77,7 +77,7 @@ namespace PandaStack_Module_Generator
                     this.txtPath.Text = ofdPath.FileName;
                 }
             }
-            else if (this._config != null && this.cmbType.Text == "File") {
+            else if (this.Config != null && this.cmbType.Text == "File") {
                 OpenFileDialog ofdPath = new OpenFileDialog();
                 ofdPath.Title = "Select Configuration File";
                 ofdPath.Filter = "All Files (*.*)|*.*";
@@ -87,7 +87,7 @@ namespace PandaStack_Module_Generator
                     this.txtPath.Text = ofdPath.FileName;
                 }
             }
-            else if (this._config != null && this.cmbType.Text == "Directory")
+            else if (this.Config != null && this.cmbType.Text == "Directory")
             {
                 FolderBrowserDialog fbdPath = new FolderBrowserDialog();
 

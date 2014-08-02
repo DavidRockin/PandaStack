@@ -9,72 +9,72 @@ namespace PandaStack_Module_Generator
     class Module
     {
 
-        private string name = "Untitled Module";
-        private ModuleType type = ModuleType.Helper;
+        private string Name = "Untitled Module";
+        private ModuleType Type = ModuleType.Helper;
 
-        private string service;
+        private string ServiceName;
 
-        private List<ModuleAdmin> admins = new List<ModuleAdmin>();
-        private List<ModuleConfig> configs = new List<ModuleConfig>();
+        private List<ModuleControl> Controls = new List<ModuleControl>();
+        private List<ModuleConfig> Configs = new List<ModuleConfig>();
 
-        public void setName(string name)
+        public void SetModuleName(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
 
-        public string getName()
+        public string GetModuleName()
         {
-            return this.name;
+            return this.Name;
         }
 
-        public void setType(ModuleType type)
+        public void SetModuleType(ModuleType type)
         {
-            this.type = type;
+            this.Type = type;
         }
 
-        public ModuleType getType()
+        public ModuleType GetModuleType()
         {
-            return this.type;
+            return this.Type;
         }
 
-        public void setService(string service)
+        public void SetServiceName(string service)
         {
-            this.service = service;
+            this.ServiceName = service;
         }
 
-        public string getService()
+        public string GetServiceName()
         {
-            return this.service;
+            return this.ServiceName;
         }
 
-        public void addConfig(ModuleConfig config)
+        public void AddConfig(ModuleConfig config)
         {
-            this.configs.Add(config);
+            this.Configs.Add(config);
         }
 
-        public List<ModuleConfig> getConfigs()
+        public List<ModuleConfig> GetConfigs()
         {
-            return this.configs;
+            return this.Configs;
         }
 
-        public void clearConfigs()
+        public void ClearConfigs()
         {
-            this.configs.Clear();
+            this.Configs.Clear();
         }
 
-        public void addAdmin(ModuleAdmin admin)
+        public void AddControl(ModuleControl control)
         {
-            this.admins.Add(admin);
+            this.Controls.Add(control);
         }
 
-        public List<ModuleAdmin> getAdmins()
+        public List<ModuleControl> GetControls()
         {
-            return this.admins;
+            return this.Controls;
         }
 
-        public void clearAdmins()
+        public void ClearControls()
         {
-            this.admins.Clear();
+            this.Controls.Clear();
         }
 
     }

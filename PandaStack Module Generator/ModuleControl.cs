@@ -6,39 +6,39 @@ using System.Text;
 namespace PandaStack_Module_Generator
 {
 
-    class ModuleConfig
+    class ModuleControl
     {
 
-        private string Name = "Untitled Config";
+        private string Name = "Untitled Control";
         private string Path;
-        private ConfigType Type = ConfigType.File;
+        private ControlType Type = ControlType.Software;
 
-        public void SetConfigName(string name)
+        public void SetControlName(string name)
         {
             this.Name = name;
         }
 
-        public string GetConfigName()
+        public string GetControlName()
         {
             return this.Name;
         }
 
-        public void SetConfigPath(string path)
+        public void SetControlPath(string path)
         {
             this.Path = path;
         }
 
-        public string GetConfigPath()
+        public string GetControlPath()
         {
             return this.Path;
         }
 
-        public void SetConfigType(ConfigType type)
+        public void SetControlType(ControlType type)
         {
             this.Type = type;
         }
 
-        public ConfigType GetConfigType()
+        public ControlType GetControlType()
         {
             return this.Type;
         }

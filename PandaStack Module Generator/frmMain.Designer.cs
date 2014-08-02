@@ -36,16 +36,16 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.grpModuleOptions = new System.Windows.Forms.GroupBox();
-            this.btnAdmin_Edit = new System.Windows.Forms.Button();
-            this.btnAdmin_Remove = new System.Windows.Forms.Button();
-            this.btnAdmin_Add = new System.Windows.Forms.Button();
+            this.btnControl_Edit = new System.Windows.Forms.Button();
+            this.btnControl_Remove = new System.Windows.Forms.Button();
+            this.btnControl_Add = new System.Windows.Forms.Button();
             this.btnConfig_Edit = new System.Windows.Forms.Button();
             this.lvConfigs = new System.Windows.Forms.ListView();
             this.btnConfig_Remove = new System.Windows.Forms.Button();
             this.btnConfig_Add = new System.Windows.Forms.Button();
             this.lblConfigs = new System.Windows.Forms.Label();
-            this.lvAdmins = new System.Windows.Forms.ListView();
-            this.lblAdmins = new System.Windows.Forms.Label();
+            this.lvControls = new System.Windows.Forms.ListView();
+            this.lblControls = new System.Windows.Forms.Label();
             this.btnDiscard = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtServiceName = new System.Windows.Forms.TextBox();
@@ -132,16 +132,16 @@
             // 
             // grpModuleOptions
             // 
-            this.grpModuleOptions.Controls.Add(this.btnAdmin_Edit);
-            this.grpModuleOptions.Controls.Add(this.btnAdmin_Remove);
-            this.grpModuleOptions.Controls.Add(this.btnAdmin_Add);
+            this.grpModuleOptions.Controls.Add(this.btnControl_Edit);
+            this.grpModuleOptions.Controls.Add(this.btnControl_Remove);
+            this.grpModuleOptions.Controls.Add(this.btnControl_Add);
             this.grpModuleOptions.Controls.Add(this.btnConfig_Edit);
             this.grpModuleOptions.Controls.Add(this.lvConfigs);
             this.grpModuleOptions.Controls.Add(this.btnConfig_Remove);
             this.grpModuleOptions.Controls.Add(this.btnConfig_Add);
             this.grpModuleOptions.Controls.Add(this.lblConfigs);
-            this.grpModuleOptions.Controls.Add(this.lvAdmins);
-            this.grpModuleOptions.Controls.Add(this.lblAdmins);
+            this.grpModuleOptions.Controls.Add(this.lvControls);
+            this.grpModuleOptions.Controls.Add(this.lblControls);
             this.grpModuleOptions.Controls.Add(this.btnDiscard);
             this.grpModuleOptions.Controls.Add(this.btnSave);
             this.grpModuleOptions.Controls.Add(this.txtServiceName);
@@ -158,37 +158,37 @@
             this.grpModuleOptions.TabStop = false;
             this.grpModuleOptions.Text = "Module Options";
             // 
-            // btnAdmin_Edit
+            // btnControl_Edit
             // 
-            this.btnAdmin_Edit.Enabled = false;
-            this.btnAdmin_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnAdmin_Edit.Location = new System.Drawing.Point(470, 200);
-            this.btnAdmin_Edit.Name = "btnAdmin_Edit";
-            this.btnAdmin_Edit.Size = new System.Drawing.Size(30, 27);
-            this.btnAdmin_Edit.TabIndex = 20;
-            this.btnAdmin_Edit.UseVisualStyleBackColor = true;
-            this.btnAdmin_Edit.Click += new System.EventHandler(this.btnAdmin_Edit_Click);
+            this.btnControl_Edit.Enabled = false;
+            this.btnControl_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
+            this.btnControl_Edit.Location = new System.Drawing.Point(470, 200);
+            this.btnControl_Edit.Name = "btnControl_Edit";
+            this.btnControl_Edit.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Edit.TabIndex = 20;
+            this.btnControl_Edit.UseVisualStyleBackColor = true;
+            this.btnControl_Edit.Click += new System.EventHandler(this.btnControl_Edit_Click);
             // 
-            // btnAdmin_Remove
+            // btnControl_Remove
             // 
-            this.btnAdmin_Remove.Enabled = false;
-            this.btnAdmin_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnAdmin_Remove.Location = new System.Drawing.Point(470, 167);
-            this.btnAdmin_Remove.Name = "btnAdmin_Remove";
-            this.btnAdmin_Remove.Size = new System.Drawing.Size(30, 27);
-            this.btnAdmin_Remove.TabIndex = 19;
-            this.btnAdmin_Remove.UseVisualStyleBackColor = true;
-            this.btnAdmin_Remove.Click += new System.EventHandler(this.btnAdmin_Remove_Click);
+            this.btnControl_Remove.Enabled = false;
+            this.btnControl_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
+            this.btnControl_Remove.Location = new System.Drawing.Point(470, 167);
+            this.btnControl_Remove.Name = "btnControl_Remove";
+            this.btnControl_Remove.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Remove.TabIndex = 19;
+            this.btnControl_Remove.UseVisualStyleBackColor = true;
+            this.btnControl_Remove.Click += new System.EventHandler(this.btnControl_Remove_Click);
             // 
-            // btnAdmin_Add
+            // btnControl_Add
             // 
-            this.btnAdmin_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnAdmin_Add.Location = new System.Drawing.Point(470, 134);
-            this.btnAdmin_Add.Name = "btnAdmin_Add";
-            this.btnAdmin_Add.Size = new System.Drawing.Size(30, 27);
-            this.btnAdmin_Add.TabIndex = 18;
-            this.btnAdmin_Add.UseVisualStyleBackColor = true;
-            this.btnAdmin_Add.Click += new System.EventHandler(this.btnAdmin_Add_Click);
+            this.btnControl_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
+            this.btnControl_Add.Location = new System.Drawing.Point(470, 134);
+            this.btnControl_Add.Name = "btnControl_Add";
+            this.btnControl_Add.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Add.TabIndex = 18;
+            this.btnControl_Add.UseVisualStyleBackColor = true;
+            this.btnControl_Add.Click += new System.EventHandler(this.btnControl_Add_Click);
             // 
             // btnConfig_Edit
             // 
@@ -244,27 +244,27 @@
             this.lblConfigs.TabIndex = 10;
             this.lblConfigs.Text = "Configurations";
             // 
-            // lvAdmins
+            // lvControls
             // 
-            this.lvAdmins.FullRowSelect = true;
-            this.lvAdmins.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvAdmins.Location = new System.Drawing.Point(9, 113);
-            this.lvAdmins.MultiSelect = false;
-            this.lvAdmins.Name = "lvAdmins";
-            this.lvAdmins.Size = new System.Drawing.Size(455, 133);
-            this.lvAdmins.TabIndex = 9;
-            this.lvAdmins.UseCompatibleStateImageBehavior = false;
-            this.lvAdmins.View = System.Windows.Forms.View.Details;
-            this.lvAdmins.SelectedIndexChanged += new System.EventHandler(this.lvAdmins_SelectedIndexChanged);
+            this.lvControls.FullRowSelect = true;
+            this.lvControls.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvControls.Location = new System.Drawing.Point(9, 113);
+            this.lvControls.MultiSelect = false;
+            this.lvControls.Name = "lvControls";
+            this.lvControls.Size = new System.Drawing.Size(455, 133);
+            this.lvControls.TabIndex = 9;
+            this.lvControls.UseCompatibleStateImageBehavior = false;
+            this.lvControls.View = System.Windows.Forms.View.Details;
+            this.lvControls.SelectedIndexChanged += new System.EventHandler(this.lvAdmins_SelectedIndexChanged);
             // 
-            // lblAdmins
+            // lblControls
             // 
-            this.lblAdmins.AutoSize = true;
-            this.lblAdmins.Location = new System.Drawing.Point(9, 97);
-            this.lblAdmins.Name = "lblAdmins";
-            this.lblAdmins.Size = new System.Drawing.Size(77, 13);
-            this.lblAdmins.TabIndex = 8;
-            this.lblAdmins.Text = "Administrations";
+            this.lblControls.AutoSize = true;
+            this.lblControls.Location = new System.Drawing.Point(9, 97);
+            this.lblControls.Name = "lblControls";
+            this.lblControls.Size = new System.Drawing.Size(45, 13);
+            this.lblControls.TabIndex = 8;
+            this.lblControls.Text = "Controls";
             // 
             // btnDiscard
             // 
@@ -424,12 +424,12 @@
         private System.Windows.Forms.Button btnConfig_Remove;
         private System.Windows.Forms.Button btnConfig_Add;
         private System.Windows.Forms.Label lblConfigs;
-        private System.Windows.Forms.Label lblAdmins;
+        private System.Windows.Forms.Label lblControls;
         private System.Windows.Forms.Button btnConfig_Edit;
-        private System.Windows.Forms.Button btnAdmin_Edit;
-        private System.Windows.Forms.Button btnAdmin_Remove;
-        private System.Windows.Forms.Button btnAdmin_Add;
-        private System.Windows.Forms.ListView lvAdmins;
+        private System.Windows.Forms.Button btnControl_Edit;
+        private System.Windows.Forms.Button btnControl_Remove;
+        private System.Windows.Forms.Button btnControl_Add;
+        private System.Windows.Forms.ListView lvControls;
         private System.Windows.Forms.Button btnImportConfig;
         private System.Windows.Forms.Button btnLoadConfig;
     }
