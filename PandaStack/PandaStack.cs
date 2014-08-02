@@ -14,48 +14,33 @@ namespace PandaStack
     public class PandaStack
     {
 
-        private JSONHandler jsonHandler;
-        protected List<Module> _modules = new List<Module>();
+        private JsonHandler JsonHandler;
+        protected List<Module> Modules = new List<Module>();
 
         public PandaStack()
         {
-            this.jsonHandler = new JSONHandler(AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf");
+            string jsonFile = AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf";
+            this.JsonHandler = new JsonHandler(jsonFile);
         }
 
-        public void loadModules()
+        public void LoadModules()
         {
-            this.jsonHandler.fetchJSON();
+            this.JsonHandler.FetchJson();
 
-            foreach (jsonModule jModule in this.jsonHandler.getModules())
+            foreach (JsonModule jsonModule in this.JsonHandler.GetModules())
             {
                 // Module has to have a name and type
-                if (jModule.name == null || jModule.type == null)
+                if (String.IsNullOrEmpty(jsonModule.name) || String.IsNullOrEmpty(jsonModule.type))
                     continue;
 
-                // Get and then check module type
-                ModuleType moduleType = ModuleType.Helper;
-                string jmType = jModule.type.ToLower();
-
-                if (jmType == "service")
-                {
-                    moduleType = ModuleType.Service;
-                }
-                else if (jmType == "software")
-                {
-                    moduleType = ModuleType.Software;
-                }
-                else if (jmType == "language")
-                {
-                    moduleType = ModuleType.Language;
-                }
-
-                // Create the module
-                Module module = new Module(jModule.name, moduleType);
+                // Set module type then create the module
+                ModuleType moduleType = (ModuleType)Enum.Parse(typeof(ModuleType), jsonModule.type);
+                Module module = new Module(jsonModule.name, moduleType);
 
                 // Setup the module with its corresponding type
-                if (moduleType == ModuleType.Service && jModule.service != null)
+                if (moduleType == ModuleType.Service && jsonModule.service != null)
                 {
-                    module.setService(jModule.service);
+                    module.SetServiceName(jsonModule.service);
                 }
                 else if (moduleType == ModuleType.Software)
                 {
@@ -63,105 +48,53 @@ namespace PandaStack
                 }
 
                 // Setup module's configurations
-                if (jModule.config != null)
+                if (jsonModule.config != null)
                 {
-                    foreach (jsonConfig jConfig in jModule.config)
+                    foreach (JsonConfig jsonConfig in jsonModule.config)
                     {
                         // Configuration must have a name, a type and a file/path
-                        if (jConfig.name == null || jConfig.type == null || jConfig.path == null)
+                        if (String.IsNullOrEmpty(jsonConfig.name) || String.IsNullOrEmpty(jsonConfig.type) || String.IsNullOrEmpty(jsonConfig.path))
                             continue;
 
-                        // Get and then check the config's type
-                        ModuleConfig mc;
-                        ModuleConfigType configType = ModuleConfigType.File;
-                        string jcType = jConfig.type.ToLower();
-
-                        if (jcType == "dir" || jcType == "directory" || jcType == "folder")
-                        {
-                            configType = ModuleConfigType.Directory;
-                        }
-                        else if (jcType == "software")
-                        {
-                            configType = ModuleConfigType.Software;
-                        }
-                        else if (jcType == "url" || jcType == "website")
-                        {
-                            configType = ModuleConfigType.URL;
-                        }
-
-                        // Create the configuration, based on if it has args or not
-                        if (jConfig.args == null)
-                        {
-                            mc = new ModuleConfig(jConfig.name, jConfig.path, configType);
-                        }
-                        else
-                        {
-                            mc = new ModuleConfig(jConfig.name, jConfig.path, jConfig.args, configType);
-                        }
-
-                        // Add the configuration to the module
-                        module.addConfig(mc);
+                        ConfigType configType = (ConfigType)Enum.Parse(typeof(ConfigType), jsonConfig.type);
+                        module.AddConfig(new ModuleConfig(jsonConfig.name, jsonConfig.path, jsonConfig.args, configType));
                     }
                 }
 
-                // Setup module's administrations
-                if (jModule.admin != null)
+                // Setup the module's controls
+                if (jsonModule.control != null)
                 {
-                    foreach (jsonAdmin jAdmin in jModule.admin)
+                    foreach (JsonControl jsonControl in jsonModule.control)
                     {
-                        // Admin has to have a name, a type and a file/path
-                        if (jAdmin.name == null || jAdmin.type == null || jAdmin.path == null)
+                        // Controls must have a name, a type and a file/path
+                        if (String.IsNullOrEmpty(jsonControl.name) || String.IsNullOrEmpty(jsonControl.type) || String.IsNullOrEmpty(jsonControl.path))
                             continue;
 
-                        // Get and check the admin's type
-                        ModuleAdmin ma;
-                        ModuleAdminType adminType = ModuleAdminType.Software;
-                        string jaType = jAdmin.type.ToLower();
-
-                        if (jaType == "command")
-                        {
-                            adminType = ModuleAdminType.Command;
-                        }
-                        else if (jaType == "url" || jaType == "website")
-                        {
-                            adminType = ModuleAdminType.URL;
-                        }
-
-                        // Create the administration, based on if it has args or not
-                        if (jAdmin.args == null)
-                        {
-                            ma = new ModuleAdmin(jAdmin.name, jAdmin.path, adminType);
-                        }
-                        else
-                        {
-                            ma = new ModuleAdmin(jAdmin.name, jAdmin.path, jAdmin.args, adminType);
-                        }
-
-                        // Add the administration to the module
-                        module.addAdmin(ma);
+                        ControlType controlType = (ControlType)Enum.Parse(typeof(ControlType), jsonControl.type);
+                        module.AddControl(new ModuleControl(jsonControl.name, jsonControl.path, jsonControl.args, controlType));
                     }
                 }
 
                 // Add the module to the list
-                this._modules.Add(module);
+                this.Modules.Add(module);
             }
 
         }
 
-        public void reloadModules()
+        public void ReloadModules()
         {
-            this._modules.Clear();
-            this.loadModules();
+            this.Modules.Clear();
+            this.LoadModules();
         }
 
-        public List<Module> getModules()
+        public List<Module> GetModules()
         {
-            return this._modules;
+            return this.Modules;
         }
 
-        public JSONHandler getJSONHandler()
+        public JsonHandler GetJsonHandler()
         {
-            return this.jsonHandler;
+            return this.JsonHandler;
         }
 
     }

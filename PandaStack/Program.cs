@@ -11,7 +11,7 @@ namespace PandaStack
     static class Program
     {
 
-        public static PandaStack pandaStack;
+        public static PandaStack PandaStack;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,16 +19,16 @@ namespace PandaStack
         [STAThread]
         static void Main()
         {
-            if (!Program.isAdministrator())
+            if (!Program.IsAdministrator())
             {
-                Program.launchAsAdmin();
+                Program.LaunchAsAdmin();
                 return;
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Program.pandaStack = new PandaStack();
+            Program.PandaStack = new PandaStack();
             Application.Run(new frmMain());
         }
 
@@ -40,7 +40,7 @@ namespace PandaStack
          * Returns true if it ran with administrator privileges
          * </returns>
          */
-        public static bool isAdministrator()
+        public static bool IsAdministrator()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
             WindowsPrincipal principal = new WindowsPrincipal(identity);
@@ -52,7 +52,7 @@ namespace PandaStack
          * Attempt to restart PandaStack as an administrator
          * </summary>
          */
-        private static void launchAsAdmin()
+        private static void LaunchAsAdmin()
         {
             ProcessStartInfo proc = new ProcessStartInfo();
             proc.UseShellExecute = true;
@@ -66,7 +66,7 @@ namespace PandaStack
             }
             catch
             {
-                // ...
+                // Application didn't run as administrator
             }
 
             Application.Exit();

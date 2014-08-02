@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack
 {
 
-    public class jsonSettings
+    public class JsonSettings
     {
 
         public bool minimizeToTray { get; set; }

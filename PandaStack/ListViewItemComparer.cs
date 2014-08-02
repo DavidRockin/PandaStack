@@ -11,27 +11,27 @@ namespace PandaStack
     public class ListViewItemComparer : IComparer
     {
 
-        private int _column;
-        private SortOrder _order;
+        private int Column;
+        private SortOrder Order;
 
         public ListViewItemComparer()
         {
-            this._column = 0;
-            this._order = SortOrder.Ascending;
+            this.Column = 0;
+            this.Order = SortOrder.Ascending;
         }
 
         public ListViewItemComparer(int column, SortOrder order)
         {
-            this._column = column;
-            this._order = order;
+            this.Column = column;
+            this.Order = order;
         }
 
         public int Compare(object x, object y)
         {
             int returnVal = -1;
-            returnVal = String.Compare(((ListViewItem)x).SubItems[this._column].Text, ((ListViewItem)y).SubItems[this._column].Text);
+            returnVal = String.Compare(((ListViewItem)x).SubItems[this.Column].Text, ((ListViewItem)y).SubItems[this.Column].Text);
 
-            if (this._order == SortOrder.Descending)
+            if (this.Order == SortOrder.Descending)
             {
                 returnVal *= -1;
             }

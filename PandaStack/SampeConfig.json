@@ -40,7 +40,7 @@
 					"path" : "C:/PandaStack/bin/mysql"
 				}
 			],
-			"admin" : [
+			"control" : [
 				{
 					"name" : "MySQL Console",
 					"type" : "software",
@@ -70,7 +70,7 @@
 					"path" : "C:/PandaStack/bin/php"
 				}
 			],
-			"admin" : [
+			"control" : [
 				{
 					"name" : "PHPMyAdmin",
 					"type" : "url",

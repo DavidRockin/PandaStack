@@ -6,7 +6,7 @@ using System.Text;
 namespace PandaStack
 {
 
-    public class jsonAdmin
+    public class JsonControl
     {
 
         public string name { get; set; }

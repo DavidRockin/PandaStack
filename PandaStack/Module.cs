@@ -11,71 +11,71 @@ namespace PandaStack
     public class Module
     {
 
-        private string _moduleName;
-        private ModuleType _moduleType;
+        private string Name;
+        private ModuleType Type;
 
-        private string _serviceName;
-        private ServiceController _sc;
+        private string ServiceName;
+        private ServiceController ServiceController;
 
-        private List<ModuleConfig> _configs = new List<ModuleConfig>();
-        private List<ModuleAdmin> _admin = new List<ModuleAdmin>();
+        private List<ModuleConfig> Configs = new List<ModuleConfig>();
+        private List<ModuleControl> Controls = new List<ModuleControl>();
 
         public Module(string name, ModuleType type)
         {
-            this._moduleName = name;
-            this._moduleType = type;
+            this.Name = name;
+            this.Type = type;
         }
 
-        public string getModuleName()
+        public string GetModuleName()
         {
-            return this._moduleName;
+            return this.Name;
         }
 
-        public ModuleType getModuleType()
+        public ModuleType GetModuleType()
         {
-            return this._moduleType;
+            return this.Type;
         }
 
-        public string getServiceName()
+        public string GetServiceName()
         {
-            if (this._moduleType != ModuleType.Service) return null;
-            return this._serviceName;
+            if (this.Type != ModuleType.Service) return null;
+            return this.ServiceName;
         }
 
-        public void addConfig(ModuleConfig config)
+        public void AddConfig(ModuleConfig config)
         {
-            this._configs.Add(config);
+            this.Configs.Add(config);
         }
 
-        public List<ModuleConfig> getConfigs()
+        public List<ModuleConfig> GetConfigs()
         {
-            return this._configs;
+            return this.Configs;
         }
 
-        public void addAdmin(ModuleAdmin admin)
+        public void AddControl(ModuleControl control)
         {
-            this._admin.Add(admin);
+            this.Controls.Add(control);
         }
 
-        public List<ModuleAdmin> getAdmins()
+        public List<ModuleControl> GetControls()
         {
-            return this._admin;
+            return this.Controls;
         }
 
-        public ServiceController getServiceController()
+        public ServiceController GetServiceController()
         {
-            return this._sc;
+            return this.ServiceController;
         }
 
-        public void setService(string service)
+        public void SetServiceName(string serviceName)
         {
-            if (!(service != null && service != string.Empty))
+            if (!(serviceName != null && serviceName != string.Empty))
                    return;
 
             try
             {
-                this._sc = new ServiceController(service);
-                this._serviceName = service;
+                this.ServiceController = new ServiceController(serviceName);
+                this.ServiceName = serviceName;
             }
             catch (Exception ex)
             {
@@ -83,18 +83,21 @@ namespace PandaStack
             }
         }
 
-        public string getStatus()
+        public string GetModuleStatus()
         {
             string status = "n/a";
 
-            if (this._moduleType == ModuleType.Service)
+            if (this.Type == ModuleType.Service)
             {
                 try
                 {
-                    this._sc.Refresh();
-                    status = this._sc.Status.ToString();
+                    this.ServiceController.Refresh();
+                    status = this.ServiceController.Status.ToString();
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
 
             return status;

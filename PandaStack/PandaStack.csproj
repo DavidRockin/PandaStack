@@ -88,18 +88,18 @@
     </Compile>
     <Compile Include="Information.cs" />
     <Compile Include="InfoType.cs" />
-    <Compile Include="jsonAdmin.cs" />
-    <Compile Include="jsonConfig.cs" />
-    <Compile Include="JSONHandler.cs" />
-    <Compile Include="jsonModule.cs" />
-    <Compile Include="jsonRoot.cs" />
-    <Compile Include="jsonSettings.cs" />
+    <Compile Include="JsonControl.cs" />
+    <Compile Include="JsonConfig.cs" />
+    <Compile Include="JsonHandler.cs" />
+    <Compile Include="JsonModule.cs" />
+    <Compile Include="JsonRoot.cs" />
+    <Compile Include="JsonSettings.cs" />
     <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="Module.cs" />
-    <Compile Include="ModuleAdmin.cs" />
-    <Compile Include="ModuleAdminType.cs" />
+    <Compile Include="ModuleControl.cs" />
+    <Compile Include="ControlType.cs" />
     <Compile Include="ModuleConfig.cs" />
-    <Compile Include="ModuleConfigType.cs" />
+    <Compile Include="ConfigType.cs" />
     <Compile Include="ModuleType.cs" />
     <Compile Include="PandaStack.cs" />
     <Compile Include="Program.cs" />

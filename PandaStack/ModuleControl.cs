@@ -6,22 +6,22 @@ using System.Text;
 namespace PandaStack
 {
 
-    public class ModuleConfig
+    public class ModuleControl
     {
 
         private string Name;
         private string Path;
         private string Args;
-        private ConfigType Type;
+        private ControlType Type;
 
-        public ModuleConfig(string name, string filePath, ConfigType type)
+        public ModuleControl(string name, string filePath, ControlType type)
         {
             this.Name = name;
             this.Path = filePath;
             this.Type = type;
         }
 
-        public ModuleConfig(string name, string filePath, string args, ConfigType type)
+        public ModuleControl(string name, string filePath, string args, ControlType type)
         {
             this.Name = name;
             this.Path = filePath;
@@ -29,24 +29,24 @@ namespace PandaStack
             this.Type = type;
         }
 
-        public string GetConfigName()
+        public string GetControlName()
         {
             return this.Name;
         }
 
-        public string GetConfigPath()
+        public string GetControlPath()
         {
             return this.Path;
         }
 
-        public ConfigType GetConfigType()
-        {
-            return this.Type;
-        }
-
-        public string GetConfigArgs()
+        public string GetControlArgs()
         {
             return this.Args;
+        }
+
+        public ControlType GetControlType()
+        {
+            return this.Type;
         }
 
     }

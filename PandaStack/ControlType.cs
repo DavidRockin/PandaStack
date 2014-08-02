@@ -6,13 +6,12 @@ using System.Text;
 namespace PandaStack
 {
 
-    public enum ModuleConfigType
+    public enum ControlType
     {
 
-        File,
-        Directory,
         Software,
-        URL
+        Command,
+        Url
 
     }
 

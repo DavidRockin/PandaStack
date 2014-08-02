@@ -20,7 +20,7 @@ namespace PandaStack
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            jsonSettings settings = Program.pandaStack.getJSONHandler().getSettings();
+            JsonSettings settings = Program.PandaStack.GetJsonHandler().GetSettings();
 
             // Set timer sync interval
             if (settings.timerInterval >= 250 && settings.timerInterval <= 60000)

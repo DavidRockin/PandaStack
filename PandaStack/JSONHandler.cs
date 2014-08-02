@@ -9,44 +9,44 @@ using System.Runtime.Serialization.Json;
 namespace PandaStack
 {
 
-    public class JSONHandler
+    public class JsonHandler
     {
 
-        private string _filePath;
-        private jsonRoot root;
-        private jsonModule[] modules;
-        private jsonSettings settings;
+        private string FilePath;
+        private JsonRoot Root;
+        private JsonModule[] Modules;
+        private JsonSettings Settings;
 
-        public JSONHandler(string filePath)
+        public JsonHandler(string filePath)
         {
-            this._filePath = filePath;
+            this.FilePath = filePath;
         }
 
-        public void fetchJSON()
+        public void FetchJson()
         {
-            string json = File.ReadAllText(this._filePath);
-            DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(jsonRoot));
+            string json = File.ReadAllText(this.FilePath);
+            DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(JsonRoot));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-            var obj = (jsonRoot)serialized.ReadObject(stream);
+            var root = (JsonRoot)serialized.ReadObject(stream);
 
-            this.root = obj;
-            this.modules = obj.modules;
-            this.settings = obj.settings;
+            this.Root = root;
+            this.Modules = root.modules;
+            this.Settings = root.settings;
         }
 
-        public jsonRoot getJSONRoot()
+        public JsonRoot GetJsonRoot()
         {
-            return this.root;
+            return this.Root;
         }
 
-        public jsonModule[] getModules()
+        public JsonModule[] GetModules()
         {
-            return this.modules;
+            return this.Modules;
         }
 
-        public jsonSettings getSettings()
+        public JsonSettings GetSettings()
         {
-            return this.settings;
+            return this.Settings;
         }
 
     }

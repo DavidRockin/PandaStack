@@ -16,65 +16,61 @@ namespace PandaStack
     public partial class frmMain : Form
     {
 
-        private PandaStack pandaStack;
-        private frmAbout formAbout = new frmAbout();
-        private frmSettings formSettings = new frmSettings();
+        private PandaStack PandaStack;
+        private frmAbout FormAbout = new frmAbout();
+        private frmSettings FormSettings = new frmSettings();
+
+        private int SortColumn = -1;
 
         public frmMain()
         {
-            // Setup PandaStack
-            this.pandaStack = Program.pandaStack;
-            this.pandaStack.loadModules();
-
             InitializeComponent();
+            
+            // Setup PandaStack
+            this.PandaStack = Program.PandaStack;
+            this.PandaStack.LoadModules();
 
-            Information.form = this;
-            Information.addMessage("Setting up PandaStack");
+            Information.Form = this;
+            Information.AddMessage("Setting up PandaStack");
 
             // Check to see if PandaStack is running as administrator
-            if (Program.isAdministrator())
+            if (Program.IsAdministrator())
             {
                 this.Text += " [Administrator]";
-                Information.addMessage("PandaStack is running as administrator");
+                Information.AddMessage("PandaStack is running as administrator");
             }
 
-            this.tmrSync.Interval = this.pandaStack.getJSONHandler().getSettings().timerInterval;
+            this.tmrSync.Interval = this.PandaStack.GetJsonHandler().GetSettings().timerInterval;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // Setup lvModule's Columns
+            // Setup lvModule's columns
             this.lvModules.Columns.Add("Module Name", 140, HorizontalAlignment.Left);
             this.lvModules.Columns.Add("Module Status", 130, HorizontalAlignment.Left);
             this.lvModules.Columns.Add("Module Type", 130, HorizontalAlignment.Left);
 
-            // Put the loaded modules into the list view
-            this.fetchModules();
+            // Put the loaded modules into the lvModules list view
+            this.FetchModules();
         }
 
         private void frmMain_Closing(object sender, FormClosingEventArgs e)
         {
-            Information.addMessage("Exiting PandaStack");
+            Information.AddMessage("Exiting PandaStack");
             // TODO: Handle closing programs (TBA)
         }
 
         private void frmMain_Resize(object sender, EventArgs e)
         {
-            if (this.pandaStack.getJSONHandler().getSettings().minimizeToTray != true)
+            if (this.PandaStack.GetJsonHandler().GetSettings().minimizeToTray != true)
                 return;
 
             if (this.WindowState == FormWindowState.Minimized)
             {
-                this.niMinimize.BalloonTipIcon = ToolTipIcon.Info;
-                this.niMinimize.BalloonTipTitle = "PandaStack Minimized";
-                this.niMinimize.BalloonTipText = "PandaStack has minimized to your system's tray, you can open it by double-clicking the PandaStack icon.";
-                this.niMinimize.Icon = this.Icon;
-                this.niMinimize.Text = "PandaStack";
-
                 this.ShowInTaskbar = false;
                 this.niMinimize.Visible = true;
 
-                if (this.pandaStack.getJSONHandler().getSettings().minimizeToolTip == true)
+                if (this.PandaStack.GetJsonHandler().GetSettings().minimizeToolTip == true)
                     this.niMinimize.ShowBalloonTip(3000);
 
                 this.tmrSync.Enabled = false;
@@ -86,22 +82,22 @@ namespace PandaStack
             try
             {
                 // We only want to manage a selected module
-                if (this.lvModules.SelectedItems.Count > 0)
+                if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
                 {
                     Module module = (Module)this.lvModules.FocusedItem.Tag;
-                    Information.addMessage("Selected the module " + module.getModuleName(), InfoType.Debug);
-                    grpModuleControl.Text = "Module Control: " + module.getModuleName();
+                    Information.AddMessage("Selected the module " + module.GetModuleName(), InfoType.Debug);
+                    grpModuleControl.Text = "Module Control: " + module.GetModuleName();
 
                     // If the module is a service, check it's status
-                    if (module.getModuleType() == ModuleType.Service)
+                    if (module.GetModuleType() == ModuleType.Service)
                     {
                         try
                         {
-                            ServiceController sc = module.getServiceController();
+                            ServiceController serviceController = module.GetServiceController();
 
-                            if (sc != null)
+                            if (serviceController != null)
                             {
-                                if (sc.Status == ServiceControllerStatus.Stopped)
+                                if (serviceController.Status == ServiceControllerStatus.Stopped)
                                 {
                                     btnToggle.Text = "Start Module";
                                     btnToggle.Enabled = true;
@@ -115,22 +111,22 @@ namespace PandaStack
                         }
                         catch (Exception ex)
                         {
-                            Information.handleException(ex);
+                            Information.HandleException(ex);
                         }
                     }
-                    else if (module.getModuleType() == ModuleType.Software)
+                    else if (module.GetModuleType() == ModuleType.Software)
                     {
                         // TODO: Allow the option to toggle module type software
                     }
 
-                    // If there are admin options, enable the admin button
-                    if (module.getAdmins().Count > 0)
+                    // If there are controls, enable the control button
+                    if (module.GetControls().Count > 0)
                     {
-                        btnAdmin.Enabled = true;
+                        btnControl.Enabled = true;
                     }
 
-                    // If there are any configurations, enable the config button
-                    if (module.getConfigs().Count > 0)
+                    // If there are any configs, enable the config button
+                    if (module.GetConfigs().Count > 0)
                     {
                         btnConfig.Enabled = true;
                     }
@@ -140,15 +136,12 @@ namespace PandaStack
                     // Reset the module control groupbox and it's component
                     grpModuleControl.Text = "Module Control";
                     btnToggle.Enabled = false;
-                    btnAdmin.Enabled = false;
+                    btnControl.Enabled = false;
                     btnConfig.Enabled = false;
                     btnToggle.Text = "Start Module";
                 }
             }
-            catch
-            {
-                // meh
-            }
+            catch {}
         }
 
         private void tmrSync_Tick(object sender, EventArgs e)
@@ -162,17 +155,17 @@ namespace PandaStack
                 Module module = (Module)this.lvModules.FocusedItem.Tag;
 
                 // If the module is a service, update its button status
-                if (module.getModuleType() == ModuleType.Service)
+                if (module.GetModuleType() == ModuleType.Service)
                 {
                     try
                     {
-                        ServiceController sc = module.getServiceController();
+                        ServiceController serviceController = module.GetServiceController();
 
-                        if (sc != null)
+                        if (serviceController != null)
                         {
-                            sc.Refresh();
+                            serviceController.Refresh();
 
-                            if (sc.Status == ServiceControllerStatus.Stopped)
+                            if (serviceController.Status == ServiceControllerStatus.Stopped)
                             {
                                 btnToggle.Text = "Start Module";
                                 btnToggle.Enabled = true;
@@ -186,10 +179,10 @@ namespace PandaStack
                     }
                     catch (Exception ex)
                     {
-                        Information.handleException(ex);
+                        Information.HandleException(ex);
                     }
                 }
-                else if (module.getModuleType() == ModuleType.Software)
+                else if (module.GetModuleType() == ModuleType.Software)
                 {
                     // TODO: Update buttons for a selected software type module
                 }
@@ -199,7 +192,7 @@ namespace PandaStack
             foreach (ListViewItem lvi in this.lvModules.Items) 
             {
                 Module module = (Module)lvi.Tag;
-                lvi.SubItems[1].Text = module.getStatus();
+                lvi.SubItems[1].Text = module.GetModuleStatus();
             }
         }
 
@@ -212,45 +205,45 @@ namespace PandaStack
 
             Module module = (Module)this.lvModules.FocusedItem.Tag;
 
-            if (module.getModuleType() == ModuleType.Service)
+            if (module.GetModuleType() == ModuleType.Service)
             {
                 try
                 {
-                    ServiceController sc = module.getServiceController();
-                    if (sc == null) return;
+                    ServiceController serviceController = module.GetServiceController();
+                    if (serviceController == null) return;
 
-                    Information.addMessage("Toggling module " + module.getModuleName(), InfoType.Debug);
+                    Information.AddMessage("Toggling module " + module.GetModuleName(), InfoType.Debug);
 
                     // Toggle the service
-                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    if (serviceController.Status == ServiceControllerStatus.Stopped)
                     {
-                        sc.Start();
-                        sc.Refresh();
+                        serviceController.Start();
+                        serviceController.Refresh();
                     }
                     else
                     {
-                        sc.Stop();
-                        sc.Refresh();
+                        serviceController.Stop();
+                        serviceController.Refresh();
                     }
 
                     // Check the service status
-                    if (sc.Status == ServiceControllerStatus.Stopped)
+                    if (serviceController.Status == ServiceControllerStatus.Stopped)
                     {
                         btnToggle.Text = "Start Module";
-                        lvModules.FocusedItem.SubItems[1].Text = module.getStatus();
+                        lvModules.FocusedItem.SubItems[1].Text = module.GetModuleStatus();
                     }
                     else
                     {
                         btnToggle.Text = "Stop Module";
-                        lvModules.FocusedItem.SubItems[1].Text = module.getStatus();
+                        lvModules.FocusedItem.SubItems[1].Text = module.GetModuleStatus();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Information.handleException(ex);
+                    Information.HandleException(ex);
                 }
             }
-            else if (module.getModuleType() == ModuleType.Software)
+            else if (module.GetModuleType() == ModuleType.Software)
             {
                 // TODO: Allow toggle of software type modules
             }
@@ -267,13 +260,13 @@ namespace PandaStack
             this.lvModules.Items.Clear();
 
             // Reload the modules from file, and then add to the list view
-            this.pandaStack.reloadModules();
-            this.fetchModules();
+            this.PandaStack.ReloadModules();
+            this.FetchModules();
         }
 
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            this.formAbout.Show();
+            this.FormAbout.Show();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -291,41 +284,41 @@ namespace PandaStack
             Module module = (Module)this.lvModules.FocusedItem.Tag;
             this.ctmConfig.Items.Clear();
 
-            if (module.getConfigs().Count > 0)
+            if (module.GetConfigs().Count > 0)
             {
-                foreach (ModuleConfig mc in module.getConfigs())
+                foreach (ModuleConfig config in module.GetConfigs())
                 {
-                    ToolStripMenuItem mi = new ToolStripMenuItem(mc.getConfigName());
-                    mi.Tag = mc;
-                    mi.Click += new EventHandler(this.ctmConfig_itemClicked);
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem(config.GetConfigName());
+                    menuItem.Tag = config;
+                    menuItem.Click += new EventHandler(this.ctmConfig_itemClicked);
 
-                    switch (mc.getModuleConfigType())
+                    switch (config.GetConfigType())
                     {
-                        case ModuleConfigType.File:
-                            mi.Image = Properties.Resources.page_white_edit;
+                        case ConfigType.File:
+                            menuItem.Image = Properties.Resources.page_white_edit;
                             break;
 
-                        case ModuleConfigType.Directory:
-                            mi.Image = Properties.Resources.folder;
+                        case ConfigType.Directory:
+                            menuItem.Image = Properties.Resources.folder;
                             break;
 
-                        case ModuleConfigType.Software:
-                            mi.Image = Properties.Resources.application;
+                        case ConfigType.Software:
+                            menuItem.Image = Properties.Resources.application;
                             break;
 
-                        case ModuleConfigType.URL:
-                            mi.Image = Properties.Resources.world;
+                        case ConfigType.Url:
+                            menuItem.Image = Properties.Resources.world;
                             break;
                     }
 
-                    this.ctmConfig.Items.Add(mi);
+                    this.ctmConfig.Items.Add(menuItem);
                 }
 
                 this.ctmConfig.Show(btnConfig, new Point(0, btnConfig.Height));
             }
         }
 
-        private void btnAdmin_Click(object sender, EventArgs e)
+        private void btnControl_Click(object sender, EventArgs e)
         {
             // This button should only be clickable if there are items in lvModules
             // and one of them was selected
@@ -333,56 +326,56 @@ namespace PandaStack
                 return;
 
             Module module = (Module)this.lvModules.FocusedItem.Tag;
-            this.ctmAdmin.Items.Clear();
+            this.ctmControl.Items.Clear();
 
-            if (module.getAdmins().Count > 0)
+            if (module.GetControls().Count > 0)
             {
-                foreach (ModuleAdmin ma in module.getAdmins())
+                foreach (ModuleControl control in module.GetControls())
                 {
-                    ToolStripMenuItem mi = new ToolStripMenuItem(ma.getAdminName());
-                    mi.Tag = ma;
-                    mi.Click += new EventHandler(this.ctmAdmin_itemClicked);
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem(control.GetControlName());
+                    menuItem.Tag = control;
+                    menuItem.Click += new EventHandler(this.ctmControl_ItemClicked);
 
-                    switch (ma.getModuleAdminType())
+                    switch (control.GetControlType())
                     {
-                        case ModuleAdminType.Command:
-                            mi.Image = Properties.Resources.application_xp_terminal;
+                        case ControlType.Command:
+                            menuItem.Image = Properties.Resources.application_xp_terminal;
                             break;
 
-                        case ModuleAdminType.Software:
-                            mi.Image = Properties.Resources.application;
+                        case ControlType.Software:
+                            menuItem.Image = Properties.Resources.application;
                             break;
 
-                        case ModuleAdminType.URL:
-                            mi.Image = Properties.Resources.world;
+                        case ControlType.Url:
+                            menuItem.Image = Properties.Resources.world;
                             break;
                     }
 
-                    this.ctmAdmin.Items.Add(mi);
+                    this.ctmControl.Items.Add(menuItem);
                 }
 
-                this.ctmAdmin.Show(btnAdmin, new Point(0, btnAdmin.Height));
+                this.ctmControl.Show(btnControl, new Point(0, btnControl.Height));
             }
         }
 
         private void ctmConfig_itemClicked(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
-            ModuleConfig mc = (ModuleConfig)mi.Tag;
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            ModuleConfig config = (ModuleConfig)menuItem.Tag;
             Module module = (Module)this.lvModules.FocusedItem.Tag;
 
-            Information.addMessage("Handling configuration '" + mc.getConfigName() + "' for module '" + module.getModuleName() + "'", InfoType.Debug);
-            System.Diagnostics.Process.Start(@mc.getConfigFile(), mc.getArgs());
+            Information.AddMessage("Handling config '" + config.GetConfigName() + "' for module '" + module.GetModuleName() + "'", InfoType.Debug);
+            System.Diagnostics.Process.Start(config.GetConfigPath(), config.GetConfigArgs());
         }
-        
-        private void ctmAdmin_itemClicked(object sender, EventArgs e)
+
+        private void ctmControl_ItemClicked(object sender, EventArgs e)
         {
-            ToolStripMenuItem mi = (ToolStripMenuItem)sender;
-            ModuleAdmin ma = (ModuleAdmin)mi.Tag;
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            ModuleControl control = (ModuleControl)menuItem.Tag;
             Module module = (Module)this.lvModules.FocusedItem.Tag;
 
-            Information.addMessage("Handling administration '" + ma.getAdminName() + "' for module '" + module.getModuleName() + "'", InfoType.Debug);
-            System.Diagnostics.Process.Start(@ma.getAdminPath(), ma.getArgs());
+            Information.AddMessage("Handling control '" + control.GetControlName() + "' for module '" + module.GetModuleName() + "'", InfoType.Debug);
+            System.Diagnostics.Process.Start(control.GetControlPath(), control.GetControlArgs());
         }
 
         private void ctmConsole_Copy_Click(object sender, EventArgs e)
@@ -416,16 +409,14 @@ namespace PandaStack
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            this.formSettings.Show();
+            this.FormSettings.Show();
         }
-
-        private int _sortColumn = -1;
 
         private void lvModules_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (e.Column != this._sortColumn)
+            if (e.Column != this.SortColumn)
             {
-                this._sortColumn = e.Column;
+                this.SortColumn = e.Column;
                 lvModules.Sorting = SortOrder.Ascending;
             }
             else
@@ -470,23 +461,23 @@ namespace PandaStack
          * Fetch the loaded modules into the list view
          * </summary>
          */
-        private void fetchModules()
+        private void FetchModules()
         {
-            List<Module> loadedModules = this.pandaStack.getModules();
+            List<Module> loadedModules = this.PandaStack.GetModules();
 
             this.tmrSync.Enabled = false;
 
             if (loadedModules.Count > 0)
             {
                 ListViewItem lvi;
-                Information.addMessage("Loading " + loadedModules.Count + " modules");
+                Information.AddMessage("Loading " + loadedModules.Count + " modules");
 
                 foreach (Module module in loadedModules)
                 {
-                    Information.addMessage("Found module '" + module.getModuleName() + "' with " + module.getAdmins().Count + " admin options, " + module.getConfigs().Count + " config options");
-                    lvi = new ListViewItem(module.getModuleName());
-                    lvi.SubItems.Add(module.getStatus());
-                    lvi.SubItems.Add(module.getModuleType().ToString());
+                    Information.AddMessage("Found module '" + module.GetModuleName() + "' with " + module.GetControls().Count + " controls, " + module.GetConfigs().Count + " configs");
+                    lvi = new ListViewItem(module.GetModuleName());
+                    lvi.SubItems.Add(module.GetModuleStatus());
+                    lvi.SubItems.Add(module.GetModuleType().ToString());
                     lvi.Tag = module;
 
                     this.lvModules.Items.Add(lvi);
@@ -498,7 +489,7 @@ namespace PandaStack
             }
             else
             {
-                Information.addMessage("No modules loaded");
+                Information.AddMessage("There are no modules loaded");
             }
         }
 
