@@ -371,6 +371,18 @@ namespace PandaStack_Module_Generator
             }
         }
 
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbType.Text == "Service")
+            {
+                this.txtServiceName.Enabled = true;
+            }
+            else
+            {
+                this.txtServiceName.Enabled = false;
+            }
+        }
+
         /**
          * <summary>
          * Set the selected module
@@ -459,6 +471,11 @@ namespace PandaStack_Module_Generator
             this.btnConfig_Remove.Enabled = false;
         }
 
+        /**
+         * <summary>
+         * Handles an exception with debugging information
+         * </summar>
+         */
         private void HandleException(Exception ex)
         {
             StackTrace stackTrace = new StackTrace(ex, true);
@@ -468,6 +485,11 @@ namespace PandaStack_Module_Generator
             MessageBox.Show(message, ex.GetType().ToString());
         }
 
+        /**
+         * <summary>
+         * Load a PandaStack configuration file
+         * </summary>
+         */
         private void LoadJsonFile(string filePath)
         {
             JsonHandler jsonHandler = new JsonHandler(filePath);
@@ -477,7 +499,7 @@ namespace PandaStack_Module_Generator
             {
                 Module module = new Module();
                 module.SetModuleName(jsonModule.name);
-                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), char.ToUpper(jsonModule.type[0]) + jsonModule.type.Substring(1)));
+                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), this.Ucfirst(jsonModule.type)));
                 if (module.GetModuleType() == ModuleType.Service)
                 {
                     module.SetServiceName(jsonModule.service);
@@ -485,12 +507,12 @@ namespace PandaStack_Module_Generator
 
                 if (jsonModule.control != null && jsonModule.control.Count > 0)
                 {
-                    foreach (JsonControl jsonAdmin in jsonModule.control)
+                    foreach (JsonControl jsonControl in jsonModule.control)
                     {
                         ModuleControl control = new ModuleControl();
-                        control.SetControlName(jsonAdmin.name);
-                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), char.ToUpper(jsonAdmin.type[0]) + jsonAdmin.type.Substring(1)));
-                        control.SetControlPath(jsonAdmin.path);
+                        control.SetControlName(jsonControl.name);
+                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), this.Ucfirst(jsonControl.type)));
+                        control.SetControlPath(jsonControl.path);
 
                         module.AddControl(control);
                     }
@@ -502,7 +524,7 @@ namespace PandaStack_Module_Generator
                     {
                         ModuleConfig config = new ModuleConfig();
                         config.SetConfigName(jsonConfig.name);
-                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), char.ToUpper(jsonConfig.type[0]) + jsonConfig.type.Substring(1)));
+                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), this.Ucfirst(jsonConfig.type)));
                         config.SetConfigPath(jsonConfig.path);
 
                         module.AddConfig(config);
@@ -516,6 +538,19 @@ namespace PandaStack_Module_Generator
                 lvi.Tag = module;
                 this.lvModules.Items.Add(lvi);
             }
+        }
+
+        /**
+         * <summary>
+         * Turns the first character of a string to uppercase
+         * </summary>
+         * <returns>
+         * String
+         * </returns>
+         */
+        private string Ucfirst(string text)
+        {
+            return char.ToUpper(text[0]) + text.Substring(1);
         }
 
     }
