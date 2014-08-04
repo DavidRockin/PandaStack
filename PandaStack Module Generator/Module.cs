@@ -13,6 +13,7 @@ namespace PandaStack_Module_Generator
         private ModuleType Type = ModuleType.Helper;
 
         private string ServiceName;
+        private string SoftwarePath;
 
         private List<ModuleControl> Controls = new List<ModuleControl>();
         private List<ModuleConfig> Configs = new List<ModuleConfig>();
@@ -45,6 +46,16 @@ namespace PandaStack_Module_Generator
         public string GetServiceName()
         {
             return this.ServiceName;
+        }
+
+        public void SetProgramPath(string filePath)
+        {
+            this.SoftwarePath = filePath;
+        }
+
+        public string GetProgramPath()
+        {
+            return this.SoftwarePath;
         }
 
         public void AddConfig(ModuleConfig config)
