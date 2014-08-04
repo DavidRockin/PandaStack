@@ -367,19 +367,36 @@ namespace PandaStack_Module_Generator
             if (ofdConfig.ShowDialog() != DialogResult.Cancel)
             {
                 this.LoadJsonFile(ofdConfig.FileName);
-
             }
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.txtServiceName.Enabled = false;
+            this.txtFilePath.Enabled = false;
+            this.btnOpenLoc.Enabled = false;
+
             if (this.cmbType.Text == "Service")
             {
                 this.txtServiceName.Enabled = true;
             }
-            else
+            else if (this.cmbType.Text == "Software")
             {
-                this.txtServiceName.Enabled = false;
+                this.txtFilePath.Enabled = true;
+                this.btnOpenLoc.Enabled = true;
+            }
+
+        }
+
+        private void btnOpenLoc_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdFileLoc = new OpenFileDialog();
+            ofdFileLoc.Title = "Load Application";
+            ofdFileLoc.Filter = "Application Files (*.exe)|*.exe|Batch files (*.bat;*.com)|*.bat;*.com|All Files (*.*)|*.*";
+
+            if (ofdFileLoc.ShowDialog() != DialogResult.Cancel)
+            {
+                this.txtFilePath.Text = ofdFileLoc.FileName;
             }
         }
 
@@ -444,6 +461,7 @@ namespace PandaStack_Module_Generator
             this.txtServiceName.Text = "";
             this.lvControls.Items.Clear();
             this.lvConfigs.Items.Clear();
+            this.txtFilePath.Text = "";
 
             this.ClearCurrentControl();
             this.ClearCurrentConfig();

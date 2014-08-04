@@ -36,6 +36,9 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.grpModuleOptions = new System.Windows.Forms.GroupBox();
+            this.btnOpenLoc = new System.Windows.Forms.Button();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
+            this.lblFilePath = new System.Windows.Forms.Label();
             this.btnControl_Edit = new System.Windows.Forms.Button();
             this.btnControl_Remove = new System.Windows.Forms.Button();
             this.btnControl_Add = new System.Windows.Forms.Button();
@@ -80,7 +83,7 @@
             // 
             this.btnMvDwn.Enabled = false;
             this.btnMvDwn.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
-            this.btnMvDwn.Location = new System.Drawing.Point(148, 554);
+            this.btnMvDwn.Location = new System.Drawing.Point(162, 554);
             this.btnMvDwn.Name = "btnMvDwn";
             this.btnMvDwn.Size = new System.Drawing.Size(30, 27);
             this.btnMvDwn.TabIndex = 4;
@@ -90,7 +93,7 @@
             // 
             this.btnMvUp.Enabled = false;
             this.btnMvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
-            this.btnMvUp.Location = new System.Drawing.Point(112, 554);
+            this.btnMvUp.Location = new System.Drawing.Point(126, 554);
             this.btnMvUp.Name = "btnMvUp";
             this.btnMvUp.Size = new System.Drawing.Size(30, 27);
             this.btnMvUp.TabIndex = 3;
@@ -100,7 +103,7 @@
             // 
             this.btnRemove.Enabled = false;
             this.btnRemove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnRemove.Location = new System.Drawing.Point(76, 554);
+            this.btnRemove.Location = new System.Drawing.Point(90, 554);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(30, 27);
             this.btnRemove.TabIndex = 2;
@@ -110,7 +113,7 @@
             // btnAdd
             // 
             this.btnAdd.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnAdd.Location = new System.Drawing.Point(40, 554);
+            this.btnAdd.Location = new System.Drawing.Point(54, 554);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(30, 27);
             this.btnAdd.TabIndex = 1;
@@ -121,6 +124,7 @@
             // 
             this.lvModules.FullRowSelect = true;
             this.lvModules.GridLines = true;
+            this.lvModules.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvModules.Location = new System.Drawing.Point(6, 19);
             this.lvModules.MultiSelect = false;
             this.lvModules.Name = "lvModules";
@@ -132,6 +136,9 @@
             // 
             // grpModuleOptions
             // 
+            this.grpModuleOptions.Controls.Add(this.btnOpenLoc);
+            this.grpModuleOptions.Controls.Add(this.txtFilePath);
+            this.grpModuleOptions.Controls.Add(this.lblFilePath);
             this.grpModuleOptions.Controls.Add(this.btnControl_Edit);
             this.grpModuleOptions.Controls.Add(this.btnControl_Remove);
             this.grpModuleOptions.Controls.Add(this.btnControl_Add);
@@ -158,11 +165,39 @@
             this.grpModuleOptions.TabStop = false;
             this.grpModuleOptions.Text = "Module Options";
             // 
+            // btnOpenLoc
+            // 
+            this.btnOpenLoc.Enabled = false;
+            this.btnOpenLoc.Image = global::PandaStack_Module_Generator.Properties.Resources.folder_page;
+            this.btnOpenLoc.Location = new System.Drawing.Point(470, 70);
+            this.btnOpenLoc.Name = "btnOpenLoc";
+            this.btnOpenLoc.Size = new System.Drawing.Size(30, 27);
+            this.btnOpenLoc.TabIndex = 23;
+            this.btnOpenLoc.UseVisualStyleBackColor = true;
+            this.btnOpenLoc.Click += new System.EventHandler(this.btnOpenLoc_Click);
+            // 
+            // txtFilePath
+            // 
+            this.txtFilePath.Enabled = false;
+            this.txtFilePath.Location = new System.Drawing.Point(195, 74);
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(269, 20);
+            this.txtFilePath.TabIndex = 22;
+            // 
+            // lblFilePath
+            // 
+            this.lblFilePath.AutoSize = true;
+            this.lblFilePath.Location = new System.Drawing.Point(192, 58);
+            this.lblFilePath.Name = "lblFilePath";
+            this.lblFilePath.Size = new System.Drawing.Size(90, 13);
+            this.lblFilePath.TabIndex = 21;
+            this.lblFilePath.Text = "Program Location";
+            // 
             // btnControl_Edit
             // 
             this.btnControl_Edit.Enabled = false;
             this.btnControl_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnControl_Edit.Location = new System.Drawing.Point(470, 200);
+            this.btnControl_Edit.Location = new System.Drawing.Point(470, 222);
             this.btnControl_Edit.Name = "btnControl_Edit";
             this.btnControl_Edit.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Edit.TabIndex = 20;
@@ -173,7 +208,7 @@
             // 
             this.btnControl_Remove.Enabled = false;
             this.btnControl_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnControl_Remove.Location = new System.Drawing.Point(470, 167);
+            this.btnControl_Remove.Location = new System.Drawing.Point(470, 189);
             this.btnControl_Remove.Name = "btnControl_Remove";
             this.btnControl_Remove.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Remove.TabIndex = 19;
@@ -183,7 +218,7 @@
             // btnControl_Add
             // 
             this.btnControl_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnControl_Add.Location = new System.Drawing.Point(470, 134);
+            this.btnControl_Add.Location = new System.Drawing.Point(470, 156);
             this.btnControl_Add.Name = "btnControl_Add";
             this.btnControl_Add.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Add.TabIndex = 18;
@@ -194,7 +229,7 @@
             // 
             this.btnConfig_Edit.Enabled = false;
             this.btnConfig_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 351);
+            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 422);
             this.btnConfig_Edit.Name = "btnConfig_Edit";
             this.btnConfig_Edit.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Edit.TabIndex = 17;
@@ -205,10 +240,10 @@
             // 
             this.lvConfigs.FullRowSelect = true;
             this.lvConfigs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvConfigs.Location = new System.Drawing.Point(9, 265);
+            this.lvConfigs.Location = new System.Drawing.Point(9, 313);
             this.lvConfigs.MultiSelect = false;
             this.lvConfigs.Name = "lvConfigs";
-            this.lvConfigs.Size = new System.Drawing.Size(455, 133);
+            this.lvConfigs.Size = new System.Drawing.Size(455, 181);
             this.lvConfigs.TabIndex = 14;
             this.lvConfigs.UseCompatibleStateImageBehavior = false;
             this.lvConfigs.View = System.Windows.Forms.View.Details;
@@ -218,7 +253,7 @@
             // 
             this.btnConfig_Remove.Enabled = false;
             this.btnConfig_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 318);
+            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 389);
             this.btnConfig_Remove.Name = "btnConfig_Remove";
             this.btnConfig_Remove.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Remove.TabIndex = 13;
@@ -228,7 +263,7 @@
             // btnConfig_Add
             // 
             this.btnConfig_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnConfig_Add.Location = new System.Drawing.Point(470, 285);
+            this.btnConfig_Add.Location = new System.Drawing.Point(470, 356);
             this.btnConfig_Add.Name = "btnConfig_Add";
             this.btnConfig_Add.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Add.TabIndex = 12;
@@ -238,7 +273,7 @@
             // lblConfigs
             // 
             this.lblConfigs.AutoSize = true;
-            this.lblConfigs.Location = new System.Drawing.Point(9, 249);
+            this.lblConfigs.Location = new System.Drawing.Point(9, 297);
             this.lblConfigs.Name = "lblConfigs";
             this.lblConfigs.Size = new System.Drawing.Size(74, 13);
             this.lblConfigs.TabIndex = 10;
@@ -251,7 +286,7 @@
             this.lvControls.Location = new System.Drawing.Point(9, 113);
             this.lvControls.MultiSelect = false;
             this.lvControls.Name = "lvControls";
-            this.lvControls.Size = new System.Drawing.Size(455, 133);
+            this.lvControls.Size = new System.Drawing.Size(455, 181);
             this.lvControls.TabIndex = 9;
             this.lvControls.UseCompatibleStateImageBehavior = false;
             this.lvControls.View = System.Windows.Forms.View.Details;
@@ -294,9 +329,10 @@
             // 
             // txtServiceName
             // 
+            this.txtServiceName.Enabled = false;
             this.txtServiceName.Location = new System.Drawing.Point(9, 74);
             this.txtServiceName.Name = "txtServiceName";
-            this.txtServiceName.Size = new System.Drawing.Size(194, 20);
+            this.txtServiceName.Size = new System.Drawing.Size(180, 20);
             this.txtServiceName.TabIndex = 5;
             // 
             // lblServiceName
@@ -433,6 +469,9 @@
         private System.Windows.Forms.ListView lvControls;
         private System.Windows.Forms.Button btnImportConfig;
         private System.Windows.Forms.Button btnLoadConfig;
+        private System.Windows.Forms.Button btnOpenLoc;
+        private System.Windows.Forms.TextBox txtFilePath;
+        private System.Windows.Forms.Label lblFilePath;
     }
 }
 
