@@ -109,7 +109,11 @@ namespace PandaStack_Module_Generator
 
                 if (cmbType.Text == "Service")
                 {
-                    module.SetServiceName(txtServiceName.Text);
+                    module.SetServiceName(this.txtServiceName.Text);
+                }
+                else if (cmbType.Text == "Software")
+                {
+                    module.SetProgramPath(this.txtFilePath.Text);
                 }
 
                 lvi.Text = txtName.Text;
@@ -152,6 +156,15 @@ namespace PandaStack_Module_Generator
                 txtName.Text = module.GetModuleName();
                 cmbType.Text = module.GetModuleType().ToString();
                 lvi.Text = module.GetModuleName();
+
+                if (module.GetModuleType() == ModuleType.Service)
+                {
+                    this.txtServiceName.Text = module.GetServiceName();
+                }
+                else if (module.GetModuleType() == ModuleType.Software)
+                {
+                    this.txtFilePath.Text = module.GetProgramPath();
+                }
 
                 this.lvControls.Items.Clear();
                 this.lvConfigs.Items.Clear();
@@ -375,10 +388,12 @@ namespace PandaStack_Module_Generator
             this.txtServiceName.Enabled = false;
             this.txtFilePath.Enabled = false;
             this.btnOpenLoc.Enabled = false;
+            this.btnLoadService.Enabled = false;
 
             if (this.cmbType.Text == "Service")
             {
                 this.txtServiceName.Enabled = true;
+                this.btnLoadService.Enabled = true;
             }
             else if (this.cmbType.Text == "Software")
             {
@@ -400,6 +415,16 @@ namespace PandaStack_Module_Generator
             }
         }
 
+        private void btnLoadService_Click(object sender, EventArgs e)
+        {
+            frmServiceSelector serviceSelector = new frmServiceSelector();
+            if (serviceSelector.ShowDialog() == DialogResult.OK)
+            {
+                this.txtServiceName.Text = serviceSelector.ServiceName;
+            }
+        }
+
+
         /**
          * <summary>
          * Set the selected module
@@ -415,6 +440,10 @@ namespace PandaStack_Module_Generator
             if (module.GetModuleType() == ModuleType.Service)
             {
                 this.txtServiceName.Text = module.GetServiceName();
+            }
+            else if (module.GetModuleType() == ModuleType.Software)
+            {
+                this.txtFilePath.Text = module.GetProgramPath();
             }
 
             if (module.GetControls().Count > 0)
