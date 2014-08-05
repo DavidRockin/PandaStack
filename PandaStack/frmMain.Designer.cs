@@ -246,9 +246,9 @@
             // 
             this.btnSettings.Image = global::PandaStack.Properties.Resources.cog;
             this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSettings.Location = new System.Drawing.Point(238, 517);
+            this.btnSettings.Location = new System.Drawing.Point(262, 517);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(107, 26);
+            this.btnSettings.Size = new System.Drawing.Size(119, 26);
             this.btnSettings.TabIndex = 6;
             this.btnSettings.Text = "Settings";
             this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -259,9 +259,9 @@
             // 
             this.btnExit.Image = global::PandaStack.Properties.Resources.cancel;
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.Location = new System.Drawing.Point(351, 517);
+            this.btnExit.Location = new System.Drawing.Point(387, 517);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(107, 26);
+            this.btnExit.Size = new System.Drawing.Size(119, 26);
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -272,9 +272,9 @@
             // 
             this.btnAbout.Image = global::PandaStack.Properties.Resources.information;
             this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbout.Location = new System.Drawing.Point(125, 517);
+            this.btnAbout.Location = new System.Drawing.Point(137, 517);
             this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(107, 26);
+            this.btnAbout.Size = new System.Drawing.Size(119, 26);
             this.btnAbout.TabIndex = 4;
             this.btnAbout.Text = "About";
             this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -287,7 +287,7 @@
             this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRefresh.Location = new System.Drawing.Point(12, 517);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(107, 26);
+            this.btnRefresh.Size = new System.Drawing.Size(119, 26);
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

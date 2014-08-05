@@ -101,11 +101,6 @@ namespace PandaStack
         }
         #endregion
 
-        private void frmAbout_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Hide();

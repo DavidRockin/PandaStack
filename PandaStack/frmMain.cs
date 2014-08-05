@@ -46,7 +46,7 @@ namespace PandaStack
         private void frmMain_Load(object sender, EventArgs e)
         {
             // Setup lvModule's columns
-            this.lvModules.Columns.Add("Module Name", 140, HorizontalAlignment.Left);
+            this.lvModules.Columns.Add("Module Name", 150, HorizontalAlignment.Left);
             this.lvModules.Columns.Add("Module Status", 130, HorizontalAlignment.Left);
             this.lvModules.Columns.Add("Module Type", 130, HorizontalAlignment.Left);
 
