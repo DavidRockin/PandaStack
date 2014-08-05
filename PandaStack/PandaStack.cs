@@ -34,7 +34,7 @@ namespace PandaStack
                     continue;
 
                 // Set module type then create the module
-                ModuleType moduleType = (ModuleType)Enum.Parse(typeof(ModuleType), jsonModule.type);
+                ModuleType moduleType = (ModuleType)Enum.Parse(typeof(ModuleType), jsonModule.type, true);
                 Module module = new Module(jsonModule.name, moduleType);
 
                 // Setup the module with its corresponding type
@@ -56,7 +56,7 @@ namespace PandaStack
                         if (String.IsNullOrEmpty(jsonConfig.name) || String.IsNullOrEmpty(jsonConfig.type) || String.IsNullOrEmpty(jsonConfig.path))
                             continue;
 
-                        ConfigType configType = (ConfigType)Enum.Parse(typeof(ConfigType), jsonConfig.type);
+                        ConfigType configType = (ConfigType)Enum.Parse(typeof(ConfigType), jsonConfig.type, true);
                         module.AddConfig(new ModuleConfig(jsonConfig.name, jsonConfig.path, jsonConfig.args, configType));
                     }
                 }
@@ -70,7 +70,7 @@ namespace PandaStack
                         if (String.IsNullOrEmpty(jsonControl.name) || String.IsNullOrEmpty(jsonControl.type) || String.IsNullOrEmpty(jsonControl.path))
                             continue;
 
-                        ControlType controlType = (ControlType)Enum.Parse(typeof(ControlType), jsonControl.type);
+                        ControlType controlType = (ControlType)Enum.Parse(typeof(ControlType), jsonControl.type, true);
                         module.AddControl(new ModuleControl(jsonControl.name, jsonControl.path, jsonControl.args, controlType));
                     }
                 }
@@ -78,7 +78,6 @@ namespace PandaStack
                 // Add the module to the list
                 this.Modules.Add(module);
             }
-
         }
 
         public void ReloadModules()
