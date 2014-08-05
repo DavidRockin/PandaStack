@@ -25,6 +25,8 @@ namespace PandaStack_Module_Generator
             InitializeComponent();
 
             this.Control = control;
+            this.Text = "Editing Module Control";
+
             var values = Enum.GetValues(typeof(ControlType));
             foreach (ControlType type in values)
             {
@@ -37,6 +39,8 @@ namespace PandaStack_Module_Generator
             InitializeComponent();
 
             this.Config = config;
+            this.Text = "Editing Module Config";
+
             var values = Enum.GetValues(typeof(ConfigType));
             foreach (ConfigType type in values)
             {
