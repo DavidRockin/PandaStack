@@ -193,7 +193,7 @@
             // 
             // tmrSync
             // 
-            this.tmrSync.Interval = 777;
+            this.tmrSync.Interval = 1000;
             this.tmrSync.Tick += new System.EventHandler(this.tmrSync_Tick);
             // 
             // ctmConfig
@@ -232,7 +232,7 @@
             this.ctmMinimize_restore.Name = "ctmMinimize_restore";
             this.ctmMinimize_restore.Size = new System.Drawing.Size(177, 22);
             this.ctmMinimize_restore.Text = "Restore PandaStack";
-            this.ctmMinimize_restore.Click += new System.EventHandler(this.ctmMinimize_restore_Click);
+            this.ctmMinimize_restore.Click += new System.EventHandler(this.ctmMinimize_Restore_Click);
             // 
             // ctmMinimize_exit
             // 
@@ -240,7 +240,7 @@
             this.ctmMinimize_exit.Name = "ctmMinimize_exit";
             this.ctmMinimize_exit.Size = new System.Drawing.Size(177, 22);
             this.ctmMinimize_exit.Text = "Exit PandaStack";
-            this.ctmMinimize_exit.Click += new System.EventHandler(this.ctmMinimize_exit_Click);
+            this.ctmMinimize_exit.Click += new System.EventHandler(this.ctmMinimize_Exit_Click);
             // 
             // btnSettings
             // 
