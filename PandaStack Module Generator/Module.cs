@@ -9,8 +9,8 @@ namespace PandaStack_Module_Generator
     class Module
     {
 
-        private string Name = "Untitled Module";
-        private ModuleType Type = ModuleType.Helper;
+        private string ModuleName = "Untitled Module";
+        private ModuleType ModuleType = ModuleType.Helper;
 
         private string ServiceName;
         private string SoftwarePath;
@@ -20,22 +20,22 @@ namespace PandaStack_Module_Generator
 
         public void SetModuleName(string name)
         {
-            this.Name = name;
+            this.ModuleName = name;
         }
 
         public string GetModuleName()
         {
-            return this.Name;
+            return this.ModuleName;
         }
 
         public void SetModuleType(ModuleType type)
         {
-            this.Type = type;
+            this.ModuleType = type;
         }
 
         public ModuleType GetModuleType()
         {
-            return this.Type;
+            return this.ModuleType;
         }
 
         public void SetServiceName(string service)

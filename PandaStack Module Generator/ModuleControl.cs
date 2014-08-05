@@ -9,38 +9,38 @@ namespace PandaStack_Module_Generator
     class ModuleControl
     {
 
-        private string Name = "Untitled Control";
-        private string Path;
-        private ControlType Type = ControlType.Software;
+        private string ControlName = "Untitled Control";
+        private string ControlPath;
+        private ControlType ControlType = ControlType.Software;
 
         public void SetControlName(string name)
         {
-            this.Name = name;
+            this.ControlName = name;
         }
 
         public string GetControlName()
         {
-            return this.Name;
+            return this.ControlName;
         }
 
         public void SetControlPath(string path)
         {
-            this.Path = path;
+            this.ControlPath = path;
         }
 
         public string GetControlPath()
         {
-            return this.Path;
+            return this.ControlPath;
         }
 
         public void SetControlType(ControlType type)
         {
-            this.Type = type;
+            this.ControlType = type;
         }
 
         public ControlType GetControlType()
         {
-            return this.Type;
+            return this.ControlType;
         }
 
     }

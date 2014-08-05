@@ -9,38 +9,38 @@ namespace PandaStack_Module_Generator
     class ModuleConfig
     {
 
-        private string Name = "Untitled Config";
-        private string Path;
-        private ConfigType Type = ConfigType.File;
+        private string ConfigName = "Untitled Config";
+        private string ConfigPath;
+        private ConfigType ConfigType = ConfigType.File;
 
         public void SetConfigName(string name)
         {
-            this.Name = name;
+            this.ConfigName = name;
         }
 
         public string GetConfigName()
         {
-            return this.Name;
+            return this.ConfigName;
         }
 
         public void SetConfigPath(string path)
         {
-            this.Path = path;
+            this.ConfigPath = path;
         }
 
         public string GetConfigPath()
         {
-            return this.Path;
+            return this.ConfigPath;
         }
 
         public void SetConfigType(ConfigType type)
         {
-            this.Type = type;
+            this.ConfigType = type;
         }
 
         public ConfigType GetConfigType()
         {
-            return this.Type;
+            return this.ConfigType;
         }
 
     }
