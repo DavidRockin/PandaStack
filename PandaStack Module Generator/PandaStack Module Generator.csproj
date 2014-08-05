@@ -93,14 +93,14 @@
     <Compile Include="frmServiceSelector.Designer.cs">
       <DependentUpon>frmServiceSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="JsonControl.cs">
+    <Compile Include="Json\JsonControl.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="JsonConfig.cs" />
-    <Compile Include="JsonHandler.cs" />
-    <Compile Include="JsonModule.cs" />
-    <Compile Include="JsonRoot.cs" />
-    <Compile Include="JsonSettings.cs" />
+    <Compile Include="Json\JsonConfig.cs" />
+    <Compile Include="Json\JsonHandler.cs" />
+    <Compile Include="Json\JsonModule.cs" />
+    <Compile Include="Json\JsonRoot.cs" />
+    <Compile Include="Json\JsonSettings.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleControl.cs" />
     <Compile Include="ControlType.cs" />
