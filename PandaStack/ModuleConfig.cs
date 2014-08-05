@@ -9,44 +9,44 @@ namespace PandaStack
     public class ModuleConfig
     {
 
-        private string Name;
-        private string Path;
-        private string Args;
-        private ConfigType Type;
+        private string ConfigName;
+        private string ConfigPath;
+        private string ConfigArgs;
+        private ConfigType ConfigType;
 
         public ModuleConfig(string name, string filePath, ConfigType type)
         {
-            this.Name = name;
-            this.Path = filePath;
-            this.Type = type;
+            this.ConfigName = name;
+            this.ConfigPath = filePath;
+            this.ConfigType = type;
         }
 
         public ModuleConfig(string name, string filePath, string args, ConfigType type)
         {
-            this.Name = name;
-            this.Path = filePath;
-            this.Args = args;
-            this.Type = type;
+            this.ConfigName = name;
+            this.ConfigPath = filePath;
+            this.ConfigArgs = args;
+            this.ConfigType = type;
         }
 
         public string GetConfigName()
         {
-            return this.Name;
+            return this.ConfigName;
         }
 
         public string GetConfigPath()
         {
-            return this.Path;
-        }
-
-        public ConfigType GetConfigType()
-        {
-            return this.Type;
+            return this.ConfigPath;
         }
 
         public string GetConfigArgs()
         {
-            return this.Args;
+            return this.ConfigArgs;
+        }
+        
+        public ConfigType GetConfigType()
+        {
+            return this.ConfigType;
         }
 
     }

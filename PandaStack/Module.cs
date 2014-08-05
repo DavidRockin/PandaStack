@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceProcess;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace PandaStack
 {
@@ -11,9 +12,10 @@ namespace PandaStack
     public class Module
     {
 
-        private string Name;
-        private ModuleType Type;
+        private string ModuleName;
+        private ModuleType ModuleType;
 
+        private Process ModuleProcess;
         private string ServiceName;
         private ServiceController ServiceController;
 
@@ -22,34 +24,23 @@ namespace PandaStack
 
         public Module(string name, ModuleType type)
         {
-            this.Name = name;
-            this.Type = type;
+            this.ModuleName = name;
+            this.ModuleType = type;
         }
 
         public string GetModuleName()
         {
-            return this.Name;
+            return this.ModuleName;
         }
 
         public ModuleType GetModuleType()
         {
-            return this.Type;
+            return this.ModuleType;
         }
 
         public string GetServiceName()
         {
-            if (this.Type != ModuleType.Service) return null;
             return this.ServiceName;
-        }
-
-        public void AddConfig(ModuleConfig config)
-        {
-            this.Configs.Add(config);
-        }
-
-        public List<ModuleConfig> GetConfigs()
-        {
-            return this.Configs;
         }
 
         public void AddControl(ModuleControl control)
@@ -62,6 +53,16 @@ namespace PandaStack
             return this.Controls;
         }
 
+        public void AddConfig(ModuleConfig config)
+        {
+            this.Configs.Add(config);
+        }
+
+        public List<ModuleConfig> GetConfigs()
+        {
+            return this.Configs;
+        }
+
         public ServiceController GetServiceController()
         {
             return this.ServiceController;
@@ -69,7 +70,7 @@ namespace PandaStack
 
         public void SetServiceName(string serviceName)
         {
-            if (!(serviceName != null && serviceName != string.Empty))
+            if (String.IsNullOrEmpty(serviceName))
                    return;
 
             try
@@ -79,7 +80,7 @@ namespace PandaStack
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Information.HandleException(ex);
             }
         }
 
@@ -87,7 +88,7 @@ namespace PandaStack
         {
             string status = "n/a";
 
-            if (this.Type == ModuleType.Service)
+            if (this.ModuleType == ModuleType.Service)
             {
                 try
                 {
@@ -98,6 +99,10 @@ namespace PandaStack
                 {
                     MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+            }
+            else if (this.ModuleType == ModuleType.Software)
+            {
+                // TODO: Handle software type
             }
 
             return status;

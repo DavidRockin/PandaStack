@@ -9,44 +9,44 @@ namespace PandaStack
     public class ModuleControl
     {
 
-        private string Name;
-        private string Path;
-        private string Args;
-        private ControlType Type;
+        private string ControlName;
+        private string ControlPath;
+        private string ControlArgs;
+        private ControlType ControlType;
 
         public ModuleControl(string name, string filePath, ControlType type)
         {
-            this.Name = name;
-            this.Path = filePath;
-            this.Type = type;
+            this.ControlName = name;
+            this.ControlPath = filePath;
+            this.ControlType = type;
         }
 
         public ModuleControl(string name, string filePath, string args, ControlType type)
         {
-            this.Name = name;
-            this.Path = filePath;
-            this.Args = args;
-            this.Type = type;
+            this.ControlName = name;
+            this.ControlPath = filePath;
+            this.ControlArgs = args;
+            this.ControlType = type;
         }
 
         public string GetControlName()
         {
-            return this.Name;
+            return this.ControlName;
         }
 
         public string GetControlPath()
         {
-            return this.Path;
+            return this.ControlPath;
         }
 
         public string GetControlArgs()
         {
-            return this.Args;
+            return this.ControlArgs;
         }
 
         public ControlType GetControlType()
         {
-            return this.Type;
+            return this.ControlType;
         }
 
     }
