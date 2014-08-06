@@ -30,14 +30,28 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.grpModules = new System.Windows.Forms.GroupBox();
+            this.btnMvDwn = new System.Windows.Forms.Button();
+            this.btnMvUp = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.grpModuleOptions = new System.Windows.Forms.GroupBox();
+            this.btnLoadService = new System.Windows.Forms.Button();
+            this.btnOpenLoc = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.lblFilePath = new System.Windows.Forms.Label();
+            this.btnControl_Edit = new System.Windows.Forms.Button();
+            this.btnControl_Remove = new System.Windows.Forms.Button();
+            this.btnControl_Add = new System.Windows.Forms.Button();
+            this.btnConfig_Edit = new System.Windows.Forms.Button();
             this.lvConfigs = new System.Windows.Forms.ListView();
+            this.btnConfig_Remove = new System.Windows.Forms.Button();
+            this.btnConfig_Add = new System.Windows.Forms.Button();
             this.lblConfigs = new System.Windows.Forms.Label();
             this.lvControls = new System.Windows.Forms.ListView();
             this.lblControls = new System.Windows.Forms.Label();
+            this.btnDiscard = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.txtServiceName = new System.Windows.Forms.TextBox();
             this.lblServiceName = new System.Windows.Forms.Label();
             this.cmbType = new System.Windows.Forms.ComboBox();
@@ -47,20 +61,6 @@
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.btnImportConfig = new System.Windows.Forms.Button();
             this.btnLoadConfig = new System.Windows.Forms.Button();
-            this.btnLoadService = new System.Windows.Forms.Button();
-            this.btnOpenLoc = new System.Windows.Forms.Button();
-            this.btnControl_Edit = new System.Windows.Forms.Button();
-            this.btnControl_Remove = new System.Windows.Forms.Button();
-            this.btnControl_Add = new System.Windows.Forms.Button();
-            this.btnConfig_Edit = new System.Windows.Forms.Button();
-            this.btnConfig_Remove = new System.Windows.Forms.Button();
-            this.btnConfig_Add = new System.Windows.Forms.Button();
-            this.btnDiscard = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnMvDwn = new System.Windows.Forms.Button();
-            this.btnMvUp = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.grpModules.SuspendLayout();
             this.grpModuleOptions.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -79,6 +79,47 @@
             this.grpModules.TabIndex = 0;
             this.grpModules.TabStop = false;
             this.grpModules.Text = "Loaded Module";
+            // 
+            // btnMvDwn
+            // 
+            this.btnMvDwn.Enabled = false;
+            this.btnMvDwn.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
+            this.btnMvDwn.Location = new System.Drawing.Point(157, 554);
+            this.btnMvDwn.Name = "btnMvDwn";
+            this.btnMvDwn.Size = new System.Drawing.Size(30, 27);
+            this.btnMvDwn.TabIndex = 4;
+            this.btnMvDwn.UseVisualStyleBackColor = true;
+            // 
+            // btnMvUp
+            // 
+            this.btnMvUp.Enabled = false;
+            this.btnMvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
+            this.btnMvUp.Location = new System.Drawing.Point(121, 554);
+            this.btnMvUp.Name = "btnMvUp";
+            this.btnMvUp.Size = new System.Drawing.Size(30, 27);
+            this.btnMvUp.TabIndex = 3;
+            this.btnMvUp.UseVisualStyleBackColor = true;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Enabled = false;
+            this.btnRemove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
+            this.btnRemove.Location = new System.Drawing.Point(85, 554);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(30, 27);
+            this.btnRemove.TabIndex = 2;
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
+            this.btnAdd.Location = new System.Drawing.Point(49, 554);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(30, 27);
+            this.btnAdd.TabIndex = 1;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lvModules
             // 
@@ -126,6 +167,28 @@
             this.grpModuleOptions.TabStop = false;
             this.grpModuleOptions.Text = "Module Options";
             // 
+            // btnLoadService
+            // 
+            this.btnLoadService.Enabled = false;
+            this.btnLoadService.Image = global::PandaStack_Module_Generator.Properties.Resources.server_connect;
+            this.btnLoadService.Location = new System.Drawing.Point(195, 70);
+            this.btnLoadService.Name = "btnLoadService";
+            this.btnLoadService.Size = new System.Drawing.Size(30, 27);
+            this.btnLoadService.TabIndex = 24;
+            this.btnLoadService.UseVisualStyleBackColor = true;
+            this.btnLoadService.Click += new System.EventHandler(this.btnLoadService_Click);
+            // 
+            // btnOpenLoc
+            // 
+            this.btnOpenLoc.Enabled = false;
+            this.btnOpenLoc.Image = global::PandaStack_Module_Generator.Properties.Resources.folder_page;
+            this.btnOpenLoc.Location = new System.Drawing.Point(470, 70);
+            this.btnOpenLoc.Name = "btnOpenLoc";
+            this.btnOpenLoc.Size = new System.Drawing.Size(30, 27);
+            this.btnOpenLoc.TabIndex = 23;
+            this.btnOpenLoc.UseVisualStyleBackColor = true;
+            this.btnOpenLoc.Click += new System.EventHandler(this.btnOpenLoc_Click);
+            // 
             // txtFilePath
             // 
             this.txtFilePath.Enabled = false;
@@ -143,6 +206,49 @@
             this.lblFilePath.TabIndex = 21;
             this.lblFilePath.Text = "Program Location";
             // 
+            // btnControl_Edit
+            // 
+            this.btnControl_Edit.Enabled = false;
+            this.btnControl_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
+            this.btnControl_Edit.Location = new System.Drawing.Point(470, 222);
+            this.btnControl_Edit.Name = "btnControl_Edit";
+            this.btnControl_Edit.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Edit.TabIndex = 20;
+            this.btnControl_Edit.UseVisualStyleBackColor = true;
+            this.btnControl_Edit.Click += new System.EventHandler(this.btnControl_Edit_Click);
+            // 
+            // btnControl_Remove
+            // 
+            this.btnControl_Remove.Enabled = false;
+            this.btnControl_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
+            this.btnControl_Remove.Location = new System.Drawing.Point(470, 189);
+            this.btnControl_Remove.Name = "btnControl_Remove";
+            this.btnControl_Remove.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Remove.TabIndex = 19;
+            this.btnControl_Remove.UseVisualStyleBackColor = true;
+            this.btnControl_Remove.Click += new System.EventHandler(this.btnControl_Remove_Click);
+            // 
+            // btnControl_Add
+            // 
+            this.btnControl_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
+            this.btnControl_Add.Location = new System.Drawing.Point(470, 156);
+            this.btnControl_Add.Name = "btnControl_Add";
+            this.btnControl_Add.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_Add.TabIndex = 18;
+            this.btnControl_Add.UseVisualStyleBackColor = true;
+            this.btnControl_Add.Click += new System.EventHandler(this.btnControl_Add_Click);
+            // 
+            // btnConfig_Edit
+            // 
+            this.btnConfig_Edit.Enabled = false;
+            this.btnConfig_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
+            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 422);
+            this.btnConfig_Edit.Name = "btnConfig_Edit";
+            this.btnConfig_Edit.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_Edit.TabIndex = 17;
+            this.btnConfig_Edit.UseVisualStyleBackColor = true;
+            this.btnConfig_Edit.Click += new System.EventHandler(this.btnConfig_Edit_Click);
+            // 
             // lvConfigs
             // 
             this.lvConfigs.FullRowSelect = true;
@@ -155,6 +261,27 @@
             this.lvConfigs.UseCompatibleStateImageBehavior = false;
             this.lvConfigs.View = System.Windows.Forms.View.Details;
             this.lvConfigs.SelectedIndexChanged += new System.EventHandler(this.lvConfigs_SelectedIndexChanged);
+            // 
+            // btnConfig_Remove
+            // 
+            this.btnConfig_Remove.Enabled = false;
+            this.btnConfig_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
+            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 389);
+            this.btnConfig_Remove.Name = "btnConfig_Remove";
+            this.btnConfig_Remove.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_Remove.TabIndex = 13;
+            this.btnConfig_Remove.UseVisualStyleBackColor = true;
+            this.btnConfig_Remove.Click += new System.EventHandler(this.btnConfig_Remove_Click);
+            // 
+            // btnConfig_Add
+            // 
+            this.btnConfig_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
+            this.btnConfig_Add.Location = new System.Drawing.Point(470, 356);
+            this.btnConfig_Add.Name = "btnConfig_Add";
+            this.btnConfig_Add.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_Add.TabIndex = 12;
+            this.btnConfig_Add.UseVisualStyleBackColor = true;
+            this.btnConfig_Add.Click += new System.EventHandler(this.btnConfig_Add_Click);
             // 
             // lblConfigs
             // 
@@ -176,7 +303,7 @@
             this.lvControls.TabIndex = 9;
             this.lvControls.UseCompatibleStateImageBehavior = false;
             this.lvControls.View = System.Windows.Forms.View.Details;
-            this.lvControls.SelectedIndexChanged += new System.EventHandler(this.lvAdmins_SelectedIndexChanged);
+            this.lvControls.SelectedIndexChanged += new System.EventHandler(this.lvControls_SelectedIndexChanged);
             // 
             // lblControls
             // 
@@ -186,6 +313,32 @@
             this.lblControls.Size = new System.Drawing.Size(45, 13);
             this.lblControls.TabIndex = 8;
             this.lblControls.Text = "Controls";
+            // 
+            // btnDiscard
+            // 
+            this.btnDiscard.Image = global::PandaStack_Module_Generator.Properties.Resources.cross;
+            this.btnDiscard.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDiscard.Location = new System.Drawing.Point(125, 500);
+            this.btnDiscard.Name = "btnDiscard";
+            this.btnDiscard.Size = new System.Drawing.Size(110, 28);
+            this.btnDiscard.TabIndex = 7;
+            this.btnDiscard.Text = "Discard";
+            this.btnDiscard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDiscard.UseVisualStyleBackColor = true;
+            this.btnDiscard.Click += new System.EventHandler(this.btnDiscard_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Image = global::PandaStack_Module_Generator.Properties.Resources.disk;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.Location = new System.Drawing.Point(9, 500);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(110, 28);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save";
+            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtServiceName
             // 
@@ -275,159 +428,6 @@
             this.btnLoadConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadConfig.UseVisualStyleBackColor = true;
             this.btnLoadConfig.Click += new System.EventHandler(this.btnLoadConfig_Click);
-            // 
-            // btnLoadService
-            // 
-            this.btnLoadService.Enabled = false;
-            this.btnLoadService.Image = global::PandaStack_Module_Generator.Properties.Resources.server_connect;
-            this.btnLoadService.Location = new System.Drawing.Point(195, 70);
-            this.btnLoadService.Name = "btnLoadService";
-            this.btnLoadService.Size = new System.Drawing.Size(30, 27);
-            this.btnLoadService.TabIndex = 24;
-            this.btnLoadService.UseVisualStyleBackColor = true;
-            this.btnLoadService.Click += new System.EventHandler(this.btnLoadService_Click);
-            // 
-            // btnOpenLoc
-            // 
-            this.btnOpenLoc.Enabled = false;
-            this.btnOpenLoc.Image = global::PandaStack_Module_Generator.Properties.Resources.folder_page;
-            this.btnOpenLoc.Location = new System.Drawing.Point(470, 70);
-            this.btnOpenLoc.Name = "btnOpenLoc";
-            this.btnOpenLoc.Size = new System.Drawing.Size(30, 27);
-            this.btnOpenLoc.TabIndex = 23;
-            this.btnOpenLoc.UseVisualStyleBackColor = true;
-            this.btnOpenLoc.Click += new System.EventHandler(this.btnOpenLoc_Click);
-            // 
-            // btnControl_Edit
-            // 
-            this.btnControl_Edit.Enabled = false;
-            this.btnControl_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnControl_Edit.Location = new System.Drawing.Point(470, 222);
-            this.btnControl_Edit.Name = "btnControl_Edit";
-            this.btnControl_Edit.Size = new System.Drawing.Size(30, 27);
-            this.btnControl_Edit.TabIndex = 20;
-            this.btnControl_Edit.UseVisualStyleBackColor = true;
-            this.btnControl_Edit.Click += new System.EventHandler(this.btnControl_Edit_Click);
-            // 
-            // btnControl_Remove
-            // 
-            this.btnControl_Remove.Enabled = false;
-            this.btnControl_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnControl_Remove.Location = new System.Drawing.Point(470, 189);
-            this.btnControl_Remove.Name = "btnControl_Remove";
-            this.btnControl_Remove.Size = new System.Drawing.Size(30, 27);
-            this.btnControl_Remove.TabIndex = 19;
-            this.btnControl_Remove.UseVisualStyleBackColor = true;
-            this.btnControl_Remove.Click += new System.EventHandler(this.btnControl_Remove_Click);
-            // 
-            // btnControl_Add
-            // 
-            this.btnControl_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnControl_Add.Location = new System.Drawing.Point(470, 156);
-            this.btnControl_Add.Name = "btnControl_Add";
-            this.btnControl_Add.Size = new System.Drawing.Size(30, 27);
-            this.btnControl_Add.TabIndex = 18;
-            this.btnControl_Add.UseVisualStyleBackColor = true;
-            this.btnControl_Add.Click += new System.EventHandler(this.btnControl_Add_Click);
-            // 
-            // btnConfig_Edit
-            // 
-            this.btnConfig_Edit.Enabled = false;
-            this.btnConfig_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 422);
-            this.btnConfig_Edit.Name = "btnConfig_Edit";
-            this.btnConfig_Edit.Size = new System.Drawing.Size(30, 27);
-            this.btnConfig_Edit.TabIndex = 17;
-            this.btnConfig_Edit.UseVisualStyleBackColor = true;
-            this.btnConfig_Edit.Click += new System.EventHandler(this.btnConfig_Edit_Click);
-            // 
-            // btnConfig_Remove
-            // 
-            this.btnConfig_Remove.Enabled = false;
-            this.btnConfig_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 389);
-            this.btnConfig_Remove.Name = "btnConfig_Remove";
-            this.btnConfig_Remove.Size = new System.Drawing.Size(30, 27);
-            this.btnConfig_Remove.TabIndex = 13;
-            this.btnConfig_Remove.UseVisualStyleBackColor = true;
-            this.btnConfig_Remove.Click += new System.EventHandler(this.btnConfig_Remove_Click);
-            // 
-            // btnConfig_Add
-            // 
-            this.btnConfig_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnConfig_Add.Location = new System.Drawing.Point(470, 356);
-            this.btnConfig_Add.Name = "btnConfig_Add";
-            this.btnConfig_Add.Size = new System.Drawing.Size(30, 27);
-            this.btnConfig_Add.TabIndex = 12;
-            this.btnConfig_Add.UseVisualStyleBackColor = true;
-            this.btnConfig_Add.Click += new System.EventHandler(this.btnConfig_Add_Click);
-            // 
-            // btnDiscard
-            // 
-            this.btnDiscard.Image = global::PandaStack_Module_Generator.Properties.Resources.cross;
-            this.btnDiscard.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDiscard.Location = new System.Drawing.Point(125, 500);
-            this.btnDiscard.Name = "btnDiscard";
-            this.btnDiscard.Size = new System.Drawing.Size(110, 28);
-            this.btnDiscard.TabIndex = 7;
-            this.btnDiscard.Text = "Discard";
-            this.btnDiscard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDiscard.UseVisualStyleBackColor = true;
-            this.btnDiscard.Click += new System.EventHandler(this.btnDiscard_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::PandaStack_Module_Generator.Properties.Resources.disk;
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSave.Location = new System.Drawing.Point(9, 500);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(110, 28);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "Save";
-            this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnMvDwn
-            // 
-            this.btnMvDwn.Enabled = false;
-            this.btnMvDwn.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
-            this.btnMvDwn.Location = new System.Drawing.Point(157, 554);
-            this.btnMvDwn.Name = "btnMvDwn";
-            this.btnMvDwn.Size = new System.Drawing.Size(30, 27);
-            this.btnMvDwn.TabIndex = 4;
-            this.btnMvDwn.UseVisualStyleBackColor = true;
-            // 
-            // btnMvUp
-            // 
-            this.btnMvUp.Enabled = false;
-            this.btnMvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
-            this.btnMvUp.Location = new System.Drawing.Point(121, 554);
-            this.btnMvUp.Name = "btnMvUp";
-            this.btnMvUp.Size = new System.Drawing.Size(30, 27);
-            this.btnMvUp.TabIndex = 3;
-            this.btnMvUp.UseVisualStyleBackColor = true;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Enabled = false;
-            this.btnRemove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnRemove.Location = new System.Drawing.Point(85, 554);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(30, 27);
-            this.btnRemove.TabIndex = 2;
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnAdd.Location = new System.Drawing.Point(49, 554);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(30, 27);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // frmMain
             // 

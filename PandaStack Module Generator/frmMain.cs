@@ -66,10 +66,12 @@ namespace PandaStack_Module_Generator
             this.ClearCurrentModule();
         }
 
+        /** Module Actions **/
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Module module = new Module();
             ListViewItem lvi = new ListViewItem();
+            Module module = new Module();
             lvi.Text = module.GetModuleName();
             lvi.Tag = module;
 
@@ -81,7 +83,7 @@ namespace PandaStack_Module_Generator
         {
             try
             {
-                if (this.lvModules.SelectedItems.Count > 0)
+                if (this.lvModules.Items.Count > 0 && this.lvModules.SelectedItems.Count > 0)
                 {
                     ListViewItem lvi = this.lvModules.FocusedItem;
                     Module module = (Module)lvi.Tag;
@@ -104,9 +106,12 @@ namespace PandaStack_Module_Generator
                 ListViewItem lvi = this.lvModules.FocusedItem;
                 Module module = (Module)lvi.Tag;
 
+                // Set the module values
                 module.SetModuleName(txtName.Text);
-                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), cmbType.Text));
+                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), cmbType.Text, true));
+                lvi.Text = txtName.Text;
 
+                // Based on the module type, set its corresponding values
                 if (cmbType.Text == "Service")
                 {
                     module.SetServiceName(this.txtServiceName.Text);
@@ -116,30 +121,31 @@ namespace PandaStack_Module_Generator
                     module.SetProgramPath(this.txtFilePath.Text);
                 }
 
-                lvi.Text = txtName.Text;
                 module.ClearConfigs();
                 module.ClearControls();
 
+                // If there are any controls, create them and add to the module
                 if (this.lvControls.Items.Count > 0)
                 {
-                    foreach (ListViewItem alvi in this.lvControls.Items)
+                    foreach (ListViewItem controlLvi in this.lvControls.Items)
                     {
-                        ModuleControl control = (ModuleControl)alvi.Tag;
-                        control.SetControlName(alvi.Text);
-                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), alvi.SubItems[1].Text));
-                        control.SetControlPath(alvi.SubItems[2].Text);
+                        ModuleControl control = (ModuleControl)controlLvi.Tag;
+                        control.SetControlName(controlLvi.Text);
+                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), controlLvi.SubItems[1].Text, true));
+                        control.SetControlPath(controlLvi.SubItems[2].Text);
                         module.AddControl(control);
                     }
                 }
 
+                // If there are any configs, create them and add to the module
                 if (this.lvConfigs.Items.Count > 0)
                 {
-                    foreach (ListViewItem clvi in this.lvConfigs.Items)
+                    foreach (ListViewItem configLvi in this.lvConfigs.Items)
                     {
-                        ModuleConfig config = (ModuleConfig)clvi.Tag;
-                        config.SetConfigName(clvi.Text);
-                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), clvi.SubItems[1].Text));
-                        config.SetConfigPath(clvi.SubItems[2].Text);
+                        ModuleConfig config = (ModuleConfig)configLvi.Tag;
+                        config.SetConfigName(configLvi.Text);
+                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), configLvi.SubItems[1].Text, true));
+                        config.SetConfigPath(configLvi.SubItems[2].Text);
                         module.AddConfig(config);
                     }
                 }
@@ -153,45 +159,53 @@ namespace PandaStack_Module_Generator
                 ListViewItem lvi = this.lvModules.FocusedItem;
                 Module module = (Module)lvi.Tag;
 
-                txtName.Text = module.GetModuleName();
-                cmbType.Text = module.GetModuleType().ToString();
-                lvi.Text = module.GetModuleName();
-
-                if (module.GetModuleType() == ModuleType.Service)
-                {
-                    this.txtServiceName.Text = module.GetServiceName();
-                }
-                else if (module.GetModuleType() == ModuleType.Software)
-                {
-                    this.txtFilePath.Text = module.GetProgramPath();
-                }
-
-                this.lvControls.Items.Clear();
-                this.lvConfigs.Items.Clear();
-
-                foreach (ModuleControl control in module.GetControls())
-                {
-                    ListViewItem controlLvi = new ListViewItem();
-                    controlLvi.Text = control.GetControlName();
-                    controlLvi.SubItems.Add(control.GetControlType().ToString());
-                    controlLvi.SubItems.Add(control.GetControlPath());
-                    controlLvi.Tag = control;
-                    this.lvControls.Items.Add(controlLvi);
-                }
-
-                foreach (ModuleConfig config in module.GetConfigs())
-                {
-                    ListViewItem configLvi = new ListViewItem();
-                    configLvi.Text = config.GetConfigName();
-                    configLvi.SubItems.Add(config.GetConfigType().ToString());
-                    configLvi.SubItems.Add(config.GetConfigPath());
-                    configLvi.Tag = config;
-                    this.lvConfigs.Items.Add(configLvi);
-                }
+                this.updateCurrentModule(module);
             }
         }
 
-        private void lvAdmins_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.txtServiceName.Enabled = false;
+            this.txtFilePath.Enabled = false;
+            this.btnOpenLoc.Enabled = false;
+            this.btnLoadService.Enabled = false;
+
+            if (this.cmbType.Text == "Service")
+            {
+                this.txtServiceName.Enabled = true;
+                this.btnLoadService.Enabled = true;
+            }
+            else if (this.cmbType.Text == "Software")
+            {
+                this.txtFilePath.Enabled = true;
+                this.btnOpenLoc.Enabled = true;
+            }
+        }
+
+        private void btnOpenLoc_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofdFileLoc = new OpenFileDialog();
+            ofdFileLoc.Title = "Load Application";
+            ofdFileLoc.Filter = "Application Files (*.exe)|*.exe|Batch files (*.bat;*.com)|*.bat;*.com|All Files (*.*)|*.*";
+
+            if (ofdFileLoc.ShowDialog() != DialogResult.Cancel)
+            {
+                this.txtFilePath.Text = ofdFileLoc.FileName;
+            }
+        }
+
+        private void btnLoadService_Click(object sender, EventArgs e)
+        {
+            frmServiceSelector serviceSelector = new frmServiceSelector();
+            if (serviceSelector.ShowDialog() == DialogResult.OK)
+            {
+                this.txtServiceName.Text = serviceSelector.ServiceName;
+            }
+        }
+
+        /** Module Controls **/
+
+        private void lvControls_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -267,6 +281,8 @@ namespace PandaStack_Module_Generator
                 this.HandleException(ex);
             }
         }
+
+        /** Module Configs **/
 
         private void lvConfigs_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -345,6 +361,8 @@ namespace PandaStack_Module_Generator
             }
         }
 
+        /** Application Actions **/
+
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
             DialogResult warning = MessageBox.Show("You are loading a new PandaStack configuration file, doing so will remove all unsaved changes. Are you sure you wish to remove all unsaved changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -382,48 +400,6 @@ namespace PandaStack_Module_Generator
                 this.LoadJsonFile(ofdConfig.FileName);
             }
         }
-
-        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.txtServiceName.Enabled = false;
-            this.txtFilePath.Enabled = false;
-            this.btnOpenLoc.Enabled = false;
-            this.btnLoadService.Enabled = false;
-
-            if (this.cmbType.Text == "Service")
-            {
-                this.txtServiceName.Enabled = true;
-                this.btnLoadService.Enabled = true;
-            }
-            else if (this.cmbType.Text == "Software")
-            {
-                this.txtFilePath.Enabled = true;
-                this.btnOpenLoc.Enabled = true;
-            }
-
-        }
-
-        private void btnOpenLoc_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofdFileLoc = new OpenFileDialog();
-            ofdFileLoc.Title = "Load Application";
-            ofdFileLoc.Filter = "Application Files (*.exe)|*.exe|Batch files (*.bat;*.com)|*.bat;*.com|All Files (*.*)|*.*";
-
-            if (ofdFileLoc.ShowDialog() != DialogResult.Cancel)
-            {
-                this.txtFilePath.Text = ofdFileLoc.FileName;
-            }
-        }
-
-        private void btnLoadService_Click(object sender, EventArgs e)
-        {
-            frmServiceSelector serviceSelector = new frmServiceSelector();
-            if (serviceSelector.ShowDialog() == DialogResult.OK)
-            {
-                this.txtServiceName.Text = serviceSelector.ServiceName;
-            }
-        }
-
 
         /**
          * <summary>
