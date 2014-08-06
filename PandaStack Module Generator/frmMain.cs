@@ -368,11 +368,6 @@ namespace PandaStack_Module_Generator
             DialogResult warning = MessageBox.Show("You are loading a new PandaStack configuration file, doing so will remove all unsaved changes. Are you sure you wish to remove all unsaved changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (warning == DialogResult.Yes)
             {
-                // Remove modules
-                this.ClearCurrentModule();
-                this.lvModules.Items.Clear();
-                this.Modules.Clear();
-
                 // Display a file dialog asking which configuration file to load
                 OpenFileDialog ofdConfig = new OpenFileDialog();
                 ofdConfig.Title = "Load New Configuration File";
@@ -380,6 +375,11 @@ namespace PandaStack_Module_Generator
 
                 if (ofdConfig.ShowDialog() != DialogResult.Cancel)
                 {
+                    // Remove modules
+                    this.ClearCurrentModule();
+                    this.lvModules.Items.Clear();
+                    this.Modules.Clear();
+
                     this.LoadJsonFile(ofdConfig.FileName);
                 }
             }
@@ -522,7 +522,8 @@ namespace PandaStack_Module_Generator
             {
                 Module module = new Module();
                 module.SetModuleName(jsonModule.name);
-                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), this.Ucfirst(jsonModule.type)));
+                module.SetModuleType((ModuleType)Enum.Parse(typeof(ModuleType), jsonModule.type, true));
+
                 if (module.GetModuleType() == ModuleType.Service)
                 {
                     module.SetServiceName(jsonModule.service);
@@ -534,7 +535,7 @@ namespace PandaStack_Module_Generator
                     {
                         ModuleControl control = new ModuleControl();
                         control.SetControlName(jsonControl.name);
-                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), this.Ucfirst(jsonControl.type)));
+                        control.SetControlType((ControlType)Enum.Parse(typeof(ControlType), jsonControl.type, true));
                         control.SetControlPath(jsonControl.path);
 
                         module.AddControl(control);
@@ -547,7 +548,7 @@ namespace PandaStack_Module_Generator
                     {
                         ModuleConfig config = new ModuleConfig();
                         config.SetConfigName(jsonConfig.name);
-                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), this.Ucfirst(jsonConfig.type)));
+                        config.SetConfigType((ConfigType)Enum.Parse(typeof(ConfigType), jsonConfig.type, true));
                         config.SetConfigPath(jsonConfig.path);
 
                         module.AddConfig(config);
@@ -561,19 +562,6 @@ namespace PandaStack_Module_Generator
                 lvi.Tag = module;
                 this.lvModules.Items.Add(lvi);
             }
-        }
-
-        /**
-         * <summary>
-         * Turns the first character of a string to uppercase
-         * </summary>
-         * <returns>
-         * String
-         * </returns>
-         */
-        private string Ucfirst(string text)
-        {
-            return char.ToUpper(text[0]) + text.Substring(1);
         }
 
     }
