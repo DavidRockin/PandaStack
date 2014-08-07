@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Text.RegularExpressions;
 
 namespace PandaStack_Module_Generator
 {
@@ -25,6 +26,7 @@ namespace PandaStack_Module_Generator
         public void FetchJson()
         {
             string json = File.ReadAllText(this.FilePath);
+            json = Regex.Replace(json, "/\\*(?>(?:(?>[^*]+)|\\*(?!/))*)\\*/", string.Empty, RegexOptions.Multiline);
             DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(JsonRoot));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
             var root = (JsonRoot)serialized.ReadObject(stream);
