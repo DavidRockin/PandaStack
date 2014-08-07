@@ -1,0 +1,18 @@
+PandaStack Control Panel Todo List:
++ Add support for programs (and languages?)
+	-> Programs should only be active while PandaStack is running
+* Finish the configuration of PandaStack (save to file)
+* Organise & clean the code
++ Add documentation
+* Localization?
+
+
+-----------------------------------------------------------------------
+
+
+PandaStack Module Generator Todo List:
++ Save/output the configuration
++ Test configuration
++ Move up/down the modules
+* Organise & clean the code
+* Localization?
