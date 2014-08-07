@@ -365,27 +365,28 @@ namespace PandaStack_Module_Generator
 
         private void btnLoadConfig_Click(object sender, EventArgs e)
         {
-            DialogResult warning = MessageBox.Show("You are loading a new PandaStack configuration file, doing so will remove all unsaved changes. Are you sure you wish to remove all unsaved changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (warning == DialogResult.Yes)
+            if (this.Modules.Count > 0 || this.lvModules.Items.Count > 0)
             {
-                // Display a file dialog asking which configuration file to load
-                OpenFileDialog ofdConfig = new OpenFileDialog();
-                ofdConfig.Title = "Load New Configuration File";
-                ofdConfig.Filter = "Configuration File (*.conf;*.json)|*.conf;*.json|All Files (*.*)|*.*";
-
-                if (ofdConfig.ShowDialog() != DialogResult.Cancel)
+                DialogResult warning = MessageBox.Show("You are loading a new PandaStack configuration file, doing so will remove all unsaved changes. Are you sure you wish to remove all unsaved changes?", "Unsaved Changes", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (warning != DialogResult.Yes)
                 {
-                    // Remove modules
-                    this.ClearCurrentModule();
-                    this.lvModules.Items.Clear();
-                    this.Modules.Clear();
-
-                    this.LoadJsonFile(ofdConfig.FileName);
+                    return;
                 }
             }
-            else
+
+            // Display a file dialog asking which configuration file to load
+            OpenFileDialog ofdConfig = new OpenFileDialog();
+            ofdConfig.Title = "Load New Configuration File";
+            ofdConfig.Filter = "Configuration File (*.conf;*.json)|*.conf;*.json|All Files (*.*)|*.*";
+
+            if (ofdConfig.ShowDialog() != DialogResult.Cancel)
             {
-                // Do nothing
+                // Remove modules
+                this.ClearCurrentModule();
+                this.lvModules.Items.Clear();
+                this.Modules.Clear();
+
+                this.LoadJsonFile(ofdConfig.FileName);
             }
         }
 
