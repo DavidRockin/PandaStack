@@ -3,22 +3,22 @@
 	"modules" : [
 		{
 			"name" : "Apache Server",
-			"type" : "service",
+			"type" : "Service",
 			"service" : "apache",
 			"config" : [
 				{
 					"name" : "Apache Config",
-					"type" : "file",
+					"type" : "File",
 					"path" : "C:/PandaStack/bin/apache/conf/httpd.conf"
 				},
 				{
 					"name" : "Apache Extras",
-					"type" : "directory",
+					"type" : "Directory",
 					"path" : "C:/PandaStack/bin/apache/conf/extra"
 				},
 				{
 					"name" : "Apache Directory",
-					"type" : "directory",
+					"type" : "Directory",
 					"path" : "C:/PandaStack/bin/apache"
 				}
 			]
@@ -26,30 +26,30 @@
 		
 		{
 			"name" : "MySQL Server",
-			"type" : "service",
+			"type" : "Service",
 			"service" : "mysql",
 			"config" : [
 				{
 					"name" : "MySQL Config",
-					"type" : "file",
+					"type" : "File",
 					"path" : "C:/PandaStack/bin/mysql/my.ini"
 				},
 				{
 					"name" : "MySQL Directory",
-					"type" : "directory",
+					"type" : "Directory",
 					"path" : "C:/PandaStack/bin/mysql"
 				}
 			],
 			"control" : [
 				{
 					"name" : "MySQL Console",
-					"type" : "software",
+					"type" : "Software",
 					"path" : "C:/PandaStack/bin/mysql/bin/mysql.exe",
 					"args" : "-u root -p"
 				},
 				{
 					"name" : "PHPMyAdmin",
-					"type" : "url",
+					"type" : "Url",
 					"path" : "http://localhost/phpmyadmin/"
 				}
 			]
@@ -57,28 +57,28 @@
 		
 		{
 			"name" : "PHP",
-			"type" : "language",
+			"type" : "Language",
 			"config" : [
 				{
 					"name" : "PHP Config",
-					"type" : "file",
+					"type" : "File",
 					"path" : "C:/PandaStack/bin/php/php.ini"
 				},
 				{
 					"name" : "PHP Directory",
-					"type" : "directory",
+					"type" : "Directory",
 					"path" : "C:/PandaStack/bin/php"
 				}
 			],
 			"control" : [
 				{
 					"name" : "PHPMyAdmin",
-					"type" : "url",
+					"type" : "Url",
 					"path" : "http://localhost/phpmyadmin/"
 				},
 				{
 					"name" : "PHPSysInfo",
-					"type" : "url",
+					"type" : "Url",
 					"path" : "http://localhost/phpsysinfo/"
 				}
 			]
@@ -86,11 +86,11 @@
 		
 		{
 			"name" : "Python",
-			"type" : "language",
+			"type" : "Language",
 			"config" : [
 				{
 					"name" : "Python Directory",
-					"type" : "directory",
+					"type" : "Directory",
 					"path" : "C:/PandaStack/bin/python"
 				}
 			]
