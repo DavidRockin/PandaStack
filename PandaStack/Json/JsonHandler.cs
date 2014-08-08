@@ -26,7 +26,8 @@ namespace PandaStack
         public void FetchJson()
         {
             string json = File.ReadAllText(this.FilePath);
-            json = Regex.Replace(json, "/\\*(?>(?:(?>[^*]+)|\\*(?!/))*)\\*/", string.Empty, RegexOptions.Multiline);
+            json = Regex.Replace(json, @"/\*(?>(?:(?>[^*]+)|\*(?!/))*)\*/", string.Empty, RegexOptions.Multiline);
+            json = Regex.Replace(json, @"\s//(.+?)\r\n", string.Empty, RegexOptions.Multiline);
             DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(JsonRoot));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
             var root = (JsonRoot)serialized.ReadObject(stream);
