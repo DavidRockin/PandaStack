@@ -126,6 +126,7 @@
             this.lvModules.FullRowSelect = true;
             this.lvModules.GridLines = true;
             this.lvModules.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvModules.HideSelection = false;
             this.lvModules.Location = new System.Drawing.Point(6, 19);
             this.lvModules.MultiSelect = false;
             this.lvModules.Name = "lvModules";
@@ -253,6 +254,7 @@
             // 
             this.lvConfigs.FullRowSelect = true;
             this.lvConfigs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvConfigs.HideSelection = false;
             this.lvConfigs.Location = new System.Drawing.Point(9, 313);
             this.lvConfigs.MultiSelect = false;
             this.lvConfigs.Name = "lvConfigs";
@@ -296,6 +298,7 @@
             // 
             this.lvControls.FullRowSelect = true;
             this.lvControls.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvControls.HideSelection = false;
             this.lvControls.Location = new System.Drawing.Point(9, 113);
             this.lvControls.MultiSelect = false;
             this.lvControls.Name = "lvControls";

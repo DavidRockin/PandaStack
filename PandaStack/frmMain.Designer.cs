@@ -73,6 +73,7 @@
             // lvModules
             // 
             this.lvModules.FullRowSelect = true;
+            this.lvModules.HideSelection = false;
             this.lvModules.Location = new System.Drawing.Point(6, 19);
             this.lvModules.MultiSelect = false;
             this.lvModules.Name = "lvModules";

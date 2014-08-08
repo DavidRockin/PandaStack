@@ -59,6 +59,7 @@
             this.lvServices.FullRowSelect = true;
             this.lvServices.GridLines = true;
             this.lvServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvServices.HideSelection = false;
             this.lvServices.Location = new System.Drawing.Point(3, 3);
             this.lvServices.MultiSelect = false;
             this.lvServices.Name = "lvServices";
