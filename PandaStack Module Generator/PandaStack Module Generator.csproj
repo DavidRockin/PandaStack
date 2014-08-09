@@ -28,7 +28,7 @@
     <PublisherName>David Tkachuk</PublisherName>
     <SuiteName>PandaStack Module Generator</SuiteName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.0.2.%2a</ApplicationVersion>
+    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -155,7 +155,6 @@
     <None Include="Resources\folder_page.png" />
     <None Include="Resources\page_white_get.png" />
     <None Include="Resources\server_connect.png" />
-    <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
