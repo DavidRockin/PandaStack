@@ -11,7 +11,8 @@ namespace PandaStack_Module_Generator
 
         Software,
         Command,
-        Url
+        Url,
+        Separator
 
     }
 
