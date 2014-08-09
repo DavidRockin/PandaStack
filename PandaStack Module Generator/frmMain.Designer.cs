@@ -61,6 +61,10 @@
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.btnImportConfig = new System.Windows.Forms.Button();
             this.btnLoadConfig = new System.Windows.Forms.Button();
+            this.btnControl_MvUp = new System.Windows.Forms.Button();
+            this.btnControl_MvDown = new System.Windows.Forms.Button();
+            this.btnConfig_MvUp = new System.Windows.Forms.Button();
+            this.btnConfig_MvDown = new System.Windows.Forms.Button();
             this.grpModules.SuspendLayout();
             this.grpModuleOptions.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -138,6 +142,10 @@
             // 
             // grpModuleOptions
             // 
+            this.grpModuleOptions.Controls.Add(this.btnConfig_MvDown);
+            this.grpModuleOptions.Controls.Add(this.btnConfig_MvUp);
+            this.grpModuleOptions.Controls.Add(this.btnControl_MvDown);
+            this.grpModuleOptions.Controls.Add(this.btnControl_MvUp);
             this.grpModuleOptions.Controls.Add(this.btnLoadService);
             this.grpModuleOptions.Controls.Add(this.btnOpenLoc);
             this.grpModuleOptions.Controls.Add(this.txtFilePath);
@@ -211,7 +219,7 @@
             // 
             this.btnControl_Edit.Enabled = false;
             this.btnControl_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnControl_Edit.Location = new System.Drawing.Point(470, 222);
+            this.btnControl_Edit.Location = new System.Drawing.Point(470, 190);
             this.btnControl_Edit.Name = "btnControl_Edit";
             this.btnControl_Edit.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Edit.TabIndex = 20;
@@ -222,7 +230,7 @@
             // 
             this.btnControl_Remove.Enabled = false;
             this.btnControl_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnControl_Remove.Location = new System.Drawing.Point(470, 189);
+            this.btnControl_Remove.Location = new System.Drawing.Point(470, 157);
             this.btnControl_Remove.Name = "btnControl_Remove";
             this.btnControl_Remove.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Remove.TabIndex = 19;
@@ -232,7 +240,7 @@
             // btnControl_Add
             // 
             this.btnControl_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnControl_Add.Location = new System.Drawing.Point(470, 156);
+            this.btnControl_Add.Location = new System.Drawing.Point(470, 124);
             this.btnControl_Add.Name = "btnControl_Add";
             this.btnControl_Add.Size = new System.Drawing.Size(30, 27);
             this.btnControl_Add.TabIndex = 18;
@@ -243,7 +251,7 @@
             // 
             this.btnConfig_Edit.Enabled = false;
             this.btnConfig_Edit.Image = global::PandaStack_Module_Generator.Properties.Resources.gear;
-            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 422);
+            this.btnConfig_Edit.Location = new System.Drawing.Point(470, 391);
             this.btnConfig_Edit.Name = "btnConfig_Edit";
             this.btnConfig_Edit.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Edit.TabIndex = 17;
@@ -268,7 +276,7 @@
             // 
             this.btnConfig_Remove.Enabled = false;
             this.btnConfig_Remove.Image = global::PandaStack_Module_Generator.Properties.Resources.minus;
-            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 389);
+            this.btnConfig_Remove.Location = new System.Drawing.Point(470, 358);
             this.btnConfig_Remove.Name = "btnConfig_Remove";
             this.btnConfig_Remove.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Remove.TabIndex = 13;
@@ -278,7 +286,7 @@
             // btnConfig_Add
             // 
             this.btnConfig_Add.Image = global::PandaStack_Module_Generator.Properties.Resources.plus;
-            this.btnConfig_Add.Location = new System.Drawing.Point(470, 356);
+            this.btnConfig_Add.Location = new System.Drawing.Point(470, 325);
             this.btnConfig_Add.Name = "btnConfig_Add";
             this.btnConfig_Add.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_Add.TabIndex = 12;
@@ -432,6 +440,46 @@
             this.btnLoadConfig.UseVisualStyleBackColor = true;
             this.btnLoadConfig.Click += new System.EventHandler(this.btnLoadConfig_Click);
             // 
+            // btnControl_MvUp
+            // 
+            this.btnControl_MvUp.Enabled = false;
+            this.btnControl_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
+            this.btnControl_MvUp.Location = new System.Drawing.Point(470, 223);
+            this.btnControl_MvUp.Name = "btnControl_MvUp";
+            this.btnControl_MvUp.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_MvUp.TabIndex = 25;
+            this.btnControl_MvUp.UseVisualStyleBackColor = true;
+            // 
+            // btnControl_MvDown
+            // 
+            this.btnControl_MvDown.Enabled = false;
+            this.btnControl_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
+            this.btnControl_MvDown.Location = new System.Drawing.Point(470, 256);
+            this.btnControl_MvDown.Name = "btnControl_MvDown";
+            this.btnControl_MvDown.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_MvDown.TabIndex = 26;
+            this.btnControl_MvDown.UseVisualStyleBackColor = true;
+            // 
+            // btnConfig_MvUp
+            // 
+            this.btnConfig_MvUp.Enabled = false;
+            this.btnConfig_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
+            this.btnConfig_MvUp.Location = new System.Drawing.Point(470, 424);
+            this.btnConfig_MvUp.Name = "btnConfig_MvUp";
+            this.btnConfig_MvUp.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_MvUp.TabIndex = 27;
+            this.btnConfig_MvUp.UseVisualStyleBackColor = true;
+            // 
+            // btnConfig_MvDown
+            // 
+            this.btnConfig_MvDown.Enabled = false;
+            this.btnConfig_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
+            this.btnConfig_MvDown.Location = new System.Drawing.Point(470, 457);
+            this.btnConfig_MvDown.Name = "btnConfig_MvDown";
+            this.btnConfig_MvDown.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_MvDown.TabIndex = 28;
+            this.btnConfig_MvDown.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -489,6 +537,10 @@
         private System.Windows.Forms.TextBox txtFilePath;
         private System.Windows.Forms.Label lblFilePath;
         private System.Windows.Forms.Button btnLoadService;
+        private System.Windows.Forms.Button btnConfig_MvDown;
+        private System.Windows.Forms.Button btnConfig_MvUp;
+        private System.Windows.Forms.Button btnControl_MvDown;
+        private System.Windows.Forms.Button btnControl_MvUp;
     }
 }
 
