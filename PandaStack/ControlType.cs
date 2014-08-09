@@ -11,7 +11,8 @@ namespace PandaStack
 
         Software,
         Command,
-        Url
+        Url,
+        Separator
 
     }
 

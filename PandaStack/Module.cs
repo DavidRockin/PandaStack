@@ -108,6 +108,18 @@ namespace PandaStack
             return status;
         }
 
+        public void SetProcessPath(string processPath)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = processPath;
+            this.ModuleProcess = process;
+        }
+
+        public Process GetModuleProcess()
+        {
+            return this.ModuleProcess;
+        }
+
     }
 
 }

@@ -253,6 +253,14 @@ namespace PandaStack
             {
                 foreach (ModuleControl control in module.GetControls())
                 {
+                    // If the control is a seperator, create a new seperator and
+                    // add it to the context menu
+                    if (control.GetControlType() == ControlType.Separator)
+                    {
+                        this.ctmControl.Items.Add(new ToolStripSeparator());
+                        continue;
+                    }
+
                     ToolStripMenuItem menuItem = new ToolStripMenuItem(control.GetControlName());
                     menuItem.Tag = control;
                     menuItem.Click += new EventHandler(this.ctmControl_ItemClicked);
@@ -293,6 +301,14 @@ namespace PandaStack
             {
                 foreach (ModuleConfig config in module.GetConfigs())
                 {
+                    // If the config is a seperator, create a new seperator and
+                    // add it to the context menu
+                    if (config.GetConfigType() == ConfigType.Separator)
+                    {
+                        this.ctmConfig.Items.Add(new ToolStripSeparator());
+                        continue;
+                    }
+
                     ToolStripMenuItem menuItem = new ToolStripMenuItem(config.GetConfigName());
                     menuItem.Tag = config;
                     menuItem.Click += new EventHandler(this.ctmConfig_itemClicked);

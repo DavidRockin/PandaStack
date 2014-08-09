@@ -44,7 +44,7 @@ namespace PandaStack
                 }
                 else if (moduleType == ModuleType.Software)
                 {
-                    // TODO: Create software type modules
+                    module.SetProcessPath(jsonModule.path);
                 }
 
                 // Setup module's configurations
@@ -53,7 +53,8 @@ namespace PandaStack
                     foreach (JsonConfig jsonConfig in jsonModule.config)
                     {
                         // Configuration must have a name, a type and a file/path
-                        if (String.IsNullOrEmpty(jsonConfig.name) || String.IsNullOrEmpty(jsonConfig.type) || String.IsNullOrEmpty(jsonConfig.path))
+                        if ((String.IsNullOrEmpty(jsonConfig.name) || String.IsNullOrEmpty(jsonConfig.type) || String.IsNullOrEmpty(jsonConfig.path))
+                            && jsonConfig.type.ToLower() != "separator")
                             continue;
 
                         ConfigType configType = (ConfigType)Enum.Parse(typeof(ConfigType), jsonConfig.type, true);
@@ -67,7 +68,8 @@ namespace PandaStack
                     foreach (JsonControl jsonControl in jsonModule.control)
                     {
                         // Controls must have a name, a type and a file/path
-                        if (String.IsNullOrEmpty(jsonControl.name) || String.IsNullOrEmpty(jsonControl.type) || String.IsNullOrEmpty(jsonControl.path))
+                        if ((String.IsNullOrEmpty(jsonControl.name) || String.IsNullOrEmpty(jsonControl.type) || String.IsNullOrEmpty(jsonControl.path))
+                            && jsonControl.type.ToLower() != "separator")
                             continue;
 
                         ControlType controlType = (ControlType)Enum.Parse(typeof(ControlType), jsonControl.type, true);
