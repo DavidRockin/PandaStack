@@ -13,6 +13,5 @@ PandaStack Control Panel Todo List:
 PandaStack Module Generator Todo List:
 + Save/output the configuration
 + Test configuration
-+ Move up/down the modules
 * Organise & clean the code
 * Localization?
