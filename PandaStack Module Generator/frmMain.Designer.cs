@@ -36,6 +36,10 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.lvModules = new System.Windows.Forms.ListView();
             this.grpModuleOptions = new System.Windows.Forms.GroupBox();
+            this.btnConfig_MvDown = new System.Windows.Forms.Button();
+            this.btnConfig_MvUp = new System.Windows.Forms.Button();
+            this.btnControl_MvDown = new System.Windows.Forms.Button();
+            this.btnControl_MvUp = new System.Windows.Forms.Button();
             this.btnLoadService = new System.Windows.Forms.Button();
             this.btnOpenLoc = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
@@ -61,10 +65,6 @@
             this.grpActions = new System.Windows.Forms.GroupBox();
             this.btnImportConfig = new System.Windows.Forms.Button();
             this.btnLoadConfig = new System.Windows.Forms.Button();
-            this.btnControl_MvUp = new System.Windows.Forms.Button();
-            this.btnControl_MvDown = new System.Windows.Forms.Button();
-            this.btnConfig_MvUp = new System.Windows.Forms.Button();
-            this.btnConfig_MvDown = new System.Windows.Forms.Button();
             this.grpModules.SuspendLayout();
             this.grpModuleOptions.SuspendLayout();
             this.grpActions.SuspendLayout();
@@ -93,6 +93,7 @@
             this.btnMvDwn.Size = new System.Drawing.Size(30, 27);
             this.btnMvDwn.TabIndex = 4;
             this.btnMvDwn.UseVisualStyleBackColor = true;
+            this.btnMvDwn.Click += new System.EventHandler(this.btnMvDwn_Click);
             // 
             // btnMvUp
             // 
@@ -103,6 +104,7 @@
             this.btnMvUp.Size = new System.Drawing.Size(30, 27);
             this.btnMvUp.TabIndex = 3;
             this.btnMvUp.UseVisualStyleBackColor = true;
+            this.btnMvUp.Click += new System.EventHandler(this.btnMvUp_Click);
             // 
             // btnRemove
             // 
@@ -138,7 +140,7 @@
             this.lvModules.TabIndex = 1;
             this.lvModules.UseCompatibleStateImageBehavior = false;
             this.lvModules.View = System.Windows.Forms.View.Details;
-            this.lvModules.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvModules_ItemSelectionChanged);
+            this.lvModules.SelectedIndexChanged += new System.EventHandler(this.lvModules_SelectedIndexChanged);
             // 
             // grpModuleOptions
             // 
@@ -175,6 +177,46 @@
             this.grpModuleOptions.TabIndex = 1;
             this.grpModuleOptions.TabStop = false;
             this.grpModuleOptions.Text = "Module Options";
+            // 
+            // btnConfig_MvDown
+            // 
+            this.btnConfig_MvDown.Enabled = false;
+            this.btnConfig_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
+            this.btnConfig_MvDown.Location = new System.Drawing.Point(470, 457);
+            this.btnConfig_MvDown.Name = "btnConfig_MvDown";
+            this.btnConfig_MvDown.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_MvDown.TabIndex = 28;
+            this.btnConfig_MvDown.UseVisualStyleBackColor = true;
+            // 
+            // btnConfig_MvUp
+            // 
+            this.btnConfig_MvUp.Enabled = false;
+            this.btnConfig_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
+            this.btnConfig_MvUp.Location = new System.Drawing.Point(470, 424);
+            this.btnConfig_MvUp.Name = "btnConfig_MvUp";
+            this.btnConfig_MvUp.Size = new System.Drawing.Size(30, 27);
+            this.btnConfig_MvUp.TabIndex = 27;
+            this.btnConfig_MvUp.UseVisualStyleBackColor = true;
+            // 
+            // btnControl_MvDown
+            // 
+            this.btnControl_MvDown.Enabled = false;
+            this.btnControl_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
+            this.btnControl_MvDown.Location = new System.Drawing.Point(470, 256);
+            this.btnControl_MvDown.Name = "btnControl_MvDown";
+            this.btnControl_MvDown.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_MvDown.TabIndex = 26;
+            this.btnControl_MvDown.UseVisualStyleBackColor = true;
+            // 
+            // btnControl_MvUp
+            // 
+            this.btnControl_MvUp.Enabled = false;
+            this.btnControl_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
+            this.btnControl_MvUp.Location = new System.Drawing.Point(470, 223);
+            this.btnControl_MvUp.Name = "btnControl_MvUp";
+            this.btnControl_MvUp.Size = new System.Drawing.Size(30, 27);
+            this.btnControl_MvUp.TabIndex = 25;
+            this.btnControl_MvUp.UseVisualStyleBackColor = true;
             // 
             // btnLoadService
             // 
@@ -439,46 +481,6 @@
             this.btnLoadConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadConfig.UseVisualStyleBackColor = true;
             this.btnLoadConfig.Click += new System.EventHandler(this.btnLoadConfig_Click);
-            // 
-            // btnControl_MvUp
-            // 
-            this.btnControl_MvUp.Enabled = false;
-            this.btnControl_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
-            this.btnControl_MvUp.Location = new System.Drawing.Point(470, 223);
-            this.btnControl_MvUp.Name = "btnControl_MvUp";
-            this.btnControl_MvUp.Size = new System.Drawing.Size(30, 27);
-            this.btnControl_MvUp.TabIndex = 25;
-            this.btnControl_MvUp.UseVisualStyleBackColor = true;
-            // 
-            // btnControl_MvDown
-            // 
-            this.btnControl_MvDown.Enabled = false;
-            this.btnControl_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
-            this.btnControl_MvDown.Location = new System.Drawing.Point(470, 256);
-            this.btnControl_MvDown.Name = "btnControl_MvDown";
-            this.btnControl_MvDown.Size = new System.Drawing.Size(30, 27);
-            this.btnControl_MvDown.TabIndex = 26;
-            this.btnControl_MvDown.UseVisualStyleBackColor = true;
-            // 
-            // btnConfig_MvUp
-            // 
-            this.btnConfig_MvUp.Enabled = false;
-            this.btnConfig_MvUp.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_090;
-            this.btnConfig_MvUp.Location = new System.Drawing.Point(470, 424);
-            this.btnConfig_MvUp.Name = "btnConfig_MvUp";
-            this.btnConfig_MvUp.Size = new System.Drawing.Size(30, 27);
-            this.btnConfig_MvUp.TabIndex = 27;
-            this.btnConfig_MvUp.UseVisualStyleBackColor = true;
-            // 
-            // btnConfig_MvDown
-            // 
-            this.btnConfig_MvDown.Enabled = false;
-            this.btnConfig_MvDown.Image = global::PandaStack_Module_Generator.Properties.Resources.arrow_270;
-            this.btnConfig_MvDown.Location = new System.Drawing.Point(470, 457);
-            this.btnConfig_MvDown.Name = "btnConfig_MvDown";
-            this.btnConfig_MvDown.Size = new System.Drawing.Size(30, 27);
-            this.btnConfig_MvDown.TabIndex = 28;
-            this.btnConfig_MvDown.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 

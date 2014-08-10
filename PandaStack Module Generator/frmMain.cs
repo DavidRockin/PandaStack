@@ -44,7 +44,7 @@ namespace PandaStack_Module_Generator
             }
         }
 
-        private void lvModules_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void lvModules_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -54,6 +54,16 @@ namespace PandaStack_Module_Generator
                     this.updateCurrentModule(module);
                     this.grpModuleOptions.Enabled = true;
                     this.btnRemove.Enabled = true;
+
+                    if (this.lvModules.FocusedItem.Index > 0 && this.lvModules.Items.Count > 1)
+                    {
+                        this.btnMvUp.Enabled = true;
+                    }
+
+                    if (this.lvModules.FocusedItem.Index < (this.lvModules.Items.Count - 1))
+                    {
+                        this.btnMvDwn.Enabled = true;
+                    }
 
                     return;
                 }
@@ -92,6 +102,32 @@ namespace PandaStack_Module_Generator
 
                     this.ClearCurrentModule();
                 }
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
+        private void btnMvUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvModules, this.lvModules.FocusedItem, -1, this.btnMvUp, this.btnMvDwn);
+                this.lvModules_SelectedIndexChanged(this.lvModules, new EventArgs());
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
+        private void btnMvDwn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvModules, this.lvModules.FocusedItem, 1, this.btnMvUp, this.btnMvDwn);
+                this.lvModules_SelectedIndexChanged(this.lvModules, new EventArgs());
             }
             catch (Exception ex)
             {
@@ -468,6 +504,8 @@ namespace PandaStack_Module_Generator
             this.lvControls.Items.Clear();
             this.lvConfigs.Items.Clear();
             this.txtFilePath.Text = "";
+            this.btnMvUp.Enabled = false;
+            this.btnMvDwn.Enabled = false;
 
             this.ClearCurrentControl();
             this.ClearCurrentConfig();
@@ -562,6 +600,25 @@ namespace PandaStack_Module_Generator
                 lvi.Text = module.GetModuleName();
                 lvi.Tag = module;
                 this.lvModules.Items.Add(lvi);
+            }
+        }
+
+        /**
+         * <summary>
+         * Moves an item in a list view
+         * </summary>
+         */
+        private void MoveListViewItem(ListView listView, ListViewItem listViewItem, int indexChange, Button btnMoveUp, Button btnMoveDown)
+        {
+            if (listViewItem.Index > 0 || listViewItem.Index < (listView.Items.Count-1))
+            {
+                int index = listViewItem.Index + indexChange;
+                listView.Items.RemoveAt(listViewItem.Index);
+                listView.Items.Insert(index, listViewItem);
+                listView.Items[index].Focused = true;
+
+                btnMoveUp.Enabled = (index > 0 ? true : false);
+                btnMoveDown.Enabled = (index < listView.Items.Count-1 ? true : false);
             }
         }
 
