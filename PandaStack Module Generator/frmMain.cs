@@ -249,6 +249,17 @@ namespace PandaStack_Module_Generator
                 {
                     this.btnControl_Remove.Enabled = true;
                     this.btnControl_Edit.Enabled = true;
+
+                    if (this.lvControls.FocusedItem.Index > 0 && this.lvControls.Items.Count > 1)
+                    {
+                        this.btnControl_MvUp.Enabled = true;
+                    }
+
+                    if (this.lvControls.FocusedItem.Index < (this.lvControls.Items.Count - 1))
+                    {
+                        this.btnControl_MvDown.Enabled = true;
+                    }
+
                     return;
                 }
             }
@@ -318,6 +329,33 @@ namespace PandaStack_Module_Generator
             }
         }
 
+
+        private void btnControl_MvUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvControls, this.lvControls.FocusedItem, -1, this.btnControl_MvUp, this.btnControl_MvDown);
+                this.lvControls_SelectedIndexChanged(this.lvControls, new EventArgs());
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
+        private void btnControl_MvDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvControls, this.lvControls.FocusedItem, 1, this.btnControl_MvUp, this.btnControl_MvDown);
+                this.lvControls_SelectedIndexChanged(this.lvControls, new EventArgs());
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
         /** Module Configs **/
 
         private void lvConfigs_SelectedIndexChanged(object sender, EventArgs e)
@@ -328,6 +366,17 @@ namespace PandaStack_Module_Generator
                 {
                     this.btnConfig_Edit.Enabled = true;
                     this.btnConfig_Remove.Enabled = true;
+
+                    if (this.lvConfigs.FocusedItem.Index > 0 && this.lvConfigs.Items.Count > 1)
+                    {
+                        this.btnConfig_MvUp.Enabled = true;
+                    }
+
+                    if (this.lvConfigs.FocusedItem.Index < (this.lvConfigs.Items.Count - 1))
+                    {
+                        this.btnConfig_MvDown.Enabled = true;
+                    }
+
                     return;
                 }
             }
@@ -390,6 +439,34 @@ namespace PandaStack_Module_Generator
                         lvi.SubItems[2].Text = FormEditItem.Path;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
+
+
+        private void btnConfig_MvUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvConfigs, this.lvConfigs.FocusedItem, -1, this.btnConfig_MvUp, this.btnConfig_MvDown);
+                this.lvControls_SelectedIndexChanged(this.lvConfigs, new EventArgs());
+            }
+            catch (Exception ex)
+            {
+                this.HandleException(ex);
+            }
+        }
+
+        private void btnConfig_MvDown_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.MoveListViewItem(this.lvConfigs, this.lvConfigs.FocusedItem, 1, this.btnConfig_MvUp, this.btnConfig_MvDown);
+                this.lvControls_SelectedIndexChanged(this.lvConfigs, new EventArgs());
             }
             catch (Exception ex)
             {

@@ -187,6 +187,7 @@
             this.btnConfig_MvDown.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_MvDown.TabIndex = 28;
             this.btnConfig_MvDown.UseVisualStyleBackColor = true;
+            this.btnConfig_MvDown.Click += new System.EventHandler(this.btnConfig_MvDown_Click);
             // 
             // btnConfig_MvUp
             // 
@@ -197,6 +198,7 @@
             this.btnConfig_MvUp.Size = new System.Drawing.Size(30, 27);
             this.btnConfig_MvUp.TabIndex = 27;
             this.btnConfig_MvUp.UseVisualStyleBackColor = true;
+            this.btnConfig_MvUp.Click += new System.EventHandler(this.btnConfig_MvUp_Click);
             // 
             // btnControl_MvDown
             // 
@@ -207,6 +209,7 @@
             this.btnControl_MvDown.Size = new System.Drawing.Size(30, 27);
             this.btnControl_MvDown.TabIndex = 26;
             this.btnControl_MvDown.UseVisualStyleBackColor = true;
+            this.btnControl_MvDown.Click += new System.EventHandler(this.btnControl_MvDown_Click);
             // 
             // btnControl_MvUp
             // 
@@ -217,6 +220,7 @@
             this.btnControl_MvUp.Size = new System.Drawing.Size(30, 27);
             this.btnControl_MvUp.TabIndex = 25;
             this.btnControl_MvUp.UseVisualStyleBackColor = true;
+            this.btnControl_MvUp.Click += new System.EventHandler(this.btnControl_MvUp_Click);
             // 
             // btnLoadService
             // 
