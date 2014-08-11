@@ -597,6 +597,8 @@ namespace PandaStack_Module_Generator
         {
             this.btnControl_Edit.Enabled = false;
             this.btnControl_Remove.Enabled = false;
+            this.btnControl_MvUp.Enabled = false;
+            this.btnControl_MvDown.Enabled = false;
         }
 
         /**
@@ -608,6 +610,8 @@ namespace PandaStack_Module_Generator
         {
             this.btnConfig_Edit.Enabled = false;
             this.btnConfig_Remove.Enabled = false;
+            this.btnConfig_MvUp.Enabled = false;
+            this.btnConfig_MvDown.Enabled = false;
         }
 
         /**
