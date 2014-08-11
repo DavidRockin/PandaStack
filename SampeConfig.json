@@ -102,7 +102,7 @@
 		"minimizeToTray" : true,
 		"minimizeToolTip" : true,
 		"displayDebug" : true,
-		"timerInterval" : 777
+		"timerInterval" : 1000
 	}
 
 }

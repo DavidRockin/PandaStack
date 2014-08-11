@@ -174,7 +174,7 @@ namespace PandaStack
                     }
                     catch (Exception ex)
                     {
-                        Information.HandleException(ex);
+                        //Information.HandleException(ex);
                     }
                 }
                 else if (module.GetModuleType() == ModuleType.Software)
