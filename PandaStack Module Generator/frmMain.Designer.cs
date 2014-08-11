@@ -511,6 +511,37 @@
 
         #endregion
 
+        private void SetupToolTip()
+        {
+            System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
+            toolTip.AutoPopDelay = 5000;
+            toolTip.InitialDelay = 1000;
+            toolTip.ReshowDelay = 500;
+            toolTip.ShowAlways = true;
+
+            toolTip.SetToolTip(this.btnAdd, "Create new module");
+            toolTip.SetToolTip(this.btnRemove, "Remove selected module");
+            toolTip.SetToolTip(this.btnMvUp, "Move selected module up");
+            toolTip.SetToolTip(this.btnMvDwn, "Move selected module down");
+
+            toolTip.SetToolTip(this.btnSave, "Save module modifications");
+            toolTip.SetToolTip(this.btnDiscard, "Discard module modifications");
+            toolTip.SetToolTip(this.btnLoadConfig, "Load new configuration file");
+            toolTip.SetToolTip(this.btnImportConfig, "Import configuration file");
+
+            toolTip.SetToolTip(this.btnConfig_Add, "Create new configuration");
+            toolTip.SetToolTip(this.btnConfig_Remove, "Remove selected configuration");
+            toolTip.SetToolTip(this.btnConfig_Edit, "Modify selected configuration");
+            toolTip.SetToolTip(this.btnConfig_MvUp, "Move selected configuration up");
+            toolTip.SetToolTip(this.btnConfig_MvDown, "Move selected configuration down");
+
+            toolTip.SetToolTip(this.btnControl_Add, "Create new control");
+            toolTip.SetToolTip(this.btnControl_Remove, "Remove selected control");
+            toolTip.SetToolTip(this.btnControl_Edit, "Modify selected control");
+            toolTip.SetToolTip(this.btnControl_MvUp, "Move selected control up");
+            toolTip.SetToolTip(this.btnControl_MvDown, "Move selected control down");
+        }
+
         private System.Windows.Forms.GroupBox grpModules;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAdd;

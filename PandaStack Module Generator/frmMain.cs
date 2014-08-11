@@ -20,6 +20,7 @@ namespace PandaStack_Module_Generator
         public frmMain()
         {
             InitializeComponent();
+            this.SetupToolTip();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
