@@ -82,7 +82,7 @@
             this.grpModules.Size = new System.Drawing.Size(244, 587);
             this.grpModules.TabIndex = 0;
             this.grpModules.TabStop = false;
-            this.grpModules.Text = "Loaded Module";
+            this.grpModules.Text = "Loaded Modules";
             // 
             // btnMvDwn
             // 

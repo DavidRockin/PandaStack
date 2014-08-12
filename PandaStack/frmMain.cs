@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.ServiceProcess;
 using System.IO;
+using System.Diagnostics;
 
 namespace PandaStack
 {
@@ -349,7 +350,7 @@ namespace PandaStack
 
             try
             {
-                System.Diagnostics.Process.Start(control.GetControlPath(), control.GetControlArgs());
+                Process.Start(control.GetControlPath(), control.GetControlArgs());
             }
             catch (Exception ex)
             {
@@ -367,7 +368,7 @@ namespace PandaStack
 
             try
             {
-                System.Diagnostics.Process.Start(config.GetConfigPath(), config.GetConfigArgs());
+                Process.Start(config.GetConfigPath(), config.GetConfigArgs());
             }
             catch (Exception ex)
             {
