@@ -112,6 +112,13 @@ namespace PandaStack_Module_Generator
                 this.lblPath.Text = (text == "URL" ? "URL Address" : "Command");
                 return;
             }
+            else if (text == "Separator")
+            {
+                this.btnOpenLoc.Enabled = false;
+                this.txtPath.Enabled = false;
+                this.lblPath.Text = "Path Location";
+                return;
+            }
             else if (text == "Software")
             {
                 this.lblPath.Text = "Application File";
@@ -126,6 +133,7 @@ namespace PandaStack_Module_Generator
             }
 
             this.btnOpenLoc.Enabled = true;
+            this.txtPath.Enabled = true;
         }
 
     }
