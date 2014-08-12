@@ -71,7 +71,7 @@ namespace PandaStack
         public void SetServiceName(string serviceName)
         {
             if (String.IsNullOrEmpty(serviceName))
-                   return;
+                return;
 
             try
             {
@@ -88,31 +88,28 @@ namespace PandaStack
         {
             string status = "n/a";
 
-            if (this.ModuleType == ModuleType.Service)
+            try
             {
-                try
+                if (this.ModuleType == ModuleType.Service)
                 {
                     this.ServiceController.Refresh();
                     status = this.ServiceController.Status.ToString();
                 }
-                catch (Exception ex)
+                else if (this.ModuleType == ModuleType.Software)
                 {
-                //    MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.ModuleProcess.Refresh();
+                    status = (this.ModuleProcess.HasExited ? "Stopped" : "Running");
                 }
-            }
-            else if (this.ModuleType == ModuleType.Software)
-            {
-                // TODO: Handle software type
-            }
+            } catch {}
 
             return status;
         }
 
         public void SetProcessPath(string processPath)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = processPath;
-            this.ModuleProcess = process;
+            this.ModuleProcess = new Process();
+            this.ModuleProcess.StartInfo.FileName = processPath;
+            this.ModuleProcess.Start();
         }
 
         public Process GetModuleProcess()

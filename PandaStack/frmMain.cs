@@ -55,12 +55,6 @@ namespace PandaStack
             this.FetchModules();
         }
 
-        private void frmMain_Closing(object sender, FormClosingEventArgs e)
-        {
-            Information.AddMessage("Exiting PandaStack");
-            // TODO: Handle closing programs (TBA)
-        }
-
         private void frmMain_Resize(object sender, EventArgs e)
         {
             if (this.PandaStack.GetJsonHandler().GetSettings().minimizeToTray != true)
@@ -76,6 +70,29 @@ namespace PandaStack
 
                 this.tmrSync.Enabled = false;
             }
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Information.AddMessage("Exiting PandaStack");
+
+            try
+            {
+                if (this.PandaStack.GetModules().Count > 0)
+                {
+                    foreach (Module module in this.PandaStack.GetModules())
+                    {
+                        if (module.GetModuleType() == ModuleType.Software)
+                        {
+                            module.GetModuleProcess().Kill();
+                        }
+                    }
+                }
+            }
+            catch { }
+
+            e.Cancel = false;
         }
 
         private void lvModules_SelectIndexChange(object sender, EventArgs e)
@@ -106,7 +123,20 @@ namespace PandaStack
                 }
                 else if (module.GetModuleType() == ModuleType.Software)
                 {
-                    // TODO: Get module software status
+                    try
+                    {
+                        Process process = module.GetModuleProcess();
+                        if (process != null)
+                        {
+                            process.Refresh();
+                            this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                            this.btnToggle.Enabled = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Information.HandleException(ex);
+                    }
                 }
 
                 // If there are any controls, enable the control button
@@ -180,7 +210,20 @@ namespace PandaStack
                 }
                 else if (module.GetModuleType() == ModuleType.Software)
                 {
-                    // TODO: Get module software status
+                    try
+                    {
+                        Process process = module.GetModuleProcess();
+                        if (process != null)
+                        {
+                            process.Refresh();
+                            this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                            this.btnToggle.Enabled = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Information.HandleException(ex);
+                    }
                 }
             }
 
@@ -236,7 +279,29 @@ namespace PandaStack
             }
             else if (module.GetModuleType() == ModuleType.Software)
             {
-                // TODO: Allow toggle of software type modules
+                try
+                {
+                    Process process = module.GetModuleProcess();
+                    if (process != null)
+                    {
+                        if (process.HasExited)
+                        {
+                            process.Start();
+                        }
+                        else
+                        {
+                            process.Kill();
+                        }
+
+                        process.Refresh();
+                        this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                        this.btnToggle.Enabled = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Information.HandleException(ex);
+                }
             }
         }
 
