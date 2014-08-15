@@ -20,7 +20,15 @@ namespace PandaStack
         public PandaStack()
         {
             string jsonFile = AppDomain.CurrentDomain.BaseDirectory + "/PandaStack.conf";
-            this.JsonHandler = new JsonHandler(jsonFile);
+            if (File.Exists(jsonFile))
+            {
+                this.JsonHandler = new JsonHandler(jsonFile);
+            }
+            else
+            {
+                // TODO: Create configuration file or allow the program to properly run w/o config?
+                MessageBox.Show("The PandaStack configuration file was not found.", "PandaStack Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         public void LoadModules()
