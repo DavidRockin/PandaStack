@@ -61,6 +61,15 @@ namespace PandaStack_Module_Generator
             }
         }
 
+        private void lvServices_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.lvServices.Items.Count > 0 && this.lvServices.SelectedItems.Count > 0)
+            {
+                this.ServiceName = this.lvServices.FocusedItem.SubItems[1].Text;
+                this.DialogResult = DialogResult.OK;
+            }
+        }
+
     }
 
 }

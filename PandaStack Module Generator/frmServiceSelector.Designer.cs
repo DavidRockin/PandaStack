@@ -68,6 +68,7 @@
             this.lvServices.UseCompatibleStateImageBehavior = false;
             this.lvServices.View = System.Windows.Forms.View.Details;
             this.lvServices.SelectedIndexChanged += new System.EventHandler(this.lvServices_SelectedIndexChanged);
+            this.lvServices.DoubleClick += new System.EventHandler(this.lvServices_DoubleClick);
             // 
             // tableLayoutPanel2
             // 
