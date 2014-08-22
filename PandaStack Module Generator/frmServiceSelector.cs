@@ -20,7 +20,8 @@ namespace PandaStack_Module_Generator
         {
             InitializeComponent();
             this.lvServices.Columns.Add("Service Name", 200);
-            this.lvServices.Columns.Add("Service", 150);
+            this.lvServices.Columns.Add("Service", 175);
+            this.lvServices.Columns.Add("Service Status", 150);
         }
 
         private void frmServiceSelector_Load(object sender, EventArgs e)
@@ -29,6 +30,7 @@ namespace PandaStack_Module_Generator
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = service.DisplayName;
                 lvi.SubItems.Add(service.ServiceName);
+                lvi.SubItems.Add(service.Status.ToString());
                 this.lvServices.Items.Add(lvi);
             }
         }

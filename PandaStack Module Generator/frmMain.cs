@@ -234,6 +234,7 @@ namespace PandaStack_Module_Generator
         private void btnLoadService_Click(object sender, EventArgs e)
         {
             frmServiceSelector serviceSelector = new frmServiceSelector();
+            serviceSelector.ServiceName = this.txtServiceName.Text;
             if (serviceSelector.ShowDialog() == DialogResult.OK)
             {
                 this.txtServiceName.Text = serviceSelector.ServiceName;

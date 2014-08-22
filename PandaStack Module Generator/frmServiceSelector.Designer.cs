@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 519);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(684, 566);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lvServices
@@ -63,7 +63,7 @@
             this.lvServices.Location = new System.Drawing.Point(3, 3);
             this.lvServices.MultiSelect = false;
             this.lvServices.Name = "lvServices";
-            this.lvServices.Size = new System.Drawing.Size(594, 474);
+            this.lvServices.Size = new System.Drawing.Size(678, 521);
             this.lvServices.TabIndex = 0;
             this.lvServices.UseCompatibleStateImageBehavior = false;
             this.lvServices.View = System.Windows.Forms.View.Details;
@@ -78,11 +78,11 @@
             this.tableLayoutPanel2.Controls.Add(this.btnSelect, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnCancel, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 483);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 530);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(594, 33);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(678, 33);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btnSelect
@@ -116,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 519);
+            this.ClientSize = new System.Drawing.Size(684, 566);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmServiceSelector";
