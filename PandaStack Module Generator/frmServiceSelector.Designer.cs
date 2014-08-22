@@ -58,7 +58,6 @@
             this.lvServices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvServices.FullRowSelect = true;
             this.lvServices.GridLines = true;
-            this.lvServices.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvServices.HideSelection = false;
             this.lvServices.Location = new System.Drawing.Point(3, 3);
             this.lvServices.MultiSelect = false;
@@ -67,6 +66,7 @@
             this.lvServices.TabIndex = 0;
             this.lvServices.UseCompatibleStateImageBehavior = false;
             this.lvServices.View = System.Windows.Forms.View.Details;
+            this.lvServices.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvServices_ColumnClick);
             this.lvServices.SelectedIndexChanged += new System.EventHandler(this.lvServices_SelectedIndexChanged);
             this.lvServices.DoubleClick += new System.EventHandler(this.lvServices_DoubleClick);
             // 

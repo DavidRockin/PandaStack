@@ -15,6 +15,7 @@ namespace PandaStack_Module_Generator
     {
 
         public string ServiceName;
+        private int SortColumn = -1;
 
         public frmServiceSelector()
         {
@@ -68,6 +69,29 @@ namespace PandaStack_Module_Generator
                 this.ServiceName = this.lvServices.FocusedItem.SubItems[1].Text;
                 this.DialogResult = DialogResult.OK;
             }
+        }
+
+        private void lvServices_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column != this.SortColumn)
+            {
+                this.SortColumn = e.Column;
+                this.lvServices.Sorting = SortOrder.Ascending;
+            }
+            else
+            {
+                if (this.lvServices.Sorting == SortOrder.Ascending)
+                {
+                    this.lvServices.Sorting = SortOrder.Descending;
+                }
+                else
+                {
+                    this.lvServices.Sorting = SortOrder.Ascending;
+                }
+            }
+
+            this.lvServices.Sort();
+            this.lvServices.ListViewItemSorter = new ListViewItemComparer(e.Column, this.lvServices.Sorting);
         }
 
     }
