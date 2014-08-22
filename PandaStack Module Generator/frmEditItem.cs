@@ -106,18 +106,19 @@ namespace PandaStack_Module_Generator
         {
             string text = this.cmbType.Text;
 
+            this.btnOpenLoc.Enabled = true;
+            this.txtPath.Enabled = true;
+
             if (text == "Url" || text == "Command")
             {
                 this.btnOpenLoc.Enabled = false;
                 this.lblPath.Text = (text == "URL" ? "URL Address" : "Command");
-                return;
             }
             else if (text == "Separator")
             {
                 this.btnOpenLoc.Enabled = false;
                 this.txtPath.Enabled = false;
                 this.lblPath.Text = "Path Location";
-                return;
             }
             else if (text == "Software")
             {
@@ -131,9 +132,6 @@ namespace PandaStack_Module_Generator
             {
                 this.lblPath.Text = "Configuration File";
             }
-
-            this.btnOpenLoc.Enabled = true;
-            this.txtPath.Enabled = true;
         }
 
     }
