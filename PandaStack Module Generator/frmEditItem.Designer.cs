@@ -85,11 +85,11 @@
             // 
             // btnOpenLoc
             // 
-            this.btnOpenLoc.Location = new System.Drawing.Point(394, 104);
+            this.btnOpenLoc.Image = global::PandaStack_Module_Generator.Properties.Resources.folder_page;
+            this.btnOpenLoc.Location = new System.Drawing.Point(394, 101);
             this.btnOpenLoc.Name = "btnOpenLoc";
-            this.btnOpenLoc.Size = new System.Drawing.Size(28, 20);
+            this.btnOpenLoc.Size = new System.Drawing.Size(28, 25);
             this.btnOpenLoc.TabIndex = 5;
-            this.btnOpenLoc.Text = "..";
             this.btnOpenLoc.UseVisualStyleBackColor = true;
             this.btnOpenLoc.Click += new System.EventHandler(this.btnOpenLoc_Click);
             // 
