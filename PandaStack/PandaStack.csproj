@@ -157,6 +157,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\control_stop.png" />
+    <None Include="Resources\control_play.png" />
     <None Include="Resources\arrow_refresh.png" />
     <None Include="Resources\information.png" />
     <None Include="Resources\cancel.png" />

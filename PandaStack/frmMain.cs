@@ -113,6 +113,8 @@ namespace PandaStack
                         {
                             this.btnToggle.Text = (serviceController.Status == ServiceControllerStatus.Stopped
                                                     ? "Start Module" : "Stop Module");
+                            this.btnToggle.Image = (serviceController.Status == ServiceControllerStatus.Stopped
+                                                    ? Properties.Resources.control_play : Properties.Resources.control_stop);
                             this.btnToggle.Enabled = true;
                         }
                     }
@@ -130,6 +132,7 @@ namespace PandaStack
                         {
                             process.Refresh();
                             this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                            this.btnToggle.Image = (process.HasExited ? Properties.Resources.control_play : Properties.Resources.control_stop);
                             this.btnToggle.Enabled = true;
                         }
                     }
@@ -200,6 +203,8 @@ namespace PandaStack
                         {
                             this.btnToggle.Text = (serviceController.Status == ServiceControllerStatus.Stopped
                                                     ? "Start Module" : "Stop Module");
+                            this.btnToggle.Image = (serviceController.Status == ServiceControllerStatus.Stopped
+                                                     ? Properties.Resources.control_play : Properties.Resources.control_stop);
                             this.btnToggle.Enabled = true;
                         }
                     }
@@ -217,6 +222,7 @@ namespace PandaStack
                         {
                             process.Refresh();
                             this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                            this.btnToggle.Image = (process.HasExited ? Properties.Resources.control_play : Properties.Resources.control_stop);
                             this.btnToggle.Enabled = true;
                         }
                     }
@@ -270,6 +276,8 @@ namespace PandaStack
                     serviceController.Refresh();
                     this.btnToggle.Text = (serviceController.Status == ServiceControllerStatus.Stopped
                                             ? "Start Module" : "Stop Module");
+                    this.btnToggle.Image = (serviceController.Status == ServiceControllerStatus.Stopped
+                                                     ? Properties.Resources.control_play : Properties.Resources.control_stop);
                     this.lvModules.FocusedItem.SubItems[1].Text = module.GetModuleStatus();
                 }
                 catch (Exception ex)
@@ -295,6 +303,7 @@ namespace PandaStack
 
                         process.Refresh();
                         this.btnToggle.Text = (process.HasExited ? "Start Module" : "Stop Module");
+                        this.btnToggle.Image = (process.HasExited ? Properties.Resources.control_play : Properties.Resources.control_stop);
                         this.btnToggle.Enabled = true;
                     }
                 }
@@ -571,6 +580,7 @@ namespace PandaStack
 
             this.grpModuleControl.Text = "Module Control";
             this.btnToggle.Text = "Start Module";
+            this.btnToggle.Image = Properties.Resources.control_play;
 
             this.btnToggle.Enabled = false;
             this.btnControl.Enabled = false;
