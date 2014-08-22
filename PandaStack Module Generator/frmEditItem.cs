@@ -112,7 +112,7 @@ namespace PandaStack_Module_Generator
             if (text == "Url" || text == "Command")
             {
                 this.btnOpenLoc.Enabled = false;
-                this.lblPath.Text = (text == "URL" ? "URL Address" : "Command");
+                this.lblPath.Text = (text == "Url" ? "URL Address" : "Command");
             }
             else if (text == "Separator")
             {
