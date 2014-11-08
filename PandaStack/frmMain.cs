@@ -46,7 +46,7 @@ namespace DavidRockin.PandaStack.PandaStack
         private void frmMain_Resize(object sender, EventArgs e)
         {
             // If we are to minimize to tray, make sure we are allowed to
-            if (!Program.PandaStack.JsonHandler.GetSettings().minimizeToTray &&
+            if (Program.PandaStack.JsonHandler.GetSettings().minimizeToTray &&
                 this.WindowState == FormWindowState.Minimized)
                 this.Minimize();
         }
