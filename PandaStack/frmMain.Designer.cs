@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.grpModulesLoaded = new System.Windows.Forms.GroupBox();
             this.lvwModulesLoaded = new System.Windows.Forms.ListView();
+            this.lvwModulesName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwModulesStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwModulesType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpModuleControl = new System.Windows.Forms.GroupBox();
             this.tblModuleControl = new System.Windows.Forms.TableLayoutPanel();
             this.btnModuleConfigs = new System.Windows.Forms.Button();
@@ -55,9 +58,6 @@
             this.cmsMinimize_Restore = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMinimize_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.niMinimize = new System.Windows.Forms.NotifyIcon(this.components);
-            this.lvwModulesName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwModulesStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwModulesType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpModulesLoaded.SuspendLayout();
             this.grpModuleControl.SuspendLayout();
             this.tblModuleControl.SuspendLayout();
@@ -94,6 +94,21 @@
             this.lvwModulesLoaded.View = System.Windows.Forms.View.Details;
             this.lvwModulesLoaded.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwModulesLoaded_ColumnClick);
             this.lvwModulesLoaded.SelectedIndexChanged += new System.EventHandler(this.lvwModulesLoaded_SelectedIndexChanged);
+            // 
+            // lvwModulesName
+            // 
+            this.lvwModulesName.Text = "Module Name";
+            this.lvwModulesName.Width = 150;
+            // 
+            // lvwModulesStatus
+            // 
+            this.lvwModulesStatus.Text = "Module Status";
+            this.lvwModulesStatus.Width = 130;
+            // 
+            // lvwModulesType
+            // 
+            this.lvwModulesType.Text = "Module Type";
+            this.lvwModulesType.Width = 150;
             // 
             // grpModuleControl
             // 
@@ -150,6 +165,7 @@
             this.btnModuleToggle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModuleToggle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnModuleToggle.UseVisualStyleBackColor = true;
+            this.btnModuleToggle.Click += new System.EventHandler(this.btnModuleToggle_Click);
             // 
             // btnModuleControls
             // 
@@ -342,21 +358,6 @@
             this.niMinimize.Text = "PandaStack";
             this.niMinimize.Visible = true;
             this.niMinimize.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niMinimize_MouseDoubleClick);
-            // 
-            // lvwModulesName
-            // 
-            this.lvwModulesName.Text = "Module Name";
-            this.lvwModulesName.Width = 150;
-            // 
-            // lvwModulesStatus
-            // 
-            this.lvwModulesStatus.Text = "Module Status";
-            this.lvwModulesStatus.Width = 130;
-            // 
-            // lvwModulesType
-            // 
-            this.lvwModulesType.Text = "Module Type";
-            this.lvwModulesType.Width = 150;
             // 
             // frmMain
             // 

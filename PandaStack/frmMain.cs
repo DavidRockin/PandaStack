@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.ServiceProcess;
 using DavidRockin.PandaStack.PandaClass;
 
 namespace DavidRockin.PandaStack.PandaStack
@@ -86,6 +87,44 @@ namespace DavidRockin.PandaStack.PandaStack
         #endregion
 
         #region Module control
+
+        private void btnModuleToggle_Click(object sender, EventArgs e)
+        {
+            // This button can only be clickable if there is a module selected
+            if (this.lvwModulesLoaded.Items.Count == 0 || this.lvwModulesLoaded.SelectedItems.Count == 0)
+                return;
+
+            Module module = (Module)this.lvwModulesLoaded.FocusedItem.Tag;
+
+            try
+            {
+                if (module.Type == ModuleType.Service)
+                {
+                    // Module needs to have the service controller active
+                    if (module.ServiceController == null) return;
+
+                    // Attempt to toggle the service
+                    if (module.ServiceController.Status == ServiceControllerStatus.Stopped) module.ServiceController.Start();
+                    else module.ServiceController.Stop();
+
+                    // Update module status
+                    module.ServiceController.Refresh();
+                    this.btnModuleToggle.Text = (module.ServiceController.Status == ServiceControllerStatus.Stopped
+                        ? "Start Module" : "Stop Module");
+                    this.btnModuleToggle.Image = (module.ServiceController.Status == ServiceControllerStatus.Stopped ?
+                        Properties.Resources.control_play : Properties.Resources.control_stop);
+                    this.lvwModulesLoaded.FocusedItem.SubItems[1].Text = module.GetModuleStatus();
+                }
+                else if (module.Type == ModuleType.Software)
+                {
+                    // TODO: Toggle software
+                }
+            }
+            catch (Exception ex)
+            {
+                Information.HandleException(ex);
+            }
+        }
 
         private void btnModuleConfigs_Click(object sender, EventArgs e)
         {
@@ -304,6 +343,28 @@ namespace DavidRockin.PandaStack.PandaStack
             this.grpModuleControl.Text = "Module Control: " + module.Name;
             this.btnModuleConfigs.Enabled = (module.Configs.Count > 0);
             this.btnModuleControls.Enabled = (module.Controls.Count > 0);
+
+            try
+            {
+                if (module.Type == ModuleType.Service)
+                {
+                    if (module.ServiceController == null) return;
+                    module.ServiceController.Refresh();
+                    this.btnModuleToggle.Text = (module.ServiceController.Status == ServiceControllerStatus.Stopped
+                        ? "Start Module" : "Stop Module");
+                    this.btnModuleToggle.Image = (module.ServiceController.Status == ServiceControllerStatus.Stopped ?
+                        Properties.Resources.control_play : Properties.Resources.control_stop);
+                    this.btnModuleToggle.Enabled = true;
+                }
+                else if (module.Type == ModuleType.Software)
+                {
+                    // TODO: Handle software
+                }
+            }
+            catch (Exception ex)
+            {
+                Information.HandleException(ex);
+            }
         }
 
         private void Minimize()
