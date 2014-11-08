@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PandaStack")]
-[assembly: AssemblyDescription("PandaStack Control Panel")]
+[assembly: AssemblyTitle("PandaStack Module Generator")]
+[assembly: AssemblyDescription("PandaStack's Module Generator")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PandaCraft")]
-[assembly: AssemblyProduct("PandaStack")]
+[assembly: AssemblyProduct("PandaStack Module Generator")]
 [assembly: AssemblyCopyright("Copyright © David Tkachuk, PandaCraft 2014")]
-[assembly: AssemblyTrademark("PandaStack")]
+[assembly: AssemblyTrademark("PandaStack Module Generator")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7752055c-b2a7-45c5-9af5-1facb7bfabb8")]
+[assembly: Guid("dfe2c6e8-3aec-44ed-8629-3cfea86246eb")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -7,39 +7,30 @@ using System.IO;
 using DavidRockin.PandaStack.PandaClass;
 using DavidRockin.PandaStack.PandaClass.Json;
 
-namespace DavidRockin.PandaStack.PandaStack
+namespace DavidRockin.PandaStack.ModuleGenerator
 {
     public class PandaStack
     {
-        public JsonHandler JsonHandler = new JsonHandler();
+        public JsonHandler JsonHandler;
         public List<Module> Modules = new List<Module>();
 
-        public string AppDirectory;
-
-        public PandaStack()
-        {
-            this.AppDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string jsonFile = this.AppDirectory + "/PandaStack.conf";
-            if (File.Exists(jsonFile))
-            {
-                this.JsonHandler.ConfigPath = jsonFile;
-            }
-            else
-            {
-                Information.AddMessage("Failed to locate PandaStack.conf file", InfoType.Error);
-            }
-        }
-
-        public void LoadModules()
+        public List<Module> LoadConfiguration(string configFile)
         {
             try
             {
+                if (!File.Exists(configFile))
+                {
+                    Information.AddMessage("Failed to load configuration file '" + configFile  + "'", InfoType.Error);
+                    return null;
+                }
+                this.JsonHandler = new JsonHandler();
+                this.JsonHandler.ConfigPath = configFile;
                 this.JsonHandler.LoadConfig();
             }
             catch (Exception ex)
             {
                 Information.AddMessage("Failed to load configuration: " + ex.Message, InfoType.Exception);
-                return;
+                return null;
             }
 
             // Iterate through the JSON modules
@@ -93,12 +84,49 @@ namespace DavidRockin.PandaStack.PandaStack
 
                 this.Modules.Add(module);
             }
+
+            return this.Modules;
         }
 
-        public void ReloadModules()
+        public List<JsonModule> ModulesToJson(List<Module> Modules)
         {
-            this.Modules.Clear();
-            this.LoadModules();
+            this.JsonHandler.Root.modules.Clear();
+
+            foreach (Module module in Modules)
+            {
+                JsonModule jsonModule = new JsonModule();
+                jsonModule.name = module.Name;
+                jsonModule.path = module.SoftwarePath;
+                jsonModule.service = module.ServiceName;
+                jsonModule.type = module.Type.ToString();
+
+                jsonModule.config = new List<JsonConfig>();
+                jsonModule.control = new List<JsonControl>();
+
+                foreach (ModuleConfig config in module.Configs)
+                {
+                    JsonConfig jsonConfig = new JsonConfig();
+                    jsonConfig.name = config.Name;
+                    jsonConfig.type = config.Type.ToString();
+                    jsonConfig.path = config.Path;
+                    jsonConfig.args = config.Arguments;
+                    jsonModule.config.Add(jsonConfig);
+                }
+
+                foreach (ModuleControl control in module.Controls)
+                {
+                    JsonControl jsonControl = new JsonControl();
+                    jsonControl.name = control.Name;
+                    jsonControl.type = control.Type.ToString();
+                    jsonControl.path = control.Path;
+                    jsonControl.args = control.Arguments;
+                    jsonModule.control.Add(jsonControl);
+                }
+
+                this.JsonHandler.Root.modules.Add(jsonModule);
+            }
+
+            return this.JsonHandler.Root.modules;
         }
     }
 }

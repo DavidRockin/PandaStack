@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PandaStack")]
-[assembly: AssemblyDescription("PandaStack Control Panel")]
+[assembly: AssemblyTitle("PandaClass")]
+[assembly: AssemblyDescription("PandaStack's Class Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PandaCraft")]
-[assembly: AssemblyProduct("PandaStack")]
+[assembly: AssemblyProduct("PandaClass")]
 [assembly: AssemblyCopyright("Copyright © David Tkachuk, PandaCraft 2014")]
 [assembly: AssemblyTrademark("PandaStack")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7752055c-b2a7-45c5-9af5-1facb7bfabb8")]
+[assembly: Guid("a03aa858-d43d-4756-824c-fd1a5d8324ea")]
 
 // Version information for an assembly consists of the following four values:
 //

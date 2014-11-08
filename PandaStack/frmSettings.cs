@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
-namespace PandaStack
+using DavidRockin.PandaStack.PandaClass;
+using DavidRockin.PandaStack.PandaClass.Json;
+
+namespace DavidRockin.PandaStack.PandaStack
 {
-
     public partial class frmSettings : Form
     {
-
         public frmSettings()
         {
             InitializeComponent();
@@ -20,48 +22,57 @@ namespace PandaStack
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            JsonSettings settings = Program.PandaStack.GetJsonHandler().GetSettings();
+            JsonSettings settings = Program.PandaStack.JsonHandler.GetSettings();
 
-            // Set timer sync interval
-            if (settings.timerInterval >= 250 && settings.timerInterval <= 60000)
+            // Set timer interval
+            if (settings.timerInterval >= this.nudTimerInterval.Minimum &&
+                settings.timerInterval <= this.nudTimerInterval.Maximum)
             {
-                this.numTimerInterval.Value = settings.timerInterval;
+                this.nudTimerInterval.Value = settings.timerInterval;
             }
             else
             {
-                this.numTimerInterval.Value = 2000;
+                this.nudTimerInterval.Value = 1000;
             }
 
-            // Set the minimize to tray checkbox
-            if (settings.minimizeToTray == true)
-            {
-                this.chkMinimize.Checked = true;
-            }
-
-            // Set the display minimize tooltip checkbox
-            if (settings.minimizeToolTip == true)
-            {
-                this.chkShowBalloonTip.Checked = true;
-            }
-
-            // Set the display debug messages checkbox
-            if (settings.displayDebug == true)
-            {
-                this.chkDisplayDebug.Checked = true;
-            }
-
-            this.chkAutoStart.Enabled = false;
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
+            // Set checkboxes
+            this.chkMinimizeTray.Checked = settings.minimizeToTray;
+            this.chkMinimizeTooltip.Checked = settings.minimizeToolTip;
+            this.chkStartMinimized.Checked = settings.startMinimized;
+            this.chkDebug.Checked = settings.displayDebug;
+            this.chkTimerEnabled.Checked = settings.timerEnabled;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            // TODO: Take the values, update the config
+            // Set the options
+            JsonSettings settings = Program.PandaStack.JsonHandler.GetSettings();
+            settings.timerInterval = int.Parse(this.nudTimerInterval.Value.ToString());
+            settings.displayDebug = this.chkDebug.Checked;
+            settings.minimizeToTray = this.chkMinimizeTray.Checked;
+            settings.minimizeToolTip = this.chkMinimizeTooltip.Checked;
+            settings.startMinimized = this.chkStartMinimized.Checked;
+            settings.timerEnabled = this.chkTimerEnabled.Checked;
+
+            // Serialize the settings, save to configuration
+            string serial = Program.PandaStack.JsonHandler.Serialize();
+            StreamWriter file = new StreamWriter(Program.PandaStack.JsonHandler.ConfigPath);
+            file.WriteLine(serial);
+            file.Close();
+
+            this.DialogResult = DialogResult.OK;
+            this.Dispose();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Dispose();
+        }
+
+        private void chkTimerEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            this.nudTimerInterval.Enabled = this.chkTimerEnabled.Checked;
         }
     }
-
 }

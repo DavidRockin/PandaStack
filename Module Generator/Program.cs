@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 
-namespace DavidRockin.PandaStack.PandaStack
+namespace DavidRockin.PandaStack.ModuleGenerator
 {
     static class Program
     {
@@ -24,7 +24,7 @@ namespace DavidRockin.PandaStack.PandaStack
             // is registered for PandaStack to use?
             if (!File.Exists("PandaClass.dll"))
             {
-                MessageBox.Show("PandaClass.dll is required for PandaStack", "PandaStack Error", 
+                MessageBox.Show("PandaClass.dll is required for PandaStack", "PandaStack Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }

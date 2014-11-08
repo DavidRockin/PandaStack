@@ -1,4 +1,4 @@
-﻿namespace PandaStack
+﻿namespace DavidRockin.PandaStack.PandaStack
 {
     partial class frmSettings
     {
@@ -28,114 +28,123 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
-            this.chkDisplayDebug = new System.Windows.Forms.CheckBox();
-            this.grpPSS = new System.Windows.Forms.GroupBox();
-            this.chkShowBalloonTip = new System.Windows.Forms.CheckBox();
-            this.chkMinimize = new System.Windows.Forms.CheckBox();
-            this.chkAutoStart = new System.Windows.Forms.CheckBox();
-            this.numTimerInterval = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.chkDebug = new System.Windows.Forms.CheckBox();
+            this.chkMinimizeTray = new System.Windows.Forms.CheckBox();
+            this.chkMinimizeTooltip = new System.Windows.Forms.CheckBox();
+            this.chkStartWindows = new System.Windows.Forms.CheckBox();
+            this.chkStartMinimized = new System.Windows.Forms.CheckBox();
+            this.chkTimerEnabled = new System.Windows.Forms.CheckBox();
+            this.lblTimerInt = new System.Windows.Forms.Label();
+            this.nudTimerInterval = new System.Windows.Forms.NumericUpDown();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.grpPSS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimerInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).BeginInit();
             this.SuspendLayout();
             // 
-            // chkDisplayDebug
+            // chkDebug
             // 
-            this.chkDisplayDebug.AutoSize = true;
-            this.chkDisplayDebug.Location = new System.Drawing.Point(9, 19);
-            this.chkDisplayDebug.Name = "chkDisplayDebug";
-            this.chkDisplayDebug.Size = new System.Drawing.Size(143, 17);
-            this.chkDisplayDebug.TabIndex = 0;
-            this.chkDisplayDebug.Text = "Display debug messages";
-            this.chkDisplayDebug.UseVisualStyleBackColor = true;
+            this.chkDebug.AutoSize = true;
+            this.chkDebug.Location = new System.Drawing.Point(12, 12);
+            this.chkDebug.Name = "chkDebug";
+            this.chkDebug.Size = new System.Drawing.Size(143, 17);
+            this.chkDebug.TabIndex = 0;
+            this.chkDebug.Text = "Display debug messages";
+            this.chkDebug.UseVisualStyleBackColor = true;
             // 
-            // grpPSS
+            // chkMinimizeTray
             // 
-            this.grpPSS.Controls.Add(this.chkShowBalloonTip);
-            this.grpPSS.Controls.Add(this.chkMinimize);
-            this.grpPSS.Controls.Add(this.chkAutoStart);
-            this.grpPSS.Controls.Add(this.numTimerInterval);
-            this.grpPSS.Controls.Add(this.label1);
-            this.grpPSS.Controls.Add(this.chkDisplayDebug);
-            this.grpPSS.Location = new System.Drawing.Point(12, 12);
-            this.grpPSS.Name = "grpPSS";
-            this.grpPSS.Size = new System.Drawing.Size(531, 157);
-            this.grpPSS.TabIndex = 1;
-            this.grpPSS.TabStop = false;
-            this.grpPSS.Text = "PandaStack Settings";
+            this.chkMinimizeTray.AutoSize = true;
+            this.chkMinimizeTray.Location = new System.Drawing.Point(12, 35);
+            this.chkMinimizeTray.Name = "chkMinimizeTray";
+            this.chkMinimizeTray.Size = new System.Drawing.Size(135, 17);
+            this.chkMinimizeTray.TabIndex = 1;
+            this.chkMinimizeTray.Text = "Minimize to System tray";
+            this.chkMinimizeTray.UseVisualStyleBackColor = true;
             // 
-            // chkShowBalloonTip
+            // chkMinimizeTooltip
             // 
-            this.chkShowBalloonTip.AutoSize = true;
-            this.chkShowBalloonTip.Location = new System.Drawing.Point(9, 88);
-            this.chkShowBalloonTip.Name = "chkShowBalloonTip";
-            this.chkShowBalloonTip.Size = new System.Drawing.Size(126, 17);
-            this.chkShowBalloonTip.TabIndex = 5;
-            this.chkShowBalloonTip.Text = "Show minimize tooltip";
-            this.chkShowBalloonTip.UseVisualStyleBackColor = true;
+            this.chkMinimizeTooltip.AutoSize = true;
+            this.chkMinimizeTooltip.Location = new System.Drawing.Point(12, 58);
+            this.chkMinimizeTooltip.Name = "chkMinimizeTooltip";
+            this.chkMinimizeTooltip.Size = new System.Drawing.Size(126, 17);
+            this.chkMinimizeTooltip.TabIndex = 2;
+            this.chkMinimizeTooltip.Text = "Show minimize tooltip";
+            this.chkMinimizeTooltip.UseVisualStyleBackColor = true;
             // 
-            // chkMinimize
+            // chkStartWindows
             // 
-            this.chkMinimize.AutoSize = true;
-            this.chkMinimize.Location = new System.Drawing.Point(9, 65);
-            this.chkMinimize.Name = "chkMinimize";
-            this.chkMinimize.Size = new System.Drawing.Size(133, 17);
-            this.chkMinimize.TabIndex = 4;
-            this.chkMinimize.Text = "Minimize to system tray";
-            this.chkMinimize.UseVisualStyleBackColor = true;
+            this.chkStartWindows.AutoSize = true;
+            this.chkStartWindows.Enabled = false;
+            this.chkStartWindows.Location = new System.Drawing.Point(12, 81);
+            this.chkStartWindows.Name = "chkStartWindows";
+            this.chkStartWindows.Size = new System.Drawing.Size(117, 17);
+            this.chkStartWindows.TabIndex = 3;
+            this.chkStartWindows.Text = "Start with Windows";
+            this.chkStartWindows.UseVisualStyleBackColor = true;
             // 
-            // chkAutoStart
+            // chkStartMinimized
             // 
-            this.chkAutoStart.AutoSize = true;
-            this.chkAutoStart.Location = new System.Drawing.Point(9, 42);
-            this.chkAutoStart.Name = "chkAutoStart";
-            this.chkAutoStart.Size = new System.Drawing.Size(140, 17);
-            this.chkAutoStart.TabIndex = 3;
-            this.chkAutoStart.Text = "Auto start with Windows";
-            this.chkAutoStart.UseVisualStyleBackColor = true;
+            this.chkStartMinimized.AutoSize = true;
+            this.chkStartMinimized.Location = new System.Drawing.Point(12, 104);
+            this.chkStartMinimized.Name = "chkStartMinimized";
+            this.chkStartMinimized.Size = new System.Drawing.Size(96, 17);
+            this.chkStartMinimized.TabIndex = 4;
+            this.chkStartMinimized.Text = "Start minimized";
+            this.chkStartMinimized.UseVisualStyleBackColor = true;
             // 
-            // numTimerInterval
+            // chkTimerEnabled
             // 
-            this.numTimerInterval.Location = new System.Drawing.Point(288, 39);
-            this.numTimerInterval.Maximum = new decimal(new int[] {
-            60000,
+            this.chkTimerEnabled.AutoSize = true;
+            this.chkTimerEnabled.Location = new System.Drawing.Point(273, 12);
+            this.chkTimerEnabled.Name = "chkTimerEnabled";
+            this.chkTimerEnabled.Size = new System.Drawing.Size(109, 17);
+            this.chkTimerEnabled.TabIndex = 5;
+            this.chkTimerEnabled.Text = "Enable timer sync";
+            this.chkTimerEnabled.UseVisualStyleBackColor = true;
+            this.chkTimerEnabled.CheckedChanged += new System.EventHandler(this.chkTimerEnabled_CheckedChanged);
+            // 
+            // lblTimerInt
+            // 
+            this.lblTimerInt.AutoSize = true;
+            this.lblTimerInt.Location = new System.Drawing.Point(270, 36);
+            this.lblTimerInt.Name = "lblTimerInt";
+            this.lblTimerInt.Size = new System.Drawing.Size(160, 13);
+            this.lblTimerInt.TabIndex = 6;
+            this.lblTimerInt.Text = "Timer sync interval (milliseconds)\r\n";
+            // 
+            // nudTimerInterval
+            // 
+            this.nudTimerInterval.Enabled = false;
+            this.nudTimerInterval.Location = new System.Drawing.Point(273, 52);
+            this.nudTimerInterval.Maximum = new decimal(new int[] {
+            1800000,
             0,
             0,
             0});
-            this.numTimerInterval.Minimum = new decimal(new int[] {
+            this.nudTimerInterval.Minimum = new decimal(new int[] {
             250,
             0,
             0,
             0});
-            this.numTimerInterval.Name = "numTimerInterval";
-            this.numTimerInterval.Size = new System.Drawing.Size(98, 20);
-            this.numTimerInterval.TabIndex = 2;
-            this.numTimerInterval.Value = new decimal(new int[] {
-            250,
+            this.nudTimerInterval.Name = "nudTimerInterval";
+            this.nudTimerInterval.Size = new System.Drawing.Size(102, 20);
+            this.nudTimerInterval.TabIndex = 7;
+            this.nudTimerInterval.Tag = "";
+            this.nudTimerInterval.ThousandsSeparator = true;
+            this.nudTimerInterval.Value = new decimal(new int[] {
+            1000,
             0,
             0,
             0});
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(285, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Timer Status Interval (milliseconds)";
             // 
             // btnApply
             // 
-            this.btnApply.Image = global::PandaStack.Properties.Resources.tick;
+            this.btnApply.Image = global::DavidRockin.PandaStack.PandaStack.Properties.Resources.tick;
             this.btnApply.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnApply.Location = new System.Drawing.Point(12, 175);
+            this.btnApply.Location = new System.Drawing.Point(242, 112);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(102, 26);
-            this.btnApply.TabIndex = 2;
+            this.btnApply.Size = new System.Drawing.Size(117, 28);
+            this.btnApply.TabIndex = 8;
             this.btnApply.Text = "Apply";
             this.btnApply.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnApply.UseVisualStyleBackColor = true;
@@ -143,12 +152,12 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Image = global::PandaStack.Properties.Resources.cross;
+            this.btnCancel.Image = global::DavidRockin.PandaStack.PandaStack.Properties.Resources.cross;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.Location = new System.Drawing.Point(120, 175);
+            this.btnCancel.Location = new System.Drawing.Point(365, 112);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(102, 26);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Size = new System.Drawing.Size(117, 28);
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -158,33 +167,42 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 206);
+            this.ClientSize = new System.Drawing.Size(494, 152);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.grpPSS);
+            this.Controls.Add(this.nudTimerInterval);
+            this.Controls.Add(this.lblTimerInt);
+            this.Controls.Add(this.chkTimerEnabled);
+            this.Controls.Add(this.chkStartMinimized);
+            this.Controls.Add(this.chkStartWindows);
+            this.Controls.Add(this.chkMinimizeTooltip);
+            this.Controls.Add(this.chkMinimizeTray);
+            this.Controls.Add(this.chkDebug);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.Name = "frmSettings";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PandaStack Settings";
             this.Load += new System.EventHandler(this.frmSettings_Load);
-            this.grpPSS.ResumeLayout(false);
-            this.grpPSS.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numTimerInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckBox chkDisplayDebug;
-        private System.Windows.Forms.GroupBox grpPSS;
-        private System.Windows.Forms.NumericUpDown numTimerInterval;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkAutoStart;
+        private System.Windows.Forms.CheckBox chkDebug;
+        private System.Windows.Forms.CheckBox chkMinimizeTray;
+        private System.Windows.Forms.CheckBox chkMinimizeTooltip;
+        private System.Windows.Forms.CheckBox chkStartWindows;
+        private System.Windows.Forms.CheckBox chkStartMinimized;
+        private System.Windows.Forms.CheckBox chkTimerEnabled;
+        private System.Windows.Forms.Label lblTimerInt;
+        private System.Windows.Forms.NumericUpDown nudTimerInterval;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox chkShowBalloonTip;
-        private System.Windows.Forms.CheckBox chkMinimize;
     }
 }

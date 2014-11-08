@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace PandaStack
+namespace DavidRockin.PandaStack.PandaStack
 {
     partial class frmAbout : Form
     {
@@ -101,9 +101,9 @@ namespace PandaStack
         }
         #endregion
 
-        private void okButton_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Dispose();
         }
     }
 }
