@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 using DavidRockin.PandaStack.PandaClass;
 using DavidRockin.PandaStack.PandaClass.Json;
 
@@ -493,7 +494,6 @@ namespace DavidRockin.PandaStack.ModuleGenerator
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            // TODO: export (Serialize) config
             SaveFileDialog mnuExportConfig = new SaveFileDialog();
             mnuExportConfig.Filter = "PandaStack Config (.conf)|PandaStack.conf|Configuration File (*.conf)|*.conf|All Files (*.*)|*.*";
             mnuExportConfig.Title = "Export Configuration";
@@ -501,7 +501,9 @@ namespace DavidRockin.PandaStack.ModuleGenerator
             if (mnuExportConfig.ShowDialog() != DialogResult.Cancel && mnuExportConfig.FileName != "")
             {
                 Program.PandaStack.ModulesToJson(this.Modules);
-                Information.AddMessage(Program.PandaStack.JsonHandler.Serialize());
+                StreamWriter file = new StreamWriter(mnuExportConfig.FileName);
+                file.WriteLine(Program.PandaStack.JsonHandler.Serialize());
+                file.Close();
             }
         }
 
