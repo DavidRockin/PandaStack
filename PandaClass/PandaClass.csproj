@@ -60,6 +60,7 @@
     <Compile Include="ModuleControl.cs" />
     <Compile Include="ModuleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -35,6 +35,9 @@ namespace DavidRockin.PandaStack.PandaStack
             Information.AddMessage("Fetching " + Program.PandaStack.JsonHandler.GetModules().Count + " modules");
             this.FetchModules();
 
+            if (Utilities.RunningAsAdmin())
+                this.Text += " [Administrator]";
+
             // Should we minimize PandaStack?
             if (Program.PandaStack.JsonHandler.GetSettings().startMinimized)
             {
@@ -91,7 +94,7 @@ namespace DavidRockin.PandaStack.PandaStack
         private void btnModuleToggle_Click(object sender, EventArgs e)
         {
             // This button can only be clickable if there is a module selected
-            if (this.lvwModulesLoaded.Items.Count == 0 || this.lvwModulesLoaded.SelectedItems.Count == 0)
+            if (this.lvwModulesLoaded.Items.Count == 0 || this.lvwModulesLoaded.SelectedItems.Count == 0 || !Utilities.RunningAsAdmin())
                 return;
 
             Module module = (Module)this.lvwModulesLoaded.FocusedItem.Tag;
@@ -346,7 +349,7 @@ namespace DavidRockin.PandaStack.PandaStack
 
             try
             {
-                if (module.Type == ModuleType.Service)
+                if (module.Type == ModuleType.Service && Utilities.RunningAsAdmin())
                 {
                     if (module.ServiceController == null) return;
                     module.ServiceController.Refresh();

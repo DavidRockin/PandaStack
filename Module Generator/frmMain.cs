@@ -23,14 +23,17 @@ namespace DavidRockin.PandaStack.ModuleGenerator
             InitializeComponent();
             this.FormConsole = new frmConsole();
             Information.Console = this.FormConsole.rtbConsole;
-
-            foreach (ModuleType type in Enum.GetValues(typeof(ModuleType)))
-                this.cmbModuleType.Items.Add(type.ToString());
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             Information.AddMessage("Settings up PandaStack Module Generator");
+
+            if (Utilities.RunningAsAdmin())
+                this.Text += " [Administrator]";
+
+            foreach (ModuleType type in Enum.GetValues(typeof(ModuleType)))
+                this.cmbModuleType.Items.Add(type.ToString());
         }
 
         #region Loaded modules list
