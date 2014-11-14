@@ -58,6 +58,7 @@
             this.cmsMinimize_Restore = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsMinimize_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.niMinimize = new System.Windows.Forms.NotifyIcon(this.components);
+            this.tmrServiceUpdate = new System.Windows.Forms.Timer(this.components);
             this.grpModulesLoaded.SuspendLayout();
             this.grpModuleControl.SuspendLayout();
             this.tblModuleControl.SuspendLayout();
@@ -359,6 +360,11 @@
             this.niMinimize.Visible = true;
             this.niMinimize.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niMinimize_MouseDoubleClick);
             // 
+            // tmrServiceUpdate
+            // 
+            this.tmrServiceUpdate.Interval = 1000;
+            this.tmrServiceUpdate.Tick += new System.EventHandler(this.tmrServiceUpdate_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,6 +422,7 @@
         private System.Windows.Forms.ColumnHeader lvwModulesName;
         private System.Windows.Forms.ColumnHeader lvwModulesStatus;
         private System.Windows.Forms.ColumnHeader lvwModulesType;
+        private System.Windows.Forms.Timer tmrServiceUpdate;
     }
 }
 

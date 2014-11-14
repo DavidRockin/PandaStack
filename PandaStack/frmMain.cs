@@ -44,6 +44,12 @@ namespace DavidRockin.PandaStack.PandaStack
                 this.WindowState = FormWindowState.Minimized;
                 this.Minimize();
             }
+
+            if (Program.PandaStack.JsonHandler.GetSettings().timerEnabled)
+            {
+                this.tmrServiceUpdate.Enabled = true;
+                this.tmrServiceUpdate.Interval = Program.PandaStack.JsonHandler.GetSettings().timerInterval;
+            }
         }
 
         private void frmMain_Resize(object sender, EventArgs e)
@@ -52,6 +58,29 @@ namespace DavidRockin.PandaStack.PandaStack
             if (Program.PandaStack.JsonHandler.GetSettings().minimizeToTray &&
                 this.WindowState == FormWindowState.Minimized)
                 this.Minimize();
+        }
+        
+        private void tmrServiceUpdate_Tick(object sender, EventArgs e)
+        {
+            foreach (ListViewItem listModuleItem in this.lvwModulesLoaded.Items)
+            {
+                try
+                {
+                    Module module = (Module)listModuleItem.Tag;
+                    if (module.Type == ModuleType.Service)
+                    {
+                        listModuleItem.SubItems[1].Text = module.GetModuleStatus();
+                    }
+                    else if (module.Type == ModuleType.Software)
+                    {
+                        // TODO: Update software
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Information.HandleException(ex);
+                }
+            }
         }
 
         #endregion
@@ -387,6 +416,16 @@ namespace DavidRockin.PandaStack.PandaStack
             this.lvwModulesLoaded.Items.Clear();
             Program.PandaStack.ReloadModules();
             this.FetchModules();
+
+            if (Program.PandaStack.JsonHandler.GetSettings().timerEnabled)
+            {
+                this.tmrServiceUpdate.Enabled = true;
+                this.tmrServiceUpdate.Interval = Program.PandaStack.JsonHandler.GetSettings().timerInterval;
+            }
+            else
+            {
+                this.tmrServiceUpdate.Enabled = false;
+            }
         }
 
         private void FetchModules()
