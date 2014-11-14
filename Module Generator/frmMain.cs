@@ -74,7 +74,6 @@ namespace DavidRockin.PandaStack.ModuleGenerator
         {
             ListViewItem listItem = new ListViewItem();
             Module module = new Module();
-            module.Name += " " + listItem.GetHashCode().ToString();
             listItem.Text = module.Name;
             listItem.Tag = module;
             this.Modules.Add(module);

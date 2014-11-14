@@ -54,11 +54,18 @@ namespace DavidRockin.PandaStack.PandaStack
             settings.startMinimized = this.chkStartMinimized.Checked;
             settings.timerEnabled = this.chkTimerEnabled.Checked;
 
-            // Serialize the settings, save to configuration
-            string serial = Program.PandaStack.JsonHandler.Serialize();
-            StreamWriter file = new StreamWriter(Program.PandaStack.JsonHandler.ConfigPath);
-            file.WriteLine(serial);
-            file.Close();
+            try
+            {
+                // Serialize the settings, save to configuration
+                string serial = Program.PandaStack.JsonHandler.Serialize();
+                StreamWriter file = new StreamWriter(Program.PandaStack.JsonHandler.ConfigPath);
+                file.WriteLine(serial);
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                Information.HandleException(ex);
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Dispose();
@@ -67,7 +74,6 @@ namespace DavidRockin.PandaStack.PandaStack
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Dispose();
         }
 
         private void chkTimerEnabled_CheckedChanged(object sender, EventArgs e)

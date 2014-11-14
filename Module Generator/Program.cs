@@ -8,7 +8,6 @@ namespace DavidRockin.PandaStack.ModuleGenerator
 {
     static class Program
     {
-
         public static PandaStack PandaStack;
 
         /// <summary>
