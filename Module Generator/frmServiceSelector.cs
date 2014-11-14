@@ -37,7 +37,7 @@ namespace DavidRockin.PandaStack.ModuleGenerator
 
         private void lvwServices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.lvwServices.Items.Count > 0 && this.lvwServices.SelectedItems.Count >= 0)
+            if (this.lvwServices.Items.Count > 0 && this.lvwServices.SelectedItems.Count > 0)
                 this.btnSelect.Enabled = true;
             else
                 this.btnSelect.Enabled = false;

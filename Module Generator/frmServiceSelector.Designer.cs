@@ -30,12 +30,12 @@
         {
             this.tblServiceSelctor = new System.Windows.Forms.TableLayoutPanel();
             this.lvwServices = new System.Windows.Forms.ListView();
-            this.tblActions = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.lvwServiceName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwService = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwServiceStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tblActions = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.tblServiceSelctor.SuspendLayout();
             this.tblActions.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +77,21 @@
             this.lvwServices.SelectedIndexChanged += new System.EventHandler(this.lvwServices_SelectedIndexChanged);
             this.lvwServices.DoubleClick += new System.EventHandler(this.lvwServices_DoubleClick);
             // 
+            // lvwServiceName
+            // 
+            this.lvwServiceName.Text = "Service Name";
+            this.lvwServiceName.Width = 175;
+            // 
+            // lvwService
+            // 
+            this.lvwService.Text = "Service";
+            this.lvwService.Width = 175;
+            // 
+            // lvwServiceStatus
+            // 
+            this.lvwServiceStatus.Text = "Service Status";
+            this.lvwServiceStatus.Width = 125;
+            // 
             // tblActions
             // 
             this.tblActions.ColumnCount = 3;
@@ -109,6 +124,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.cross;
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.Location = new System.Drawing.Point(128, 3);
@@ -120,25 +136,12 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lvwServiceName
-            // 
-            this.lvwServiceName.Text = "Service Name";
-            this.lvwServiceName.Width = 175;
-            // 
-            // lvwService
-            // 
-            this.lvwService.Text = "Service";
-            this.lvwService.Width = 175;
-            // 
-            // lvwServiceStatus
-            // 
-            this.lvwServiceStatus.Text = "Service Status";
-            this.lvwServiceStatus.Width = 125;
-            // 
             // frmServiceSelector
             // 
+            this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(566, 480);
             this.Controls.Add(this.tblServiceSelctor);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
