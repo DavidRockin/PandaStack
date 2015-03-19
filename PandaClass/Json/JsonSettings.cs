@@ -7,13 +7,13 @@ namespace DavidRockin.PandaStack.PandaClass.Json
 {
     public class JsonSettings
     {
-        public bool minimizeToTray { get; set; }
-        public bool minimizeToolTip { get; set; }
-        public bool startMinimized { get; set; }
+        public bool minimizeToTray = false;
+        public bool minimizeToolTip = false;
+        public bool startMinimized = false;
 
-        public bool displayDebug { get; set; }
-        
-        public bool timerEnabled { get; set; }
-        public int timerInterval { get; set; }
+        public bool displayDebug = false;
+
+        public bool timerEnabled = true;
+        public int timerInterval = 1000;
     }
 }

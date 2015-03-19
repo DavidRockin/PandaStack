@@ -10,7 +10,7 @@ namespace DavidRockin.PandaStack.PandaClass
     public class Information
     {
         public static RichTextBox Console;
-        public static Boolean ShowDebug = true;
+        public static Boolean ShowDebug = false;
 
         public static void AddMessage(string message, InfoType type)
         {

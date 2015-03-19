@@ -12,7 +12,7 @@ namespace DavidRockin.PandaStack.PandaClass.Json
         public string service { get; set; }
         public string path { get; set; }
 
-        public List<JsonConfig> config { get; set; }
-        public List<JsonControl> control { get; set; }
+        public List<JsonConfig> config = new List<JsonConfig>();
+        public List<JsonControl> control = new List<JsonControl>();
     }
 }

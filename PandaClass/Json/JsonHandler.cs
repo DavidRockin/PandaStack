@@ -12,7 +12,7 @@ namespace DavidRockin.PandaStack.PandaClass.Json
     public class JsonHandler
     {
         public string ConfigPath;
-        public JsonRoot Root;
+        public JsonRoot Root = new JsonRoot();
 
         public void LoadConfig()
         {
@@ -26,6 +26,9 @@ namespace DavidRockin.PandaStack.PandaClass.Json
             DataContractJsonSerializer serialized = new DataContractJsonSerializer(typeof(JsonRoot));
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
             this.Root = (JsonRoot)serialized.ReadObject(stream);
+
+            // Update information class
+            Information.ShowDebug = this.Root.settings.displayDebug;
         }
 
         public string Serialize()

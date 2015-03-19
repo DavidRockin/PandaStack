@@ -11,7 +11,7 @@ namespace DavidRockin.PandaStack.ModuleGenerator
 {
     public class PandaStack
     {
-        public JsonHandler JsonHandler;
+        public JsonHandler JsonHandler = new JsonHandler();
         public List<Module> Modules = new List<Module>();
 
         public List<Module> LoadConfiguration(string configFile)
@@ -23,7 +23,6 @@ namespace DavidRockin.PandaStack.ModuleGenerator
                     Information.AddMessage("Failed to load configuration file '" + configFile  + "'", InfoType.Error);
                     return null;
                 }
-                this.JsonHandler = new JsonHandler();
                 this.JsonHandler.ConfigPath = configFile;
                 this.JsonHandler.LoadConfig();
             }
@@ -90,7 +89,8 @@ namespace DavidRockin.PandaStack.ModuleGenerator
 
         public List<JsonModule> ModulesToJson(List<Module> Modules)
         {
-            this.JsonHandler.Root.modules.Clear();
+            if (this.JsonHandler != null && this.JsonHandler.Root.modules != null)
+                this.JsonHandler.Root.modules.Clear();
 
             foreach (Module module in Modules)
             {

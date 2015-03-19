@@ -7,7 +7,7 @@ namespace DavidRockin.PandaStack.PandaClass.Json
 {
     public class JsonRoot
     {
-        public List<JsonModule> modules { get; set; }
-        public JsonSettings settings { get; set; }
+        public List<JsonModule> modules = new List<JsonModule>();
+        public JsonSettings settings = new JsonSettings();
     }
 }
