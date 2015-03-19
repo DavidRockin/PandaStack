@@ -115,7 +115,7 @@
             this.tblModuleActions.Name = "tblModuleActions";
             this.tblModuleActions.RowCount = 1;
             this.tblModuleActions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModuleActions.Size = new System.Drawing.Size(211, 38);
+            this.tblModuleActions.Size = new System.Drawing.Size(211, 39);
             this.tblModuleActions.TabIndex = 0;
             // 
             // btnModuleMvDown
@@ -125,7 +125,7 @@
             this.btnModuleMvDown.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.arrow_270;
             this.btnModuleMvDown.Location = new System.Drawing.Point(147, 3);
             this.btnModuleMvDown.Name = "btnModuleMvDown";
-            this.btnModuleMvDown.Size = new System.Drawing.Size(33, 32);
+            this.btnModuleMvDown.Size = new System.Drawing.Size(33, 33);
             this.btnModuleMvDown.TabIndex = 4;
             this.btnModuleMvDown.UseVisualStyleBackColor = true;
             this.btnModuleMvDown.Click += new System.EventHandler(this.btnModuleMvDown_Click);
@@ -137,7 +137,7 @@
             this.btnModuleMvUp.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.arrow_090;
             this.btnModuleMvUp.Location = new System.Drawing.Point(108, 3);
             this.btnModuleMvUp.Name = "btnModuleMvUp";
-            this.btnModuleMvUp.Size = new System.Drawing.Size(33, 32);
+            this.btnModuleMvUp.Size = new System.Drawing.Size(33, 33);
             this.btnModuleMvUp.TabIndex = 3;
             this.btnModuleMvUp.UseVisualStyleBackColor = true;
             this.btnModuleMvUp.Click += new System.EventHandler(this.btnModuleMvUp_Click);
@@ -149,7 +149,7 @@
             this.btnModuleDelete.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.minus;
             this.btnModuleDelete.Location = new System.Drawing.Point(69, 3);
             this.btnModuleDelete.Name = "btnModuleDelete";
-            this.btnModuleDelete.Size = new System.Drawing.Size(33, 32);
+            this.btnModuleDelete.Size = new System.Drawing.Size(33, 33);
             this.btnModuleDelete.TabIndex = 2;
             this.btnModuleDelete.UseVisualStyleBackColor = true;
             this.btnModuleDelete.Click += new System.EventHandler(this.btnModuleDelete_Click);
@@ -160,7 +160,7 @@
             this.btnModuleCreate.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.plus;
             this.btnModuleCreate.Location = new System.Drawing.Point(30, 3);
             this.btnModuleCreate.Name = "btnModuleCreate";
-            this.btnModuleCreate.Size = new System.Drawing.Size(33, 32);
+            this.btnModuleCreate.Size = new System.Drawing.Size(33, 33);
             this.btnModuleCreate.TabIndex = 0;
             this.btnModuleCreate.UseVisualStyleBackColor = true;
             this.btnModuleCreate.Click += new System.EventHandler(this.btnModuleCreate_Click);
@@ -228,7 +228,7 @@
             this.tblModuleControlsBtns.Controls.Add(this.btnControlEdit, 0, 2);
             this.tblModuleControlsBtns.Controls.Add(this.btnControlDelete, 0, 1);
             this.tblModuleControlsBtns.Controls.Add(this.btnControlCreate, 0, 0);
-            this.tblModuleControlsBtns.Location = new System.Drawing.Point(497, 290);
+            this.tblModuleControlsBtns.Location = new System.Drawing.Point(497, 287);
             this.tblModuleControlsBtns.Name = "tblModuleControlsBtns";
             this.tblModuleControlsBtns.RowCount = 5;
             this.tblModuleControlsBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -236,7 +236,7 @@
             this.tblModuleControlsBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblModuleControlsBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblModuleControlsBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblModuleControlsBtns.Size = new System.Drawing.Size(38, 158);
+            this.tblModuleControlsBtns.Size = new System.Drawing.Size(38, 155);
             this.tblModuleControlsBtns.TabIndex = 17;
             // 
             // btnControlMvDown
@@ -246,7 +246,7 @@
             this.btnControlMvDown.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.arrow_270;
             this.btnControlMvDown.Location = new System.Drawing.Point(3, 127);
             this.btnControlMvDown.Name = "btnControlMvDown";
-            this.btnControlMvDown.Size = new System.Drawing.Size(32, 28);
+            this.btnControlMvDown.Size = new System.Drawing.Size(32, 25);
             this.btnControlMvDown.TabIndex = 4;
             this.btnControlMvDown.UseVisualStyleBackColor = true;
             this.btnControlMvDown.Click += new System.EventHandler(this.btnControlMvDown_Click);
@@ -319,7 +319,7 @@
             this.tblModuleConfigBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblModuleConfigBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tblModuleConfigBtns.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tblModuleConfigBtns.Size = new System.Drawing.Size(38, 158);
+            this.tblModuleConfigBtns.Size = new System.Drawing.Size(38, 155);
             this.tblModuleConfigBtns.TabIndex = 16;
             // 
             // btnConfigMvDown
@@ -329,7 +329,7 @@
             this.btnConfigMvDown.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.arrow_270;
             this.btnConfigMvDown.Location = new System.Drawing.Point(3, 127);
             this.btnConfigMvDown.Name = "btnConfigMvDown";
-            this.btnConfigMvDown.Size = new System.Drawing.Size(32, 28);
+            this.btnConfigMvDown.Size = new System.Drawing.Size(32, 25);
             this.btnConfigMvDown.TabIndex = 4;
             this.btnConfigMvDown.UseVisualStyleBackColor = true;
             this.btnConfigMvDown.Click += new System.EventHandler(this.btnConfigMvDown_Click);
@@ -384,7 +384,7 @@
             // btnSave
             // 
             this.btnSave.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.disk;
-            this.btnSave.Location = new System.Drawing.Point(9, 454);
+            this.btnSave.Location = new System.Drawing.Point(9, 448);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(126, 26);
             this.btnSave.TabIndex = 15;
@@ -397,7 +397,7 @@
             // btnDiscard
             // 
             this.btnDiscard.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.cross;
-            this.btnDiscard.Location = new System.Drawing.Point(141, 454);
+            this.btnDiscard.Location = new System.Drawing.Point(141, 448);
             this.btnDiscard.Name = "btnDiscard";
             this.btnDiscard.Size = new System.Drawing.Size(126, 26);
             this.btnDiscard.TabIndex = 14;
@@ -415,10 +415,10 @@
             this.lvwControlPath});
             this.lvwModuleControls.FullRowSelect = true;
             this.lvwModuleControls.HideSelection = false;
-            this.lvwModuleControls.Location = new System.Drawing.Point(9, 290);
+            this.lvwModuleControls.Location = new System.Drawing.Point(9, 287);
             this.lvwModuleControls.MultiSelect = false;
             this.lvwModuleControls.Name = "lvwModuleControls";
-            this.lvwModuleControls.Size = new System.Drawing.Size(482, 158);
+            this.lvwModuleControls.Size = new System.Drawing.Size(482, 155);
             this.lvwModuleControls.TabIndex = 13;
             this.lvwModuleControls.UseCompatibleStateImageBehavior = false;
             this.lvwModuleControls.View = System.Windows.Forms.View.Details;
@@ -442,7 +442,7 @@
             // lblModuleControls
             // 
             this.lblModuleControls.AutoSize = true;
-            this.lblModuleControls.Location = new System.Drawing.Point(6, 274);
+            this.lblModuleControls.Location = new System.Drawing.Point(6, 271);
             this.lblModuleControls.Name = "lblModuleControls";
             this.lblModuleControls.Size = new System.Drawing.Size(45, 13);
             this.lblModuleControls.TabIndex = 12;
@@ -459,7 +459,7 @@
             this.lvwModuleConfigs.Location = new System.Drawing.Point(9, 113);
             this.lvwModuleConfigs.MultiSelect = false;
             this.lvwModuleConfigs.Name = "lvwModuleConfigs";
-            this.lvwModuleConfigs.Size = new System.Drawing.Size(482, 158);
+            this.lvwModuleConfigs.Size = new System.Drawing.Size(482, 155);
             this.lvwModuleConfigs.TabIndex = 11;
             this.lvwModuleConfigs.UseCompatibleStateImageBehavior = false;
             this.lvwModuleConfigs.View = System.Windows.Forms.View.Details;
@@ -503,15 +503,15 @@
             // txtModuleProgram
             // 
             this.txtModuleProgram.Enabled = false;
-            this.txtModuleProgram.Location = new System.Drawing.Point(249, 74);
+            this.txtModuleProgram.Location = new System.Drawing.Point(229, 74);
             this.txtModuleProgram.Name = "txtModuleProgram";
-            this.txtModuleProgram.Size = new System.Drawing.Size(248, 20);
+            this.txtModuleProgram.Size = new System.Drawing.Size(268, 20);
             this.txtModuleProgram.TabIndex = 8;
             // 
             // lblModuleProgram
             // 
             this.lblModuleProgram.AutoSize = true;
-            this.lblModuleProgram.Location = new System.Drawing.Point(246, 58);
+            this.lblModuleProgram.Location = new System.Drawing.Point(229, 58);
             this.lblModuleProgram.Name = "lblModuleProgram";
             this.lblModuleProgram.Size = new System.Drawing.Size(90, 13);
             this.lblModuleProgram.TabIndex = 7;
@@ -602,11 +602,11 @@
             this.tblActions.Controls.Add(this.btnLoad, 0, 0);
             this.tblActions.Controls.Add(this.btnExport, 3, 0);
             this.tblActions.Controls.Add(this.btnConsole, 2, 0);
-            this.tblActions.Location = new System.Drawing.Point(6, 19);
+            this.tblActions.Location = new System.Drawing.Point(9, 15);
             this.tblActions.Name = "tblActions";
             this.tblActions.RowCount = 1;
             this.tblActions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblActions.Size = new System.Drawing.Size(529, 31);
+            this.tblActions.Size = new System.Drawing.Size(524, 31);
             this.tblActions.TabIndex = 0;
             // 
             // btnImport
@@ -614,9 +614,9 @@
             this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnImport.Enabled = false;
             this.btnImport.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.page_white_get;
-            this.btnImport.Location = new System.Drawing.Point(135, 3);
+            this.btnImport.Location = new System.Drawing.Point(134, 3);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(126, 25);
+            this.btnImport.Size = new System.Drawing.Size(125, 25);
             this.btnImport.TabIndex = 2;
             this.btnImport.Text = "Import Config";
             this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -631,7 +631,7 @@
             this.btnLoad.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.folder_page;
             this.btnLoad.Location = new System.Drawing.Point(3, 3);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(126, 25);
+            this.btnLoad.Size = new System.Drawing.Size(125, 25);
             this.btnLoad.TabIndex = 0;
             this.btnLoad.Text = "Load Config";
             this.btnLoad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -643,9 +643,9 @@
             // 
             this.btnExport.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnExport.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.page_white_put;
-            this.btnExport.Location = new System.Drawing.Point(399, 3);
+            this.btnExport.Location = new System.Drawing.Point(396, 3);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(127, 25);
+            this.btnExport.Size = new System.Drawing.Size(125, 25);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Export Config";
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -657,9 +657,9 @@
             // 
             this.btnConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnConsole.Image = global::DavidRockin.PandaStack.ModuleGenerator.Properties.Resources.application_xp_terminal;
-            this.btnConsole.Location = new System.Drawing.Point(267, 3);
+            this.btnConsole.Location = new System.Drawing.Point(265, 3);
             this.btnConsole.Name = "btnConsole";
-            this.btnConsole.Size = new System.Drawing.Size(126, 25);
+            this.btnConsole.Size = new System.Drawing.Size(125, 25);
             this.btnConsole.TabIndex = 4;
             this.btnConsole.Text = "Show Console";
             this.btnConsole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -709,9 +709,6 @@
         private System.Windows.Forms.Button btnModuleMvUp;
         private System.Windows.Forms.Button btnModuleDelete;
         private System.Windows.Forms.Button btnModuleCreate;
-        private System.Windows.Forms.Button btnModuleService;
-        private System.Windows.Forms.TextBox txtModuleService;
-        private System.Windows.Forms.Label lblModuleService;
         private System.Windows.Forms.ComboBox cmbModuleType;
         private System.Windows.Forms.Label lblModuleType;
         private System.Windows.Forms.TextBox txtModuleName;
@@ -745,6 +742,9 @@
         private System.Windows.Forms.ColumnHeader lvwConfigName;
         private System.Windows.Forms.ColumnHeader lvwConfigType;
         private System.Windows.Forms.ColumnHeader lvwConfigPath;
+        private System.Windows.Forms.Button btnModuleService;
+        private System.Windows.Forms.TextBox txtModuleService;
+        private System.Windows.Forms.Label lblModuleService;
     }
 }
 
