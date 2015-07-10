@@ -54,6 +54,9 @@
     <Compile Include="Json\JsonModule.cs" />
     <Compile Include="Json\JsonRoot.cs" />
     <Compile Include="Json\JsonSettings.cs" />
+    <Compile Include="ListViewBuffered.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ListViewItemComparer.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleConfig.cs" />

@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.grpModulesLoaded = new System.Windows.Forms.GroupBox();
-            this.lvwModulesLoaded = new System.Windows.Forms.ListView();
+            this.lvwModulesLoaded = new DavidRockin.PandaStack.PandaClass.ListViewBuffered();
             this.lvwModulesName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwModulesStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwModulesType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -395,7 +395,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpModulesLoaded;
-        private System.Windows.Forms.ListView lvwModulesLoaded;
+        private DavidRockin.PandaStack.PandaClass.ListViewBuffered lvwModulesLoaded;
         private System.Windows.Forms.GroupBox grpModuleControl;
         private System.Windows.Forms.TableLayoutPanel tblModuleControl;
         private System.Windows.Forms.Button btnModuleConfigs;

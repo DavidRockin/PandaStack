@@ -41,6 +41,7 @@ namespace DavidRockin.PandaStack.PandaStack
             this.chkStartMinimized.Checked = settings.startMinimized;
             this.chkDebug.Checked = settings.displayDebug;
             this.chkTimerEnabled.Checked = settings.timerEnabled;
+            this.chkConsole.Checked = settings.displayConsole;
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace DavidRockin.PandaStack.PandaStack
             settings.minimizeToolTip = this.chkMinimizeTooltip.Checked;
             settings.startMinimized = this.chkStartMinimized.Checked;
             settings.timerEnabled = this.chkTimerEnabled.Checked;
+            settings.displayConsole = this.chkConsole.Checked;
 
             try
             {

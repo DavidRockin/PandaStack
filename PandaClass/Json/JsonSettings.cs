@@ -12,6 +12,7 @@ namespace DavidRockin.PandaStack.PandaClass.Json
         public bool startMinimized = false;
 
         public bool displayDebug = false;
+        public bool displayConsole = true;
 
         public bool timerEnabled = true;
         public int timerInterval = 1000;

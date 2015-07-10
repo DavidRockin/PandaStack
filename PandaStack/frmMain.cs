@@ -50,6 +50,12 @@ namespace DavidRockin.PandaStack.PandaStack
                 this.tmrServiceUpdate.Enabled = true;
                 this.tmrServiceUpdate.Interval = Program.PandaStack.JsonHandler.GetSettings().timerInterval;
             }
+
+            this.UpdateUI();
+
+            this.lvwModulesLoaded.SmallImageList = new ImageList();
+            this.lvwModulesLoaded.SmallImageList.Images.Add("ascending", Properties.Resources.ascending);
+            this.lvwModulesLoaded.SmallImageList.Images.Add("descending", Properties.Resources.descending);
         }
 
         private void frmMain_Resize(object sender, EventArgs e)
@@ -62,6 +68,7 @@ namespace DavidRockin.PandaStack.PandaStack
         
         private void tmrServiceUpdate_Tick(object sender, EventArgs e)
         {
+            this.lvwModulesLoaded.BeginUpdate();
             foreach (ListViewItem listModuleItem in this.lvwModulesLoaded.Items)
             {
                 try
@@ -81,6 +88,7 @@ namespace DavidRockin.PandaStack.PandaStack
                     Information.HandleException(ex);
                 }
             }
+            this.lvwModulesLoaded.EndUpdate();
         }
 
         #endregion
@@ -112,8 +120,22 @@ namespace DavidRockin.PandaStack.PandaStack
                 this.lvwModulesLoaded.Sorting = (this.lvwModulesLoaded.Sorting == SortOrder.Descending
                     ? SortOrder.Ascending : SortOrder.Descending);
             }
+
+            // clear all icons from all the columns
+            for (int i = 0; i < this.lvwModulesLoaded.Columns.Count; ++i)
+            {
+                this.lvwModulesLoaded.Columns[i].ImageKey = "";
+                this.lvwModulesLoaded.Columns[i].TextAlign = HorizontalAlignment.Left;
+            }
+            
+            // change the clicked column's image icon
+            ColumnHeader header = this.lvwModulesLoaded.Columns[e.Column];
+            header.ImageKey = this.lvwModulesLoaded.Sorting.ToString();
+
+            // sort the list view
             this.lvwModulesLoaded.Sort();
             this.lvwModulesLoaded.ListViewItemSorter = new ListViewItemComparer(e.Column, this.lvwModulesLoaded.Sorting);
+            this.lvwModulesLoaded.Refresh();
         }
 
         #endregion
@@ -426,6 +448,8 @@ namespace DavidRockin.PandaStack.PandaStack
             {
                 this.tmrServiceUpdate.Enabled = false;
             }
+
+            this.UpdateUI();
         }
 
         private void FetchModules()
@@ -466,6 +490,22 @@ namespace DavidRockin.PandaStack.PandaStack
             // Clear context menus
             this.cmsConfig.Items.Clear();
             this.cmsControl.Items.Clear();
+        }
+
+        private void UpdateUI()
+        {
+            if (!Program.PandaStack.JsonHandler.Root.settings.displayConsole)
+            {
+                this.Height -= this.rtbConsole.Height;
+                this.tblActions.Top = this.rtbConsole.Top;
+                this.rtbConsole.Hide();
+            }
+            else
+            {
+                this.Height = 600;
+                this.tblActions.Top = 526;
+                this.rtbConsole.Show();
+            }
         }
 
         public void RestoreApplication()

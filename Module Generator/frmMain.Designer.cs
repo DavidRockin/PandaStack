@@ -35,7 +35,7 @@
             this.btnModuleMvUp = new System.Windows.Forms.Button();
             this.btnModuleDelete = new System.Windows.Forms.Button();
             this.btnModuleCreate = new System.Windows.Forms.Button();
-            this.lvwModulesLoaded = new System.Windows.Forms.ListView();
+            this.lvwModulesLoaded = new DavidRockin.PandaStack.PandaClass.ListViewBuffered();
             this.lvwModulesName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.grpModuleOptions = new System.Windows.Forms.GroupBox();
             this.tblModuleControlsBtns = new System.Windows.Forms.TableLayoutPanel();
@@ -52,12 +52,12 @@
             this.btnConfigCreate = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDiscard = new System.Windows.Forms.Button();
-            this.lvwModuleControls = new System.Windows.Forms.ListView();
+            this.lvwModuleControls = new DavidRockin.PandaStack.PandaClass.ListViewBuffered();
             this.lvwControlName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwControlType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwControlPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblModuleControls = new System.Windows.Forms.Label();
-            this.lvwModuleConfigs = new System.Windows.Forms.ListView();
+            this.lvwModuleConfigs = new DavidRockin.PandaStack.PandaClass.ListViewBuffered();
             this.lvwConfigName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwConfigType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwConfigPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -697,7 +697,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grpModulesLoaded;
-        private System.Windows.Forms.ListView lvwModulesLoaded;
+        private DavidRockin.PandaStack.PandaClass.ListViewBuffered lvwModulesLoaded;
         private System.Windows.Forms.GroupBox grpModuleOptions;
         private System.Windows.Forms.GroupBox grpActions;
         private System.Windows.Forms.TableLayoutPanel tblActions;
@@ -718,9 +718,9 @@
         private System.Windows.Forms.TextBox txtModuleProgram;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnDiscard;
-        private System.Windows.Forms.ListView lvwModuleControls;
+        private DavidRockin.PandaStack.PandaClass.ListViewBuffered lvwModuleControls;
         private System.Windows.Forms.Label lblModuleControls;
-        private System.Windows.Forms.ListView lvwModuleConfigs;
+        private DavidRockin.PandaStack.PandaClass.ListViewBuffered lvwModuleConfigs;
         private System.Windows.Forms.Label lblConfigs;
         private System.Windows.Forms.TableLayoutPanel tblModuleConfigBtns;
         private System.Windows.Forms.Button btnConfigMvDown;

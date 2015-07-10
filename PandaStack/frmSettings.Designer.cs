@@ -43,6 +43,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chkConsole = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -202,7 +203,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(247, 33);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -210,6 +211,7 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.chkConsole, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.chkDebug, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.chkMinimizeTray, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.chkMinimizeTooltip, 0, 2);
@@ -253,6 +255,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(241, 44);
             this.panel1.TabIndex = 6;
+            // 
+            // chkConsole
+            // 
+            this.chkConsole.AutoSize = true;
+            this.chkConsole.Location = new System.Drawing.Point(3, 118);
+            this.chkConsole.Name = "chkConsole";
+            this.chkConsole.Size = new System.Drawing.Size(100, 17);
+            this.chkConsole.TabIndex = 5;
+            this.chkConsole.Text = "Display console";
+            this.chkConsole.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 
@@ -300,5 +312,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox chkConsole;
     }
 }
